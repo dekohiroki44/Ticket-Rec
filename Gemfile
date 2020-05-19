@@ -14,13 +14,14 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.8'
 # gem 'capistrano-rails', group: :development
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'rails-i18n', '~> 5.1'
 gem 'devise-i18n'
-gem 'devise-bootstrap-views', '~> 1.0'
+gem 'bootstrap', '~> 4.4.1'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
