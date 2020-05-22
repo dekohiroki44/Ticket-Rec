@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   
-  get 'users/show'
   root to: "static_pages#home"
   get '/about', to: 'static_pages#about'
-  resources :users, only: [:show]
   devise_for :users
+  resources :users, only: [:show]
   # devise_scope :user do
   #   # get 'signup', to: 'devise/registrations#new'
   #   # post 'signup', to: 'devise/registrations#create'
