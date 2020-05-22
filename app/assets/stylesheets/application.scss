@@ -1,14 +1,10 @@
 @import "bootstrap";
 
-// ログイン画面
-
 .container {
   @extend .container-fluid;
   max-width: 576px;
   padding: 2rem;
 }
-
-// 「ログインしました」などのフラッシュ用スタイル
 
 .alert-notice {
   @extend .alert-info;
@@ -16,4 +12,16 @@
 
 .alert-alert {
   @extend .alert-danger;
+}
+
+/* footer */
+
+footer {
+  height: 50px;
+  padding-top: 10px;
+  color: whitesmoke;
+  small {
+    text-align: center;
+    display: block;
+  }
 }
