@@ -1,0 +1,46 @@
+<% provide(:title, "Event - new") %>
+<h1>イベントを編集</h1>
+
+<div class="form-container">
+  <%= form_with(model: @event, local: true) do |f| %>
+    <div class="form-group">
+      <%= f.label :date, '日付' %>
+      <%= f.date_field :date, autofocus: true, autocomplete: 'date', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :title, 'イベント名' %>
+      <%= f.text_field :title, autocomplete: 'current-password', class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :place, '会場' %>
+      <%= f.text_field :place, autocomplete: 'current-password', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :artist, 'アーティスト' %>
+      <%= f.text_area :artist, autocomplete: 'current-password', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :content, '詳細' %>
+      <%= f.text_area :content, autocomplete: 'current-password', class: 'form-control' %>
+    </div>
+
+    <div class="form-group images">
+      <%= f.label :images, '画像' %>
+      <%= f.file_field :iamges, accept: 'image/jpeg,image/gif,image/png', multiple: true, class: 'form-control' %>
+    </div>
+
+    <p class="text-light">現在登録されている画像（削除するものはチェックしてください）</p>
+    <% @event.images.each do |image| %>
+      <%= f.check_box :image_ids, {multiple: true}, image.id, false %>
+      <%= image_tag image, size:"100x100" %> <br>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.submit  '投稿する', class: 'btn btn-primary btn-block' %>
+    </div>
+  <% end %>
+</div>
