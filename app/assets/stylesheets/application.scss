@@ -6,6 +6,11 @@
   padding: 2rem;
 }
 
+.form-container {
+  @extend .container-fluid;
+  max-width: 600px;
+}
+
 .alert-notice {
   @extend .alert-info;
 }

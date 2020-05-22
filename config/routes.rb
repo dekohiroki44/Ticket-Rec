@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  
+  get 'events/new'
+  get 'events/show'
+  get 'events/edit'
   root to: "static_pages#home"
   get '/about', to: 'static_pages#about'
   devise_for :users
   resources :users, only: [:show]
+  resources :events
   # devise_scope :user do
   #   # get 'signup', to: 'devise/registrations#new'
   #   # post 'signup', to: 'devise/registrations#create'
