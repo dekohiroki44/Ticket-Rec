@@ -1,2 +1,22 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<% if user_signed_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+    </aside>
+    <div>
+      <%= render @events %>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron">
+    <h1>LIVCALE</h1>
+    <h2>
+      This is the home page for the
+      <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
+      sample application.
+    </h2>
+    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>
