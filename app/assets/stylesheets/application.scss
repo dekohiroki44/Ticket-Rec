@@ -114,3 +114,60 @@ aside {
   float: left;
   margin-right: 10px;
 }
+
+/* event */
+
+.events {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+
+.event {
+  color: #212529;
+  .span {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .user-info {
+    .avatar {
+      margin-right: 10px;
+    }
+    .name {
+      font-size: 20px;
+    }
+  }
+  .event-info {
+    .date {
+      display: block;
+      margin-top: 1em;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    .name {
+      display: block;
+      margin-left: 10px;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    .performer {
+      display: block;
+      margin-left: 10px;
+      font-weight: normal;
+    }
+    .place {
+      display: block;
+      margin-left: 10px;
+      font-weight: bold;
+      font-size: 30px;
+    }
+    .image {
+      margin-top: 5px;
+    }
+  }
+  
+}

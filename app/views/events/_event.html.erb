@@ -1,0 +1,19 @@
+<%= link_to event_path(event.id), class: "partial-link" do %> 
+  <li id="event-<%= event.id %>" class="event d-flex">
+    <div class="event-left">
+      <div class="user-info d-flex">
+        <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+        <span class="user"><%= event.user.name %></span>
+      </div>
+      <div class="event-info d-flex">
+        <span class="date"><%= event.date %></span>
+        <div clss="column">
+          <span class="name">「<%= event.name %>」</span>
+          <span class="performer">出演：<%= event.performer %></span>
+          <span class="place">場所：<%= event.place %></span>
+        </div>
+      </div>
+    </div>
+    <%= image_tag event.images.first.variant(resize:'250x250').processed, class:"image" if event.images.attached?  %>
+  </li>
+<% end %>
