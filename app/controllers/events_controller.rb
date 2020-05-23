@@ -1,6 +1,9 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
+  def index
+  end
+
   def show
     @event = Event.find(params[:id])
   end
@@ -10,10 +13,10 @@ class EventsController < ApplicationController
   end
 
   def create
-    event = Event.new(event_params)
+    event = current_user.events.build(event_params)
     if event.save
-      flash[:success] = "eventを作成しました"
-      redirect_to events_url
+      flash[:success] = "イベントを作成しました"
+      redirect_to event
     else
       render new_event_path
     end
@@ -32,8 +35,8 @@ class EventsController < ApplicationController
       end
     end
     if event.update_attributes(event_params)
-      flash[:success] = "eventを編集しました"
-      redirect_to events_url
+      flash[:success] = "イベントを編集しました"
+      redirect_to event
     else
       render edit_event_path
     end
@@ -42,7 +45,7 @@ class EventsController < ApplicationController
   def destroy
     event = Event.find(params[:id])
     event.destroy
-    flash[:success] = "eventを削除しました"
+    flash[:success] = "イベントを削除しました"
     redirect_to events_url
   end
 
@@ -51,6 +54,6 @@ class EventsController < ApplicationController
   def event_params
     params.
     require(:event).
-    permit(:name, :content, :date, :place, :time, :price, :performer, images: [])
+    permit(:name, :content, :date, :place, :time, :price, :performer, :public, images: [])
   end
 end

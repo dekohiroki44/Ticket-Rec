@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :name, presence: true, length: { maximum: 50 }
   validates :profile, length: { maximum: 200 }
+  has_many :events
   has_one_attached :image
   before_create :default_image
 

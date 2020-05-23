@@ -1,2 +1,24 @@
-<h1>Events#show</h1>
-<p>Find me in app/views/events/show.html.erb</p>
+<% provide(:title, "@event.name") %>
+<div class="row event-schedule">
+  <div class="col-md-12">
+    <li id="event-<%= @event.id %>" class="event-info d-flex flex-column  align-items-center flex-lg-row ">
+      <div class="d-flex flex-column w-100">
+        <% if @event.images.attached? %>
+          <% @event.images.each do |image| %>
+            <%= image_tag image.variant(resize:'700x700').processed, class:"images-show mb-5" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="event-column d-flex flex-column">
+        <span class="date"><%= @event.date %></span>
+        <span class="place"><%= @event.place %></span>
+        <span class="name"><%= @event.name %></span>
+        <span class="time"><%= @event.time %></span>
+        <span class="price"><%= @event.price %></span>
+        <span class="performer"><%= simple_format(h(@event.performer)) %></span>
+        <span class="content"><%= simple_format(h(@event.content)) %></span>
+        <span class="edit"><%= link_to 'edit', edit_event_path(@event.id) if user_signed_in?  %></span>
+      </div>
+    </li>
+  </div>
+</div>
