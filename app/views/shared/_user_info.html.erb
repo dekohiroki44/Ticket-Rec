@@ -1,6 +1,6 @@
 <%= link_to current_user do %>
-  <%= image_tag current_user.image %>
+  <%= image_tag current_user.image, class: "image" %>
 <% end %>
 <h1><%= current_user.name %></h1>
 <span><%= link_to "view my profile", current_user %></span>
-<span><%= pluralize(current_user.events.count, "event") %></span>
+<span><%= pluralize(current_user.events.count, "イベント") %></span>

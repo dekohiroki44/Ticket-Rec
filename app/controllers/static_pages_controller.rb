@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-    @events = current_user.events
+    @feed_items = current_user.feed
   end
 
   def about
