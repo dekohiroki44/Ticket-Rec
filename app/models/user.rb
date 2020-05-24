@@ -9,6 +9,10 @@ class User < ApplicationRecord
   has_one_attached :image
   before_create :default_image
 
+  def feed
+    Event.where("user_id = ?", id)
+  end
+
   private
 
   def default_image

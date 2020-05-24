@@ -2,12 +2,15 @@
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1>
-        <%= image_tag @user.image %>
-        <p>名前 : <%= @user.name %></p>
-        <p>メールアドレス : <%= @user.email %></p>
-        <p>プロフィール : <%= @user.profile %></p>
-      </h1>
+      <%= render 'shared/user_info' %>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.events.any? %>
+      <h3>イベント (<%= @user.events.count %>)</h3>
+      <ol class="events">
+        <%= render @events %>
+      </ol>
+    <% end %>
+  </div>
 </div>

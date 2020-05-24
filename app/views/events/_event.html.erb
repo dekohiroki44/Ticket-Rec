@@ -1,19 +1,16 @@
-<%= link_to event_path(event.id), class: "partial-link" do %> 
+<%= link_to event_path(event.id), class: "event-partial" do %> 
   <li id="event-<%= event.id %>" class="event d-flex">
     <div class="event-left">
-      <div class="user-info d-flex">
-        <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
-        <span class="user"><%= event.user.name %></span>
-      </div>
-      <div class="event-info d-flex">
-        <span class="date"><%= event.date %></span>
-        <div clss="column">
-          <span class="name">「<%= event.name %>」</span>
-          <span class="performer">出演：<%= event.performer %></span>
-          <span class="place">場所：<%= event.place %></span>
-        </div>
-      </div>
+      <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+      <span class="date"><%= event.date.strftime("%-m/%-d") %></span>
     </div>
-    <%= image_tag event.images.first.variant(resize:'250x250').processed, class:"image" if event.images.attached?  %>
+    <div class="event-center">
+      <span class="user-name"><%= event.user.name %></span>
+      <span class="event-name"><%= event.name %></span>
+      <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
+      <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
+      <span class="content"><i class="fas fa-comment"></i><%= event.content %></span>
+    </div>
+    <%= image_tag event.images.first.variant(resize:'100x100').processed, class:"image" if event.images.attached?  %>
   </li>
 <% end %>
