@@ -14,8 +14,11 @@
   <body>
     <%= render 'layouts/header' %>
     <%= render 'layouts/flash_messages' %>
-    <div class='container'>
-      <%= yield %>
+    <div class="d-flex" id="wrapper">
+      <%= render 'layouts/sidebar' %>
+      <div class="container">
+        <%= yield %>
+      </div>
     </div>
     <%= render 'layouts/footer' %>
   </body>

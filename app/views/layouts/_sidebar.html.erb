@@ -1,0 +1,21 @@
+<div class="bg-dark border-right" id="sidebar-wrapper">
+  <%= link_to "LIVCALE", root_path, id: "logo", class: "navbar-brand sidebar-heading" %>
+  <div class="list-group list-group-flush">
+    <a href="#" class="list-group-item list-group-item-action bg-dark">Dashboard</a>
+    <a href="#" class="list-group-item list-group-item-action bg-dark">Shortcuts</a>
+    <a href="#" class="list-group-item list-group-item-action bg-dark">Overview</a>
+    <a href="#" class="list-group-item list-group-item-action bg-dark">Events</a>
+    <a href="#" class="list-group-item list-group-item-action bg-dark">Profile</a>
+    <%= link_to new_event_path, class:"list-group-item list-group-item-action bg-dark" do %>
+      <i class="far fa-edit fa-2x"></i>書き込む
+    <% end %>
+    <section class="user_info">
+      <%= link_to current_user do %>
+        <%= image_tag current_user.image, class: "image" %>
+      <% end %>
+      <h1><%= current_user.name %></h1>
+      <span><%= link_to "view my profile", current_user %></span>
+      <span><%= pluralize(current_user.events.count, "イベント") %></span>
+    </section>
+  </div>
+</div>
