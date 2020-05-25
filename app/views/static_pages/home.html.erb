@@ -1,8 +1,8 @@
 <% if user_signed_in? %>
   <h3>イベント</h3>
-  <% if @feed_items.any? %>
+  <% if @events.any? %>
     <ol class="events">
-      <%= render @feed_items %>
+      <%= render @events %>
     </ol>
   <% end %>
 <% else %>
