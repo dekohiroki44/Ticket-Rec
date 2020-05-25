@@ -2,7 +2,6 @@
 
 .container {
   @extend .container-fluid;
-  max-width: 1100px;
   padding: 2rem;
 }
 
@@ -24,7 +23,6 @@
   -webkit-box-sizing: border-box;
   box-sizing:         border-box;
 }
-
 
 /* typography */
 
@@ -53,20 +51,77 @@ p {
   line-height: 1.7em;
 }
 
-/* header */
-
 #logo {
-  float: left;
-  margin-right: 10px;
   font-size: 1.7em;
   color: white;
-  text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
   &:hover {
     color: white;
     text-decoration: none;
+  }
+}
+
+/* header */
+
+@media (min-width: 720px) {
+  #header-wrapper {
+    display: none;
+  }
+}
+
+/* sidebar */
+
+#sidebar-wrapper {
+  color: white;
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+  .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.8rem;
+  }
+  .list-group {
+    width: 15rem;
+    .list-group-item-action {
+      color: white; 
+    }
+  }
+  .user_info {
+    margin: 1rem 1.25rem 0 1.25rem;
+    .image {
+      height: 100px;
+      width: 100px;
+    }
+  }
+}
+
+section {
+  &:first-child {
+    border: 0;
+    padding-top: 0;
+  }
+  span {
+    display: block;
+    margin-bottom: 3px;
+    line-height: 1;
+  }
+  h1 {
+    font-size: 1.4em;
+    text-align: left;
+    letter-spacing: -1px;
+    margin-bottom: 3px;
+    margin-top: 0px;
+  }
+}
+
+@media (min-width: 720px) {
+  #sidebar-wrapper {
+    margin-left: 0;
   }
 }
 
@@ -80,43 +135,6 @@ footer {
     text-align: center;
     display: block;
   }
-}
-
-/* sidebar */
-
-aside {
-  section.user_info {
-    margin-top: 20px;
-    .image {
-      height: 100px;
-      width: 100px;
-    }
-  }
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
-}
-
-.gravatar {
-  float: left;
-  margin-right: 10px;
 }
 
 /* event */
