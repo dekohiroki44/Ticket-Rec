@@ -14,13 +14,18 @@
     </div>
     
     <div class="form-group">
+      <%= f.label :performer, 'アーティスト' %>
+      <%= f.text_area :performer, autocomplete: 'current-password', class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
       <%= f.label :place, '会場' %>
       <%= f.text_field :place, autocomplete: 'current-password', class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :performer, 'アーティスト' %>
-      <%= f.text_area :performer, autocomplete: 'current-password', class: 'form-control' %>
+      <%= f.label :price, '料金' %>
+      <%= f.text_field :price, autocomplete: 'current-password', class: 'form-control' %>
     </div>
 
     <div class="form-group">

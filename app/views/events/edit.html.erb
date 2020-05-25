@@ -4,6 +4,11 @@
 <div class="form-container">
   <%= form_with(model: @event, local: true) do |f| %>
     <div class="form-group">
+      <%= f.label :public, '公開する' %>
+      <%= f.check_box :public %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :date, '日付' %>
       <%= f.date_field :date, autofocus: true, autocomplete: 'date', class: 'form-control' %>
     </div>
@@ -14,13 +19,18 @@
     </div>
     
     <div class="form-group">
+      <%= f.label :performer, 'アーティスト' %>
+      <%= f.text_area :performer, autocomplete: 'current-password', class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
       <%= f.label :place, '会場' %>
       <%= f.text_field :place, autocomplete: 'current-password', class: 'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= f.label :performer, 'アーティスト' %>
-      <%= f.text_area :performer, autocomplete: 'current-password', class: 'form-control' %>
+      <%= f.label :price, '料金' %>
+      <%= f.text_field :price, autocomplete: 'current-password', class: 'form-control' %>
     </div>
 
     <div class="form-group">
@@ -33,11 +43,11 @@
       <%= f.file_field :images, accept: 'image/jpeg,image/gif,image/png', multiple: true, class: 'form-control' %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :public, '公開する' %>
-      <%= f.check_box :public %>
-    </div>
-
+    <p>現在登録されている画像（削除するものはチェックしてください）</p>
+    <% @event.images.each do |image| %>
+      <%= f.check_box :image_ids, {multiple: true}, image.id, false %>
+      <%= image_tag image, size:"100x100" %> <br>
+    <% end %>
 
     <div class="form-group">
       <%= f.submit  '投稿する', class: 'btn btn-primary btn-block' %>

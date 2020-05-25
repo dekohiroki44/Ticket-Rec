@@ -1,24 +1,57 @@
 <% provide(:title, "@event.name") %>
-<div class="row event-schedule">
-  <div class="col-md-12">
-    <li id="event-<%= @event.id %>" class="event-info d-flex flex-column  align-items-center flex-lg-row ">
-      <div class="d-flex flex-column w-100">
+<div class="row event-show">
+  <div class="col-md-8">
+    <div id="event-<%= @event.id %>" class="event d-flex">
+      <div class="event-show-main">
+        <div class="user d-flex">
+          <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+          <span class="user-name"><%= @event.user.name %></span>
+        </div>
+        <table>
+          <tr>
+            <td><i class="fas fa-user-secret fa-2x"></i></td>
+            <td>
+              <% if @event.public == true %>
+                公開する
+              <% else %>
+                公開しない
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td><i class="far fa-calendar-alt fa-2x"></i></td>
+            <td class="event-column date"><%= @event.date.strftime("%y/%-m/%-d") %></td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-music fa-2x"></i></td>
+            <td class="event-column event-name"><%= @event.name %></td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-user fa-2x"></i></td>
+            <td class="event-column performer"><%= @event.performer%></td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-map-marker-alt fa-2x"></i></td>
+            <td class="event-column place"></i><%= @event.place %></td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-money-bill-wave-alt fa-2x"></i></td>
+            <td class="event-column price"><%= @event.price %></td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-comment fa-2x"></i></td>
+            <td class="event-column content"><%= simple_format(h(@event.content)) %></td>
+          </tr>
+        </table>
         <% if @event.images.attached? %>
           <% @event.images.each do |image| %>
-            <%= image_tag image.variant(resize:'700x700').processed, class:"images-show mb-5" %>
+            <%= image_tag image.variant(resize:'200x200').processed, class:"images" %>
           <% end %>
         <% end %>
+        <%= link_to '編集する', edit_event_path(@event), class: "edit" %>
       </div>
-      <div class="event-column d-flex flex-column">
-        <span class="date"><%= @event.date %></span>
-        <span class="place"><%= @event.place %></span>
-        <span class="name"><%= @event.name %></span>
-        <span class="time"><%= @event.time %></span>
-        <span class="price"><%= @event.price %></span>
-        <span class="performer"><%= simple_format(h(@event.performer)) %></span>
-        <span class="content"><%= simple_format(h(@event.content)) %></span>
-        <span class="edit"><%= link_to 'edit', edit_event_path(@event.id) if user_signed_in?  %></span>
+      <div class="event-show-side">
       </div>
-    </li>
+    </div>
   </div>
 </div>

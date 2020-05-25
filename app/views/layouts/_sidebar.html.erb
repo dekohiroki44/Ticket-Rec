@@ -4,8 +4,9 @@
     <a href="#" class="list-group-item list-group-item-action bg-dark">Dashboard</a>
     <a href="#" class="list-group-item list-group-item-action bg-dark">Shortcuts</a>
     <a href="#" class="list-group-item list-group-item-action bg-dark">Overview</a>
-    <a href="#" class="list-group-item list-group-item-action bg-dark">Events</a>
-    <a href="#" class="list-group-item list-group-item-action bg-dark">Profile</a>
+    <%= link_to events_path, class:"list-group-item list-group-item-action bg-dark" do %>
+      <i class="far fa-comments fa-2x"></i>皆んなのイベント
+    <% end %>
     <%= link_to new_event_path, class:"list-group-item list-group-item-action bg-dark" do %>
       <i class="far fa-edit fa-2x"></i>書き込む
     <% end %>
