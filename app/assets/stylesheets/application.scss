@@ -90,15 +90,25 @@ p {
     .list-group-item-action {
       color: white; 
     }
-    .far {
+    .far, .fas {
       margin: 0.25rem
     }
   }
-  .user_info {
-    margin: 1rem 1.25rem 0 1.25rem;
-    .image {
-      height: 100px;
-      width: 100px;
+  .user-info {
+    margin: 0 1.25rem;
+    .avatar-box {
+      position: relative;
+      .clef-image {
+        width: 110px;
+      }
+      .avatar {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        position: absolute;
+        top: 43%;
+        left: 15%;
+      }
     }
   }
 }
