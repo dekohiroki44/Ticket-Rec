@@ -3,15 +3,19 @@
   <section class="user-info d-flex">
     <div class="avatar-box">
       <%= image_tag 'treble_clef.png', class: "clef-image"%>
-      <%= link_to current_user do %>
-        <% image_tag current_user.image, class: "avatar" %>
+      <% if user_signed_in? %>
+        <%= link_to current_user do %>
+          <% image_tag current_user.image, class: "avatar" %>
+        <% end %>
       <% end %>
     </div>
-    <div class="user-column">
-      <h1><%= current_user.name %></h1>
-      <span><%= link_to "view my profile", current_user %></span>
-      <span><%= pluralize(current_user.events.count, "イベント") %></span>
-    </div>
+    <% if user_signed_in? %>
+      <div class="user-column">
+        <h1><%= current_user.name %></h1>
+        <span><%= link_to "view my profile", current_user %></span>
+        <span><%= pluralize(current_user.events.count, "イベント") %></span>
+      </div>
+    <% end %>
   </section>
   <div class="list-group list-group-flush">
     <a href="#" class="list-group-item list-group-item-action bg-dark">Dashboard</a>
