@@ -46,8 +46,10 @@ ActiveRecord::Schema.define(version: 2020_05_22_101651) do
     t.string "price"
     t.text "content"
     t.boolean "public", default: false, null: false
+    t.boolean "done", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["date"], name: "index_events_on_date"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

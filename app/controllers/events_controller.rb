@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  require 'date'
 
   def index
     @feed_items = current_user.feed
@@ -14,6 +15,8 @@ class EventsController < ApplicationController
   end
 
   def create
+    # if params[:event][:date] > Date.today
+    # end
     event = current_user.events.build(event_params)
     if event.save
       flash[:success] = "イベントを作成しました"
@@ -54,7 +57,7 @@ class EventsController < ApplicationController
 
   def event_params
     params.
-    require(:event).
-    permit(:name, :content, :date, :place, :time, :price, :performer, :public, images: [])
+      require(:event).
+      permit(:name, :content, :date, :place, :time, :price, :performer, :public, :done, images: [])
   end
 end
