@@ -1,6 +1,6 @@
 <%= link_to event_path(event.id), class: "event-partial" do %> 
   <li id="event-<%= event.id %>" class="event d-flex">
-    <div class="event-left">
+    <div class="event-left d-flex flex-column align-items-center">
       <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
       <span class="date"><%= event.date.strftime("%-m/%-d") %></span>
     </div>

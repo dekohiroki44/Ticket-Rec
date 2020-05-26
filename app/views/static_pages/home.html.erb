@@ -4,6 +4,7 @@
     <ol class="events">
       <%= render @events %>
     </ol>
+    <%= paginate @events %>
   <% end %>
 <% else %>
   <div class="center jumbotron">

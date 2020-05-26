@@ -22,6 +22,8 @@ gem 'twitter'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem "aws-sdk-s3", require: false
+gem 'faker'
+gem 'kaminari', '~> 0.17.0'
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
@@ -47,7 +49,6 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  gem 'faker'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'webdrivers'
