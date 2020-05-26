@@ -1,16 +1,22 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-    </section>
-  </aside>
-  <div class="col-md-8">
-    <% if @user.events.any? %>
-      <h3>イベント (<%= @user.events.count %>)</h3>
-      <ol class="events">
-        <%= render @events %>
-      </ol>
-      <%= paginate @events %>
-    <% end %>
+<div class="user-seciton d-flex">
+  <div class="user-section-left">
+    <%= image_tag @user.image, class: "avatar" %>
+    <div class="name"><%= @user.name %></div>
   </div>
+  <div class="user-section-right"><%= @user.profile %></div>
+  <% if @user == current_user %>
+    <%= link_to "プロフィールを編集する", edit_user_registration_path(current_user) %>
+  <% end %>
+</div>
+<div class="event-section">
+  <% if @user.events.any? %>
+    <h3>イベント (<%= @user.events.count %>)</h3>
+    <ol class="events">
+      <%= render @events %>
+    </ol>
+    <%= paginate @events %>
+  <% else %>
+    <h3>イベントがありません</h3>
+  <% end %>
 </div>

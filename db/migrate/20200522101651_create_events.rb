@@ -10,6 +10,8 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.string :price
       t.text :content
       t.boolean :public, default: false, null: false
+      t.boolean :done, null: false
+      t.index :date
 
       t.timestamps
     end
