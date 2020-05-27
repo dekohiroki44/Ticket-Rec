@@ -9,6 +9,11 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :done, '参加済み' %>
+      <%= f.check_box :done %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :date, '日付' %>
       <%= f.date_field :date, autofocus: true, autocomplete: 'date', class: 'form-control' %>
     </div>

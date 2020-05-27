@@ -1,0 +1,46 @@
+<div class="timeline mt-3">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a href="#done" class="nav-link active" data-toggle="tab">参加したイベント</a>
+    </li>
+    <li class="nav-item">
+      <a href="#upcomming" class="nav-link" data-toggle="tab">参加予定のイベント</a>
+    </li>
+    <% if user.id==current_user.id && unsolved_events.present?%>
+      <li class="nav-item">
+        <a href="#unsolved" class="nav-link" data-toggle="tab">終了したイベント</a>
+      </li>
+    <% end %>
+  </ul>
+  <div class="tab-content">
+    <div id="done" class="tab-pane active">
+      <% if done_events.present? %>
+        <ol class="events">
+          <%= render done_events %>
+        </ol>
+        <%= paginate done_events %>
+      <% else %>
+        <p>参加したイベントはありません</p>
+      <% end %>
+    </div>
+    <div id="upcomming" class="tab-pane">
+      <% if upcomming_events.present? %>
+        <ol class="events">
+          <%= render upcomming_events %>
+        </ol>
+        <%= paginate upcomming_events %>
+      <% else %>
+        <p>参加予定のイベントはありません</p>
+      <% end %>
+    </div>
+    <div id="unsolved" class="tab-pane">
+      <%# if unsolved_events.present? %>
+        <p>ライブに参加した場合はチェックを入れよう！</p>
+        <ol class="events">
+          <%= render unsolved_events %>
+        </ol>
+        <%= paginate unsolved_events %>
+      <%# end %>
+    </div>
+  </div>
+</div>

@@ -3,10 +3,15 @@
     <div class="event-left d-flex flex-column align-items-center">
       <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
       <span class="date"><%= event.date.strftime("%-m/%-d") %></span>
+      <span class="year"><%= event.date.strftime("%Y") %></span>
     </div>
     <div class="event-center">
       <span class="user-name"><%= event.user.name %></span>
-      <span class="event-name"><%= event.name %></span>
+      <% if event.public %>
+        <span class="event-name"><%= event.name %></span>
+      <% else %>
+        <span class="event-name"><i class="fas fa-lock"></i><%= event.name %></span>
+      <% end %>
       <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
       <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
       <span class="content"><i class="fas fa-comment"></i><%= event.content %></span>
