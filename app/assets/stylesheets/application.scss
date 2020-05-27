@@ -5,8 +5,12 @@
   padding: 2rem;
 }
 
+.main-wrapper {
+  width: 100vw;
+}
+
 @media (min-width: 720px) {
-  .container {
+  .main-wrapper {
     padding-left: 15rem;
   }
 }
@@ -87,6 +91,7 @@ p {
 
 #sidebar-wrapper {
   color: white;
+  width: 15rem;
   min-height: 100vh;
   margin-left: -15rem;
   transition: margin .25s ease-out;
