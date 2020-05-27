@@ -9,14 +9,12 @@
     <%= link_to "プロフィールを編集する", edit_user_registration_path(current_user) %>
   <% end %>
 </div>
-<div class="event-section">
+<div class="event-section mt-5">
   <% if @user.events.any? %>
-    <h3>イベント (<%= @user.events.count %>)</h3>
-    <ol class="events">
-      <%= render @events %>
-    </ol>
-    <%= paginate @events %>
-  <% else %>
-    <h3>イベントがありません</h3>
+    <h3>参加したイベント (<%= @done_events.release.count %>)</h3>
+    <%= render 'events/timeline', user: @user,
+                                  done_events: @done_events,
+                                  upcomming_events: @upcomming_events,
+                                  unsolved_events: @unsolved_events %>
   <% end %>
 </div>

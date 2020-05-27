@@ -18,8 +18,6 @@
     <% end %>
   </section>
   <div class="list-group list-group-flush">
-    <a href="#" class="list-group-item list-group-item-action bg-dark">Dashboard</a>
-    <a href="#" class="list-group-item list-group-item-action bg-dark">Shortcuts</a>
     <%= link_to events_path, class:"list-group-item list-group-item-action bg-dark" do %>
     <i class="far fa-comments fa-2x"></i>皆んなのイベント
     <% end %>
@@ -28,6 +26,9 @@
     <% end %>
     <%= link_to about_path, class:"list-group-item list-group-item-action bg-dark" do %>
       <i class="fas fa-info-circle fa-2x"></i>このサイトについて
+    <% end %>
+    <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-dark" do %>
+    <i class="fas fa-sign-out-alt fa-2x"></i>ログアウト
     <% end %>
   </div>
 </div>

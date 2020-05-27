@@ -104,6 +104,7 @@ p {
   .list-group {
     width: 15rem;
     .list-group-item-action {
+      padding-top: 0.2rem;
       color: white; 
     }
     .far, .fas {
@@ -167,6 +168,27 @@ footer {
   }
 }
 
+/* timeline */
+
+.timeline {
+  margin-top: 1rem;
+  p {
+    padding: 2rem 0;
+  }
+}
+
+/* user_show */
+
+.user-section-left {
+  .avatar {
+    height: 100px;
+    width: 100px;
+  }
+  .name {
+    font-size: 2rem;
+  }
+}
+
 /* event */
 
 .events {
@@ -221,7 +243,6 @@ footer {
   }
 }
 
-
 .event-show {
   font-size: 20px;
   padding-left: 20px;
@@ -249,3 +270,4 @@ footer {
     display: block;
   }
 }
+
