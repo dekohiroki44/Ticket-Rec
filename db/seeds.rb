@@ -17,19 +17,27 @@ User.create!(name: "example user",
 end
 
 50.times do
-  User.find(1).events.create!(date: Faker::Date.between(from: 1.year.ago, to: 1.year.from_now),
+  date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
+  date < Date.current ? done = true : done = false
+  User.find(1).events.create!(date: date,
                               name: Faker::Music.album,
                               content: Faker::Lorem.sentence,
                               place: Faker::Restaurant.name,
                               price: "2500円",
-                              performer: Faker::Music.band)
+                              performer: Faker::Music.band,
+                              public: true,
+                              done:done)
 end
 
 50.times do
-  User.find(2).events.create!(date: Faker::Date.between(from: 1.year.ago, to: 1.year.from_now),
+  date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
+  date < Date.current ? done = true : done = false
+  User.find(2).events.create!(date: date,
                               name: Faker::Music.album,
                               content: Faker::Lorem.sentence,
                               place: Faker::Restaurant.name,
                               price: "2500円",
-                              performer: Faker::Music::RockBand.name)
+                              performer: Faker::Music::RockBand.name,
+                              public: true,
+                              done:done)
 end

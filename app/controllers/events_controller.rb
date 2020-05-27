@@ -15,9 +15,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    # if params[:event][:date] > Date.today
-    # end
-    event = current_user.events.build(event_params)
+    event = current_user.events.build(event_params_create)
     if event.save
       flash[:success] = "イベントを作成しました"
       redirect_to event
@@ -38,7 +36,7 @@ class EventsController < ApplicationController
         image.purge
       end
     end
-    if event.update_attributes(event_params)
+    if event.update_attributes(event_params_update)
       flash[:success] = "イベントを編集しました"
       redirect_to event
     else
@@ -55,7 +53,15 @@ class EventsController < ApplicationController
 
   private
 
-  def event_params
+  def event_params_create
+    params[:event][:date].to_date < Date.current ? done = true : done = false
+    params.
+      require(:event).
+      permit(:name, :content, :date, :place, :time, :price, :performer, :public, images: []).
+      merge(done: done)
+  end
+
+  def event_params_update
     params.
       require(:event).
       permit(:name, :content, :date, :place, :time, :price, :performer, :public, :done, images: [])

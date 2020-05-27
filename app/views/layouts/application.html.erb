@@ -13,11 +13,13 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <%= render 'layouts/flash_messages' %>
     <div class="d-flex" id="wrapper">
       <%= render 'layouts/sidebar' %>
-      <div class="container">
-        <%= yield %>
+      <div class="main-wrapper">
+        <%= render 'layouts/flash_messages' %>
+        <div class="container">
+          <%= yield %>
+        </div>
       </div>
     </div>
     <%= render 'layouts/footer' %>
