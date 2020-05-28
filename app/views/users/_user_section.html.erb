@@ -1,0 +1,19 @@
+<div class="user-section row">
+  <div class="user-section-left col-4">
+    <%= link_to user do %>
+      <%= image_tag user.image, class: "avatar" %>
+    <% end %>
+    <div class="name"><%= user.name %></div>
+    <div class="stats">
+      <%= render 'shared/stats', user: user %>
+    </div>
+    <%= render 'follow_btn', user: user if user_signed_in? %>
+  </div>
+  <div class="user-section-right col-8">
+    <div class="profile"><%= user.profile %></div>
+    <% if user == current_user %>
+      <%= link_to "プロフィールを編集する", edit_user_registration_path(current_user) %>
+    <% end %>
+  </div>
+</div>
+

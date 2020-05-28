@@ -111,7 +111,7 @@ p {
       margin: 0.25rem
     }
   }
-  .user-info {
+  .current-user-section {
     margin: 0 1.25rem;
     .avatar-box {
       position: relative;
@@ -132,10 +132,6 @@ p {
 }
 
 section {
-  &:first-child {
-    border: 0;
-    padding-top: 0;
-  }
   span {
     display: block;
     margin-bottom: 3px;
@@ -177,9 +173,10 @@ footer {
   }
 }
 
-/* user_show */
+/* user_section */
 
 .user-section-left {
+  text-align: center;
   .avatar {
     height: 100px;
     width: 100px;
@@ -189,9 +186,48 @@ footer {
   }
 }
 
-/* event */
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+  width: 200px;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid gray;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+  strong {
+    display: block;
+  }
+}
 
-.events {
+.user_avatars {
+  overflow: auto;
+  margin-top: 10px;
+  .gravatar {
+    margin: 1px 1px;
+  }
+  a {
+    padding: 0;
+  }
+}
+
+.users.follow {
+  padding: 0;
+}
+
+/* list */
+
+.events, .users {
   list-style: none;
   padding: 0;
   li {
@@ -200,30 +236,30 @@ footer {
   }
 }
 
-.event-partial {
+.event-partial, .user-partial {
   &:hover {
     text-decoration: none;
   }
-  .event {
+  .event, .user {
     color: #212529;
     .fas {
       margin-right: 0.25rem;
     }
-    .event-left {
+    .event-left, .user-left {
       width: 100px;
       .date {
         font-weight: bold;
         font-size: 20px;
       }
     }
-    .event-center {
+    .event-center, .user-center {
       margin-left: 10px;
       .user-name {
         display: block;
         font-size: 15px;
         font-weight: bold;
       }
-      .event-name {
+      .event-name, .name {
         display: block;
         font-weight: bold;
         font-size: 20px;
@@ -234,6 +270,13 @@ footer {
         width: 100%;
         height: 1em;
         line-height: 1; 
+      }
+      .profile {
+        display: block;
+        overflow: hidden;
+        width: 100%;
+        height: 2em;
+        line-height: 2; 
       }
     }
     .image {
