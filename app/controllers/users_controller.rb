@@ -10,4 +10,18 @@ class UsersController < ApplicationController
       @unsolved_events = @unsolved_events.release
     end
   end
+
+  def following
+    @user  = User.find(params[:id])
+    @title = "#{@user.name}がフォローしているユーザー"
+    @users = @user.following.page(params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @user  = User.find(params[:id])
+    @title = "#{@user.name}のフォロワー"
+    @users = @user.followers.page(params[:page])
+    render 'show_follow'
+  end
 end

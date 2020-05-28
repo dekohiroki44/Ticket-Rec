@@ -5,7 +5,7 @@ User.create!(name: "example user",
              admin: true,
              profile: "こんにちは、example userです。ライブに行くのが趣味です。")
 
-9.times do |n|
+20.times do |n|
   name = Faker::Name.name
   email = "example-#{n+1}@example.org"
   password = "password"
@@ -16,7 +16,7 @@ User.create!(name: "example user",
                profile: "こんにちは、#{name}です。ライブに行くのが趣味です。気軽 にフォローしてください！")
 end
 
-50.times do
+30.times do
   date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
   date < Date.current ? done = true : done = false
   User.find(1).events.create!(date: date,
@@ -29,7 +29,7 @@ end
                               done:done)
 end
 
-50.times do
+30.times do
   date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
   date < Date.current ? done = true : done = false
   User.find(2).events.create!(date: date,
@@ -41,3 +41,10 @@ end
                               public: true,
                               done:done)
 end
+
+users = User.all
+user  = users.first
+following = users[2..10]
+followers = users[3..10]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }

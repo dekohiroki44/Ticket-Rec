@@ -1,6 +1,6 @@
 <div class="bg-dark border-right" id="sidebar-wrapper">
   <%= link_to "LIVCALE", root_path, id: "logo", class: "navbar-brand sidebar-heading" %>
-  <section class="user-info d-flex">
+  <section class="current-user-section d-flex">
     <div class="avatar-box">
       <%= image_tag 'treble_clef.png', class: "clef-image"%>
       <% if user_signed_in? %>
@@ -10,7 +10,7 @@
       <% end %>
     </div>
     <% if user_signed_in? %>
-      <div class="user-column">
+      <div class="current-user-info">
         <h1><%= current_user.name %></h1>
         <span><%= link_to "view my profile", current_user %></span>
         <span><%= pluralize(current_user.events.count, "イベント") %></span>

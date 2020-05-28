@@ -1,0 +1,11 @@
+<%= link_to user_path(user.id), class: "user-partial" do %> 
+  <li id="user-<%= user.id %>" class="user d-flex">
+    <div class="user-left d-flex flex-column align-items-center">
+      <%= image_tag user.image.variant(resize:'50x50').processed, class:"avatar" %>
+    </div>
+    <div class="event-center">
+      <span class="name"><%= user.name %></span>
+      <span class="profile"><i class="fas fa-comment"></i><%= user.profile %></span>
+    </div>
+  </li>
+<% end %>

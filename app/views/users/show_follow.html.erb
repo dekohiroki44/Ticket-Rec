@@ -1,0 +1,13 @@
+<% provide(:title, @title) %>
+<div class="d-flex flex-column">
+  <%= render 'user_section', user: @user %>
+  <div class="list-section mt-5">
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+      <ul class="users follow">
+        <%= render @users %>
+      </ul>
+      <%= paginate @users %>
+    <% end %>
+  </div>
+</div>

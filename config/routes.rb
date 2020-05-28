@@ -6,7 +6,13 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
   devise_for :users
   resources :users, only: [:show]
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :events
+  resources :relationships, only: [:create, :destroy]
   # devise_scope :user do
   #   # get 'signup', to: 'devise/registrations#new'
   #   # post 'signup', to: 'devise/registrations#create'
