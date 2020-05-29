@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'likes/create'
+  get 'likes/destroy'
   get 'events/new'
   get 'events/show'
   get 'events/edit'
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   end
   resources :events
   resources :relationships, only: [:create, :destroy]
+  resources :likes, only: [:create, :destroy]
   # devise_scope :user do
   #   # get 'signup', to: 'devise/registrations#new'
   #   # post 'signup', to: 'devise/registrations#create'
