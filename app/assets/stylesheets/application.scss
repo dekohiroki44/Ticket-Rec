@@ -247,6 +247,7 @@ footer {
     }
     .event-left, .user-left {
       width: 100px;
+      flex-shrink: 0;
       .date {
         font-weight: bold;
         font-size: 20px;
@@ -263,6 +264,9 @@ footer {
         display: block;
         font-weight: bold;
         font-size: 20px;
+      }
+      .performer {
+        display: block;
       }
       .content {
         display: block;

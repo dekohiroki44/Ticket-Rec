@@ -3,7 +3,7 @@
     <div class="event-left d-flex flex-column align-items-center">
       <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
       <span class="date"><%= event.date.strftime("%-m/%-d") %></span>
-      <span class="year"><%= event.date.strftime("%Y") %></span>
+      <small class="year"><%= event.date.strftime("%Y") %></small>
     </div>
     <div class="event-center">
       <span class="user-name"><%= event.user.name %></span>
