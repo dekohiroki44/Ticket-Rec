@@ -1,21 +1,27 @@
 <%= link_to event_path(event.id), class: "event-partial" do %> 
-  <li id="event-<%= event.id %>" class="event d-flex">
-    <div class="event-left d-flex flex-column align-items-center">
-      <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
-      <span class="date"><%= event.date.strftime("%-m/%-d") %></span>
-      <span class="year"><%= event.date.strftime("%Y") %></span>
+  <li id="event-<%= event.id %>" class="event d-flex flex-column flex-lg-row">
+    <div class="d-flex event-left">
+      <div class="event-left-1 d-flex flex-column align-items-center">
+        <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+        <span class="date"><%= event.date.strftime("%-m/%-d") %></span>
+        <small class="year"><%= event.date.strftime("%Y") %></small>
+      </div>
+      <div class="event-center">
+        <span class="user-name"><%= event.user.name %></span>
+        <% if event.public %>
+          <span class="event-name"><%= event.name %></span>
+        <% else %>
+          <span class="event-name"><i class="fas fa-lock"></i><%= event.name %></span>
+        <% end %>
+        <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
+        <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
+      </div>
     </div>
-    <div class="event-center">
-      <span class="user-name"><%= event.user.name %></span>
-      <% if event.public %>
-        <span class="event-name"><%= event.name %></span>
-      <% else %>
-        <span class="event-name"><i class="fas fa-lock"></i><%= event.name %></span>
+    <div class="d-flex event-right  justify-content-around mx-3">
+      <% if event.content.present? %>
+        <span class="content"><%= event.content %></span>
       <% end %>
-      <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
-      <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
-      <span class="content"><i class="fas fa-comment"></i><%= event.content %></span>
+      <%= image_tag event.images.first.variant(resize:'100x100').processed, class:"image" if event.images.attached?  %>
     </div>
-    <%= image_tag event.images.first.variant(resize:'100x100').processed, class:"image" if event.images.attached?  %>
   </li>
 <% end %>
