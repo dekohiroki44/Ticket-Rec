@@ -231,16 +231,45 @@ footer {
   list-style: none;
   padding: 0;
   li {
-    padding: 10px 0;
-    border-top: 1px solid gray
+    max-width: 700px;
+    padding: 4%;
+    margin: 10px;
+    border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
+    background-color: lightgray;
+    border: 2px solid #333;
+  }
+}
+
+#done {
+  li {
+    position: relative;
+    z-index: 0;
+  }
+  li:after {
+    content:"";
+    position: absolute;
+    right: 0px;
+    bottom: -2px;
+    left: 50%;
+    width: 0px;
+    height: 0px;
+    margin: auto;
+    border-style: solid;
+    border-color: transparent white white white;
+    border-width: 20px 20px 15px 20px;
+    z-index: 1;
   }
 }
 
 .event-partial, .user-partial {
-  &:hover {
-    text-decoration: none;
+  a {
+    color: #212529;
+    &:hover {
+      text-decoration: none;
+    }
   }
   .event, .user {
+    text-decoration: none;
     color: #212529;
     .fas {
       margin-right: 0.25rem;
@@ -255,7 +284,6 @@ footer {
     }
     .event-left-2, .user-center {
       margin: 0 10px;
-      
       .user-name {
         display: block;
         font-size: 15px;
