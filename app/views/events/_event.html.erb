@@ -1,28 +1,34 @@
-<%= link_to event_path(event.id), class: "event-partial" do %> 
+<div class="event-partial">
   <li id="event-<%= event.id %>" class="event d-flex flex-column flex-lg-row">
     <div class="d-flex event-left">
       <div class="event-left-1 d-flex flex-column align-items-center">
-        <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+        <%= link_to user_path(event.user_id) do %>
+          <%= image_tag event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+        <% end %>
         <span class="date"><%= event.date.strftime("%-m/%-d") %></span>
         <small class="year"><%= event.date.strftime("%Y") %></small>
         <%= render "likes/like", event: event %>
       </div>
-      <div class="event-left-2">
-        <span class="user-name"><%= event.user.name %></span>
-        <% if event.public %>
-          <span class="event-name"><%= event.name %></span>
-        <% else %>
-          <span class="event-name"><i class="fas fa-lock"></i><%= event.name %></span>
-        <% end %>
-        <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
-        <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
-      </div>
-    </div>
-    <div class="d-flex event-right  justify-content-around mx-3">
-      <% if event.content.present? %>
-        <span class="content"><%= event.content %></span>
+      <%= link_to event_path(event.id) do %>
+        <div class="event-left-2">
+          <span class="user-name"><%= event.user.name %></span>
+          <% if event.public %>
+            <span class="event-name"><%= event.name %></span>
+          <% else %>
+            <span class="event-name"><i class="fas fa-lock"></i><%= event.name %></span>
+          <% end %>
+          <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
+          <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
+        </div>
       <% end %>
-      <%= image_tag event.images.first.variant(resize:'100x100').processed, class:"image" if event.images.attached?  %>
     </div>
+    <%= link_to event_path(event.id) do %>
+      <div class="d-flex event-right  justify-content-around mx-3">
+        <!-- <% if event.content.present? %>
+          <span class="content"><%= event.content %></span>
+        <% end %> -->
+        <%= image_tag event.images.first.variant(resize:'100x100').processed, class:"image" if event.images.attached?  %>
+      </div>
+    <% end %>
   </li>
-<% end %>
+</div>
