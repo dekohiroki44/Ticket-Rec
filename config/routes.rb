@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :events
+  resources :events do
+    resources :comments, only: [:create, :destroy]
+  end
   resources :relationships, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
   # devise_scope :user do

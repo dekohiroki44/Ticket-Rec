@@ -7,6 +7,7 @@ class Event < ApplicationRecord
   has_many_attached :images
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+  has_many :comments, dependent: :destroy
 
   def like(user)
     likes.create(user_id: user.id)

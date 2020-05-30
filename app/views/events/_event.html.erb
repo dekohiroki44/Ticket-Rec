@@ -24,9 +24,6 @@
     </div>
     <%= link_to event_path(event.id) do %>
       <div class="d-flex event-right  justify-content-around mx-3">
-        <!-- <% if event.content.present? %>
-          <span class="content"><%= event.content %></span>
-        <% end %> -->
         <%= image_tag event.images.first.variant(resize:'100x100').processed, class:"image" if event.images.attached?  %>
       </div>
     <% end %>
