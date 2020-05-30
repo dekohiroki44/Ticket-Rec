@@ -23,7 +23,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem "aws-sdk-s3", require: false
 gem 'faker'
-gem 'kaminari', '~> 0.17.0'
+gem "kaminari", ">= 1.2.1"
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
