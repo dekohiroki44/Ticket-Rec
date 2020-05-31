@@ -1,19 +1,21 @@
-<div class="comment-partial">
-  <li id="comment-<%= comment.id %>" class="comment">
-    <%= link_to user_path(comment.user.id) do %>
-      <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
-      <%= comment.user.name %>
-    <% end %>
-    <span class="content"><%= comment.content %></span>
-    <div class="under">
-      <span class="timestamp">
-        Posted <%= time_ago_in_words(comment.created_at) %> ago.
-      </span>
-      <% if comment.user == current_user %>
-        <%= link_to event_comment_path(@event.id, id: comment.id), method: :delete, data: {confirm: "削除してよろしいですか？"} do %>
-          <i class="far fa-trash-alt delete"></i>
-        <% end %>
+<div class="mx-auto">
+  <div class="comment-partial">
+    <li id="comment-<%= comment.id %>" class="comment">
+      <%= link_to user_path(comment.user.id) do %>
+        <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+        <%= comment.user.name %>
       <% end %>
-    </div>
-  </li>
+      <span class="content"><%= comment.content %></span>
+      <div class="under">
+        <span class="timestamp">
+          <%= "#{time_ago_in_words(comment.created_at)}前にコメント" %>
+        </span>
+        <% if comment.user == current_user %>
+          <%= link_to event_comment_path(@event.id, id: comment.id), method: :delete, data: {confirm: "削除してよろしいですか？"} do %>
+            <i class="far fa-trash-alt delete"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </li>
+  </div>
 </div>

@@ -48,7 +48,6 @@ class User < ApplicationRecord
     end
   end
 
-
   private
 
   def default_image

@@ -2,7 +2,7 @@
 <div class="d-flex flex-column">
   <%= render 'user_section', user: @user %>
 </div>
-<div class="list-section mt-5">
+<div class="list-section mt-5 col-lg-10 mx-auto">
   <% if @user.events.any? %>
     <h3>参加したイベント (<%= @done_events.release.count %>)</h3>
     <%= render 'events/timeline', user: @user,

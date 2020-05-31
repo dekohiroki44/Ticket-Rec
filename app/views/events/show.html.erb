@@ -1,6 +1,6 @@
 <% provide(:title, @event.name) %>
 <div class="row event-show">
-  <div class="col-md-7">
+  <div class="col-lg-7">
     <div id="event-<%= @event.id %>" class="event d-flex">
       <div class="event-show-main">
         <div class="user d-flex">
@@ -55,12 +55,11 @@
       </div>
     </div>
   </div>
-  <div class="col-md-5 comment-section">
+  <div class="col-lg-5 comment-section">
     <div class="comment-list">
       <h2>コメント一覧</h2>
-      <ol class="comments">
-        <%= render @comments %>
-      </ol>
+      <%= render @comments %>
+      <%= paginate @comments %>
     </div>
     <div class="comment-form">
       <%= form_with model: [@event, @comment] do |f| %>
