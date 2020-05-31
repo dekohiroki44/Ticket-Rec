@@ -1,6 +1,6 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
-<div class="col-md-6 mx-auto">
+<div class="col-lg-8 mx-auto">
   <div class="form-inline">
     <span>
       <%= link_to user_path(visitor) do %>
@@ -31,7 +31,7 @@
   </div>
 
   <div class="small text-muted text-right">
-    <%= time_ago_in_words(notification.created_at).upcase %>
+    <%= "#{time_ago_in_words(notification.created_at).upcase}前" %>
   </div>
   <hr>
 </div>

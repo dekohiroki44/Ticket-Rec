@@ -13,7 +13,7 @@
       <div class="current-user-info">
         <h1><%= current_user.name %></h1>
         <span><%= link_to "view my profile", current_user %></span>
-        <span><%= pluralize(current_user.events.count, "イベント") %></span>
+        <span><%= "#{current_user.events.count}のイベント" %></span>
       </div>
     <% end %>
   </section>
@@ -27,13 +27,17 @@
       <% end %>
       <%= link_to notifications_path, class:"list-group-item list-group-item-action bg-dark" do %>
         <% if unchecked_notifications.any? %>
-          <i class="fas fa-bell faa-ring animated fa-2x"></i>通知があります
+          <i class="fas fa-bell faa-ring animated fa-2x"></i><%= "#{unchecked_notifications.count}件の未読通知" %>
         <% else %>
-          <i class="far fa-bell fa-2x"></i>通知はありません
+          <i class="far fa-bell fa-2x mr-2"></i>通知
         <% end %>
       <% end %>
       <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-dark" do %>
       <i class="fas fa-sign-out-alt fa-2x"></i>ログアウト
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class:"list-group-item list-group-item-action bg-dark" do %>
+        <i class="fas fa-sign-out-alt fa-2x"></i>ログイン
       <% end %>
     <% end %>
     <%= link_to about_path, class:"list-group-item list-group-item-action bg-dark" do %>
