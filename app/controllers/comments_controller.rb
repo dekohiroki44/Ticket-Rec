@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
     comment = event.comments.build(comment_params)
     comment.user_id = current_user.id
     if comment.save
+      event.create_notification_comment!(current_user, comment.id)
       flash[:success] = "コメントしました"
       redirect_back(fallback_location: event_path(event))
     else
