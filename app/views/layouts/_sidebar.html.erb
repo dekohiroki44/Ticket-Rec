@@ -18,17 +18,26 @@
     <% end %>
   </section>
   <div class="list-group list-group-flush">
-    <%= link_to events_path, class:"list-group-item list-group-item-action bg-dark" do %>
-    <i class="far fa-comments fa-2x"></i>皆んなのイベント
-    <% end %>
-    <%= link_to new_event_path, class:"list-group-item list-group-item-action bg-dark" do %>
-    <i class="far fa-edit fa-2x"></i>書き込む
+    <% if user_signed_in? %>
+      <%= link_to events_path, class:"list-group-item list-group-item-action bg-dark" do %>
+        <i class="far fa-comments fa-2x"></i>皆んなのイベント
+      <% end %>
+      <%= link_to new_event_path, class:"list-group-item list-group-item-action bg-dark" do %>
+        <i class="far fa-edit fa-2x"></i>書き込む
+      <% end %>
+      <%= link_to notifications_path, class:"list-group-item list-group-item-action bg-dark" do %>
+        <% if unchecked_notifications.any? %>
+          <i class="fas fa-bell faa-ring animated fa-2x"></i>通知があります
+        <% else %>
+          <i class="far fa-bell fa-2x"></i>通知はありません
+        <% end %>
+      <% end %>
+      <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-dark" do %>
+      <i class="fas fa-sign-out-alt fa-2x"></i>ログアウト
+      <% end %>
     <% end %>
     <%= link_to about_path, class:"list-group-item list-group-item-action bg-dark" do %>
       <i class="fas fa-info-circle fa-2x"></i>このサイトについて
-    <% end %>
-    <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-dark" do %>
-    <i class="fas fa-sign-out-alt fa-2x"></i>ログアウト
     <% end %>
   </div>
 </div>
