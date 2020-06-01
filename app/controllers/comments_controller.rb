@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
-  
-  def  create
+
+  def create
     event = Event.find(params[:event_id])
     comment = event.comments.build(comment_params)
     comment.user_id = current_user.id

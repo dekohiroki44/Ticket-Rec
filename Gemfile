@@ -44,6 +44,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop-airbnb'
+  gem 'bullet'
 end
 
 group :test do
@@ -52,5 +53,4 @@ group :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'webdrivers'
-  gem 'selenium-webdriver'
 end
