@@ -1,6 +1,7 @@
 <h3>フォロー中のユーサーが参加したイベント</h3>
-<% if @feed_items.any? %>
-  <ol class="events">
-    <%= render @feed_items %>
-  </ol>
+<% if @event.any? %>
+<%= render 'timeline', user: current_user,
+                              done_events: @done_events,
+                              upcomming_events: @upcomming_events,
+                              unsolved_events: @unsolved_events %>
 <% end %>

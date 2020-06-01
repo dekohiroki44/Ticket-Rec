@@ -9,10 +9,10 @@
       <% end %>
       <% case notification.action %>
       <% when 'follow' then %>
-        <p>あなたをフォローしました</p>
+        <%= "あなたをフォローしました" %>
       <% when 'like' then %>
         <%= link_to 'あなたの投稿', notification.event, style: "font-weight: bold;" %>
-        <p>にいいねしました</p>
+        <%= "にいいねしました" %>
       <% when 'comment' then %>
         <% if notification.event.user_id == visited.id %>
           <%= link_to "あなたの投稿", notification.event, style: "font-weight: bold;" %>
@@ -24,8 +24,8 @@
             <% end %>
           </span>
         <% end %>
-        <p>にコメントしました</p>
-        <p class="text-muted mb-0"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
+        <%= "にコメントしました" %>
+        <p class="text-muted mb-0 mx-5"><%= Comment.find_by(id: notification.comment_id)&.content %></p>
       <% end %>
     </span>
   </div>

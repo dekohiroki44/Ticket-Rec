@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 <h3>参加したイベント (<%= @done_events.release.count %>)</h3>
   <% if current_user.events.any? %>
-  <%= render 'events/timeline', user: @user,
+  <%= render 'events/timeline', user: current_user,
                                 done_events: @done_events,
                                 upcomming_events: @upcomming_events,
                                 unsolved_events: @unsolved_events %>
