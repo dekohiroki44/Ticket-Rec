@@ -25,6 +25,8 @@
     
     <div class="form-group">
       <%= f.label :performer, 'アーティスト' %>
+      <small class="d-block">複数入力する場合は「,」(半角)でくぎってください。</small> 
+      <small class="d-block">(例) アーティストA, アーティストB, アーティストC, ...</small>
       <%= f.text_area :performer, autocomplete: 'current-password', class: 'form-control' %>
     </div>
     
