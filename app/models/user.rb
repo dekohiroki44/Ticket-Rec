@@ -55,6 +55,32 @@ class User < ApplicationRecord
     end
   end
 
+  def most_places(count)
+    events.
+      pluck(:place).
+      join(",").
+      gsub(" ","").
+      downcase.split(",").
+      group_by { |place| place }.
+      sort_by { |_, v| -v.size }.
+      map(&:first).
+      take(count).
+      join(", ")
+  end
+
+  def most_artists(count)
+    events.
+      pluck(:performer).
+      join(",").
+      gsub(", ",",").
+      downcase.split(",").
+      group_by { |performer| performer }.
+      sort_by { |_, v| -v.size }.
+      map(&:first).
+      take(count).
+      join(", ")
+  end
+
   private
 
   def default_image

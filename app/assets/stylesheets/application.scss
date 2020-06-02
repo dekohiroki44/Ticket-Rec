@@ -178,51 +178,30 @@ footer {
 .user-section-left {
   text-align: center;
   .avatar {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
   }
   .name {
     font-size: 2rem;
   }
-}
-
-.stats {
-  overflow: auto;
-  margin-top: 0;
-  padding: 0;
-  width: 200px;
-  a {
-    float: left;
-    padding: 0 10px;
-    border-left: 1px solid gray;
-    color: gray;
-    &:first-child {
-      padding-left: 0;
-      border: 0;
+  .stats {
+    overflow: auto;
+    margin-top: 5px;
+    a {
+      margin: 0 10px;
+      padding: 0.5rem;
+      background-color: lightgray;
+      border-radius: 0.5rem;
+      color: black;
+      &:hover {
+        text-decoration: none;
+        color: blue;
+      }
     }
-    &:hover {
-      text-decoration: none;
-      color: blue;
+    strong {
+      display: block;
     }
   }
-  strong {
-    display: block;
-  }
-}
-
-.user_avatars {
-  overflow: auto;
-  margin-top: 10px;
-  .gravatar {
-    margin: 1px 1px;
-  }
-  a {
-    padding: 0;
-  }
-}
-
-.users.follow {
-  padding: 0;
 }
 
 /* list */
