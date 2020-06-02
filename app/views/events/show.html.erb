@@ -3,10 +3,10 @@
   <div class="col-lg-7">
     <div id="event-<%= @event.id %>" class="event d-flex">
       <div class="event-show-main">
-        <div class="user d-flex">
+        <%= link_to user_path(@event.user), class: "user d-flex" do %>
           <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
           <span class="user-name"><%= @event.user.name %></span>
-        </div>
+        <% end %>
         <%= render "likes/like", event: @event %>
         <table>
           <tr>

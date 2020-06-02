@@ -34,13 +34,11 @@
       <% end %>
     </div>
     <div id="unsolved" class="tab-pane">
-      <%# if unsolved_events.present? %>
-        <p>ライブに参加した場合はチェックを入れよう！</p>
-        <ol class="events">
-          <%= render unsolved_events %>
-        </ol>
-        <%= paginate unsolved_events %>
-      <%# end %>
+      <p>ライブに参加した場合はチェックを入れよう！</p>
+      <ol class="events">
+        <%= render unsolved_events %>
+      </ol>
+      <%= paginate unsolved_events %>
     </div>
   </div>
 </div>

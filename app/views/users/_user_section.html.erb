@@ -18,7 +18,9 @@
     </div>
     <div class="most-artist mt-3 text-center">
       <%= "#{user.name}が最も見に行ったアーティスト" if user.most_artists(1).present? %>
-      <strong class="d-block"><%= user.most_artists(1) %></strong>
+      <strong class="d-block mb-3"><%= user.most_artists(1) %></strong>
+      <%= "#{user.most_artists(1)}が好きな方にオススメのアーティスト♪" %>
+      <strong class="d-block"><%= user.recommends(3) %></strong>
     </div>
     </div>
   </div>

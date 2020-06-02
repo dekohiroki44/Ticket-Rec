@@ -61,6 +61,13 @@ p {
   line-height: 1.7em;
 }
 
+a {
+  color: black;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 #logo {
   font-size: 1.7em;
   color: white;
