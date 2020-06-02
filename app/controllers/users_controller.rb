@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @done_events = @user.events.done.page(params[:page]).with_attached_images
-    @upcomming_events = @user.events.upcomming.page(params[:page]).with_attached_images
-    @unsolved_events = @user.events.unsolved.page(params[:page]).with_attached_images
+    @done_events = @user.events.done.page(params[:page]).with_attached_images.includes([:like_users])
+    @upcomming_events = @user.events.upcomming.page(params[:page]).with_attached_images.includes([:like_users])
+    @unsolved_events = @user.events.unsolved.page(params[:page]).with_attached_images.includes([:like_users])
     if current_user != @user
       @done_events = @done_events.release
       @upcomming_events = @upcomming_events.release

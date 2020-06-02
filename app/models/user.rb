@@ -73,7 +73,28 @@ class User < ApplicationRecord
       pluck(:performer).
       join(",").
       gsub(", ",",").
-      downcase.split(",").
+      downcase.
+      split(",").
+      group_by { |performer| performer }.
+      sort_by { |_, v| -v.size }.
+      map(&:first).
+      take(count).
+      join(", ")
+  end
+
+  def recommends(count)
+    user_ids = Event.
+      where('UPPER(performer) LIKE ?', "%#{most_artists(1)}%".upcase).
+      where.not(user_id: id).
+      pluck(:user_id).
+      uniq
+      array = []
+    user_ids.each do |user_id|
+      array << User.find(user_id).events.done.take(5).pluck(:performer).join(",")
+    end
+    recently_performers = array.join(",").gsub(", ",",").downcase.split(",")
+    recently_performers.delete(self.most_artists(1))
+    recently_performers.
       group_by { |performer| performer }.
       sort_by { |_, v| -v.size }.
       map(&:first).
