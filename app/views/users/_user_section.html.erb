@@ -1,19 +1,26 @@
 <div class="user-section row">
-  <div class="user-section-left col-4">
+  <div class="user-section-left col-lg-4">
     <%= link_to user do %>
       <%= image_tag user.image, class: "avatar" %>
     <% end %>
     <div class="name"><%= user.name %></div>
-    <div class="stats">
+    <div class="stats mb-3">
       <%= render 'shared/stats', user: user %>
     </div>
-    <%= render 'follow_btn', user: user if user_signed_in? %>
+    <%= render 'follow_btn', user: user %>
+    <%= link_to "プロフィールを編集", edit_user_registration_path(current_user) if user == current_user %>
   </div>
-  <div class="user-section-right col-8">
-    <div class="profile"><%= user.profile %></div>
-    <% if user == current_user %>
-      <%= link_to "プロフィールを編集する", edit_user_registration_path(current_user) %>
-    <% end %>
+  <div class="user-section-right col-lg-8">
+    <div class="profile mt-3"><%= user.profile %></div>
+    <div class="most-place mt-3 text-center">
+      <%= "#{user.name}が最も行った会場" if user.most_places(1).present? %>
+      <strong class="d-block"><%= user.most_places(1) %></strong>
+    </div>
+    <div class="most-artist mt-3 text-center">
+      <%= "#{user.name}が最も見に行ったアーティスト" if user.most_artists(1).present? %>
+      <strong class="d-block"><%= user.most_artists(1) %></strong>
+    </div>
+    </div>
   </div>
 </div>
 
