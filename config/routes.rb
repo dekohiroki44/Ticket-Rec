@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
   resources :users do
     member do
-      get :following, :followers
+      get :following, :followers, :map
     end
   end
   resources :events do
