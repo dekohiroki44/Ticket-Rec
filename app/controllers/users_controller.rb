@@ -24,4 +24,11 @@ class UsersController < ApplicationController
     @users = @user.followers.page(params[:page]).with_attached_image
     render 'show_follow'
   end
+
+  def map
+    @user = User.find(params[:id])
+    places = @user.events.pluck(:place)
+    places.each do |place|
+      
+  end
 end
