@@ -1,72 +1,61 @@
 <% provide(:title, @event.name) %>
-<div class="row event-show">
-  <div class="col-lg-7">
-    <div id="event-<%= @event.id %>" class="event d-flex">
-      <div class="event-show-main">
-        <%= link_to user_path(@event.user), class: "user d-flex" do %>
-          <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
-          <span class="user-name"><%= @event.user.name %></span>
+<div class="event-show" >
+  <%= link_to user_path(@event.user), class: "user d-flex justify-content-center" do %>
+    <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+    <div class="user-name"><%= @event.user.name %></div>
+  <% end %>
+  <% if @event.public %>
+    <h1 class="event-name mt-3"><%= @event.name %></h1>
+  <% else %>
+    <h1 class="event-name mt-3"><i class="fas fa-lock"></i><%= @event.name %></h1>
+  <% end %>
+  <div class="row">
+    <div class="main-section col-lg-7">
+      <%= render "likes/like", event: @event %>
+      <table>
+        <tr>
+          <td><i class="far fa-calendar-alt fa-2x"></i></td>
+          <td class="event-column date"><%= @event.date.strftime("%Y/%-m/%-d") %></td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-user fa-2x"></i></td>
+          <td class="event-column performer"><%= @event.performer%></td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-map-marker-alt fa-2x"></i></td>
+          <td class="event-column place"></i><%= @event.place %></td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-money-bill-wave-alt fa-2x"></i></td>
+          <td class="event-column price"><%= @event.price %></td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-comment fa-2x"></i></td>
+          <td class="event-column content"><%= simple_format(h(@event.content)) %></td>
+        </tr>
+      </table>
+      <% if @event.images.attached? %>
+        <% @event.images.each do |image| %>
+          <%= image_tag image.variant(resize:'200x200').processed, class:"images" %>
         <% end %>
-        <%= render "likes/like", event: @event %>
-        <table>
-          <tr>
-            <td><i class="fas fa-user-secret fa-2x"></i></td>
-            <td>
-              <% if @event.public == true %>
-                公開する
-              <% else %>
-                公開しない
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td><i class="far fa-calendar-alt fa-2x"></i></td>
-            <td class="event-column date"><%= @event.date.strftime("%Y/%-m/%-d") %></td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-music fa-2x"></i></td>
-            <td class="event-column event-name"><%= @event.name %></td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-user fa-2x"></i></td>
-            <td class="event-column performer"><%= @event.performer%></td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-map-marker-alt fa-2x"></i></td>
-            <td class="event-column place"></i><%= @event.place %></td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-money-bill-wave-alt fa-2x"></i></td>
-            <td class="event-column price"><%= @event.price %></td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-comment fa-2x"></i></td>
-            <td class="event-column content"><%= simple_format(h(@event.content)) %></td>
-          </tr>
-        </table>
-        <% if @event.images.attached? %>
-          <% @event.images.each do |image| %>
-            <%= image_tag image.variant(resize:'200x200').processed, class:"images" %>
-          <% end %>
-        <% end %>
-        <%= link_to '編集する', edit_event_path(@event), class: "edit" %>
-      </div>
-      <div class="event-show-side">
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-5 comment-section">
-    <div class="comment-list">
-      <h2>コメント一覧</h2>
-      <%= render @comments %>
-      <%= paginate @comments %>
-    </div>
-    <div class="comment-form">
-      <%= form_with model: [@event, @comment] do |f| %>
-        <%= f.text_area :content, class: "area" %>
-        <br>
-        <%= f.submit 'コメントする', class: "btn btn-primary btn-block" %>
       <% end %>
+      <%= link_to '編集する', edit_event_path(@event), class: "edit" %>
+    </div>
+    <div class="col-lg-5 mt-5 comment-section">
+      <div class="comment-list">
+        <h2>コメント一覧</h2>
+        <%= render @comments %>
+        <%= paginate @comments %>
+      </div>
+      <div class="comment-form">
+        <%= form_with model: [@event, @comment] do |f| %>
+          <%= f.text_area :content, class: "area" %>
+          <br>
+          <%= f.submit 'コメントする', class: "btn btn-primary btn-block" %>
+        <% end %>
+      </div>
     </div>
   </div>
+
 </div>
+
