@@ -4,9 +4,9 @@ class EventsController < ApplicationController
 
   def index
     @event = current_user.feed
-    @done_events = current_user.feed.done.page(params[:page]).with_attached_images.includes(:user)
-    @upcomming_events = current_user.feed.upcomming.page(params[:page]).with_attached_images.includes(:user)
-    @unsolved_events = current_user.feed.unsolved.page(params[:page]).with_attached_images.includes(:user)
+    @done_events = current_user.feed.done.page(params[:page]).with_attached_images.includes(:user).includes([:like_users])
+    @upcomming_events = current_user.feed.upcomming.page(params[:page]).with_attached_images.includes(:user).includes([:like_users])
+    @unsolved_events = current_user.feed.unsolved.page(params[:page]).with_attached_images.includes(:user).includes([:like_users])
   end
 
   def show
