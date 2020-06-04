@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def show
     @user = User.find(params[:id])
     @done_events = @user.events.done.page(params[:page]).with_attached_images.includes([:like_users])
@@ -26,9 +27,6 @@ class UsersController < ApplicationController
   end
 
   def map
-    @user = User.find(params[:id])
-    places = @user.events.pluck(:place)
-    places.each do |place|
-      
   end
+
 end
