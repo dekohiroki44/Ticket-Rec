@@ -40,19 +40,26 @@
         <% end %>
       <% end %>
       <%= link_to '編集する', edit_event_path(@event), class: "edit" %>
+      <%= @related_artist_name0 %>
+      <%= @top_track_url %>
     </div>
-    <div class="col-lg-5 mt-5 comment-section">
-      <div class="comment-list">
-        <h2>コメント一覧</h2>
-        <%= render @comments %>
-        <%= paginate @comments %>
+    <div class="col-lg-5 mt-5 side-section">
+      <div class="spotify-section">
+        <p><%= "#{@event.performer}の曲を試聴する" %></p>
       </div>
-      <div class="comment-form">
-        <%= form_with model: [@event, @comment] do |f| %>
-          <%= f.text_area :content, class: "area" %>
-          <br>
-          <%= f.submit 'コメントする', class: "btn btn-primary btn-block" %>
-        <% end %>
+      <div class="comment-section">
+        <div class="comment-list">
+          <h2>コメント一覧</h2>
+          <%= render @comments %>
+          <%= paginate @comments %>
+        </div>
+        <div class="comment-form">
+          <%= form_with model: [@event, @comment] do |f| %>
+            <%= f.text_area :content, class: "area" %>
+            <br>
+            <%= f.submit 'コメントする', class: "btn btn-primary btn-block" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
