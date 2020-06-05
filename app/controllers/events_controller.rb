@@ -14,29 +14,22 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @comments = @event.comments.page(params[:page])
     @comment = Comment.new
-    if @event.performer
-      url = 'https://api.spotify.com/v1/search'
-      query = { "q": "#{@event.performer}", "type": "artist", "market": "JP", "limit": 1 }
+    if @event.performer && spotify_artist_id(@event.performer)
+      id = spotify_artist_id(@event.performer)
+      url = "https://api.spotify.com/v1/artists/#{id}/top-tracks"
+      query = { "market": "JP" }
       header = { "Authorization": "Bearer #{authenticate_token}" }
       client = HTTPClient.new
       response = client.get(url, query, header)
-      spotify_artist = JSON.parse(response.body)
-      if spotify_artist["artists"]["items"].present?
-        id =spotify_artist["artists"]["items"][0]["id"]
-        url = "https://api.spotify.com/v1/artists/#{id}/top-tracks"
-        query = { "market": "JP" }
-        client = HTTPClient.new
-        response = client.get(url, query, header)
-        top_tracks = JSON.parse(response.body)
-        @top_track_url = top_tracks["tracks"].sample["preview_url"]
-        url = "https://api.spotify.com/v1/artists/#{id}/related-artists"
-        client = HTTPClient.new
-        response = client.get(url, query, header)
-        related_artists = JSON.parse(response.body)
-        @related_artist_name0 = related_artists["artists"][0]["name"]
-        @related_artist_name1 = related_artists["artists"][1]["name"]
-        @related_artist_name2 = related_artists["artists"][2]["name"]
-      end
+      top_tracks = JSON.parse(response.body)
+      @top_track_url = top_tracks["tracks"].sample["preview_url"] if response.status == 200
+      # url = "https://api.spotify.com/v1/artists/#{id}/related-artists"
+      # client = HTTPClient.new
+      # response = client.get(url, query, header)
+      # related_artists = JSON.parse(response.body)
+      # @related_artist_name0 = related_artists["artists"][0]["name"]
+      # @related_artist_name1 = related_artists["artists"][1]["name"]
+      # @related_artist_name2 = related_artists["artists"][2]["name"]
     end
   end
 
@@ -92,6 +85,18 @@ class EventsController < ApplicationController
     response = client.post(url, query, header)
     auth_params = JSON.parse(response.body)
     auth_params["access_token"]
+  end
+
+  def spotify_artist_id(performer)
+    url = 'https://api.spotify.com/v1/search'
+    query = { "q": performer, "type": "artist", "market": "JP", "limit": 1 }
+    header = { "Authorization": "Bearer #{authenticate_token}" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    spotify_artist = JSON.parse(response.body)
+    if spotify_artist["artists"]["items"].present? && spotify_artist["artists"]["items"][0]["name"].downcase == performer.downcase
+      spotify_artist["artists"]["items"][0]["id"]
+    end
   end
 
   def event_params_create
