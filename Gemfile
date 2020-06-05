@@ -25,6 +25,7 @@ gem "aws-sdk-s3", require: false
 gem 'faker'
 gem "kaminari", ">= 1.2.1"
 gem 'httpclient'
+gem 'gon'
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'

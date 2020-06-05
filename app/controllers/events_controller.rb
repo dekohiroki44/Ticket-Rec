@@ -16,16 +16,9 @@ class EventsController < ApplicationController
     @comment = Comment.new
     if @event.performer && spotify_artist_id(@event.performer)
       id = spotify_artist_id(@event.performer)
-      url = "https://api.spotify.com/v1/artists/#{id}/top-tracks"
-      query = { "market": "JP" }
-      header = { "Authorization": "Bearer #{authenticate_token}" }
-      client = HTTPClient.new
-      response = client.get(url, query, header)
-      top_tracks = JSON.parse(response.body)
-      @top_track_url = top_tracks["tracks"].sample["preview_url"] if response.status == 200
+      @track_url = get_top_track(id)
+      @image_url = get_artist_image(id)
       # url = "https://api.spotify.com/v1/artists/#{id}/related-artists"
-      # client = HTTPClient.new
-      # response = client.get(url, query, header)
       # related_artists = JSON.parse(response.body)
       # @related_artist_name0 = related_artists["artists"][0]["name"]
       # @related_artist_name1 = related_artists["artists"][1]["name"]
@@ -93,23 +86,49 @@ class EventsController < ApplicationController
     header = { "Authorization": "Bearer #{authenticate_token}" }
     client = HTTPClient.new
     response = client.get(url, query, header)
-    spotify_artist = JSON.parse(response.body)
-    if spotify_artist["artists"]["items"].present? && spotify_artist["artists"]["items"][0]["name"].downcase == performer.downcase
-      spotify_artist["artists"]["items"][0]["id"]
+    spotify_artist_en = JSON.parse(response.body)
+    header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    spotify_artist_ja = JSON.parse(response.body)
+    if spotify_artist_en["artists"]["items"].present? && spotify_artist_en["artists"]["items"][0]["name"].downcase == performer.downcase
+      spotify_artist_en["artists"]["items"][0]["id"]
+    elsif spotify_artist_ja["artists"]["items"].present? && spotify_artist_ja["artists"]["items"][0]["name"] == performer
+      spotify_artist_ja["artists"]["items"][0]["id"]
     end
+  end
+
+  def get_top_track(id)
+    url = "https://api.spotify.com/v1/artists/#{id}/top-tracks"
+    query = { "market": "JP" }
+    header = { "Authorization": "Bearer #{authenticate_token}" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    top_tracks = JSON.parse(response.body)
+    top_tracks["tracks"].sample["preview_url"]
+  end
+
+  def get_artist_image(id)
+    url = "https://api.spotify.com/v1/artists/#{id}"
+    query = { "market": "JP" }
+    header = { "Authorization": "Bearer #{authenticate_token}" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    artist_info = JSON.parse(response.body)
+    artist_info["images"][1]["url"]
   end
 
   def event_params_create
     params[:event][:date].to_date < Date.current ? done = true : done = false
     params.
       require(:event).
-      permit(:name, :content, :date, :place, :time, :price, :performer, :public, images: []).
+      permit(:name, :content, :date, :place, :prefecture, :price, :performer, :public, images: []).
       merge(done: done)
   end
 
   def event_params_update
     params.
       require(:event).
-      permit(:name, :content, :date, :place, :time, :price, :performer, :public, :done, images: [])
+      permit(:name, :content, :date, :place, :prefecture, :price, :performer, :public, :done, images: [])
   end
 end
