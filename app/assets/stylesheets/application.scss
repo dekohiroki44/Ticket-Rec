@@ -330,9 +330,14 @@ footer {
   }
   .event-column {
     padding: 1rem 0;
-  }
-  .content {
-    padding-bottom: 0;
+    font-size: 1.5rem;
+    a {
+      margin-left: 1rem;
+      background-color: lightgray;
+    }
+    .content {
+      padding-bottom: 0;
+    }
   }
   .edit {
     display: block;

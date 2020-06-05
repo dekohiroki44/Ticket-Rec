@@ -1,5 +1,5 @@
 <% provide(:title, @event.name) %>
-<div class="event-show" >
+<div id="event-<%= @event.id %>" class="event-show" >
   <%= link_to user_path(@event.user), class: "user d-flex justify-content-center" do %>
     <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
     <div class="user-name"><%= @event.user.name %></div>
@@ -19,7 +19,10 @@
         </tr>
         <tr>
           <td><i class="fas fa-user fa-2x"></i></td>
-          <td class="event-column performer"><%= @event.performer%></td>
+          <td class="event-column performer">
+            <%= @event.performer%>
+            <%= link_to "♪試聴する♪", @top_track_url, target: :_blank, class: "track-url" if @top_track_url %>
+          </td>
         </tr>
         <tr>
           <td><i class="fas fa-map-marker-alt fa-2x"></i></td>
@@ -40,16 +43,11 @@
         <% end %>
       <% end %>
       <%= link_to '編集する', edit_event_path(@event), class: "edit" %>
-      <%= @related_artist_name0 %>
-      <%= @top_track_url %>
     </div>
     <div class="col-lg-5 mt-5 side-section">
-      <div class="spotify-section">
-        <p><%= "#{@event.performer}の曲を試聴する" %></p>
-      </div>
       <div class="comment-section">
         <div class="comment-list">
-          <h2>コメント一覧</h2>
+          <h2><%= @comments.present? ? "コメント一覧" : "コメントはありません"  %></h2>
           <%= render @comments %>
           <%= paginate @comments %>
         </div>
@@ -63,6 +61,4 @@
       </div>
     </div>
   </div>
-
 </div>
-
