@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
+  before_action :set_user
 
   def show
-    @user = User.find(params[:id])
     @done_events = @user.events.done.page(params[:page]).with_attached_images.includes([:like_users])
     @upcomming_events = @user.events.upcomming.page(params[:page]).with_attached_images.includes([:like_users])
     @unsolved_events = @user.events.unsolved.page(params[:page]).with_attached_images.includes([:like_users])
@@ -13,20 +13,29 @@ class UsersController < ApplicationController
   end
 
   def following
-    @user  = User.find(params[:id])
     @title = "#{@user.name}がフォローしているユーザー"
     @users = @user.following.page(params[:page]).with_attached_image
     render 'show_follow'
   end
 
   def followers
-    @user  = User.find(params[:id])
     @title = "#{@user.name}のフォロワー"
     @users = @user.followers.page(params[:page]).with_attached_image
     render 'show_follow'
   end
 
   def map
+    prefectures = ["都道府県"]
+    @user.events.done.each do |event|
+      prefectures << event.prefecture
+    end
+    gon.prefectures = prefectures.group_by(&:itself).map{ |key, value| [key, value.count] }
+    gon.prefectures[0][1] = "回数" 
   end
 
+  private
+
+  def set_user
+    @user  = User.find(params[:id])
+  end
 end

@@ -86,6 +86,12 @@ a {
   border-radius: 50%;
 }
 
+.edit-mark {
+  margin: 0 0.5rem;
+  padding: 0.5rem;
+  background-color: lightgray;
+}
+
 /* header */
 
 @media (min-width: 720px) {
@@ -331,10 +337,6 @@ footer {
   .event-column {
     padding: 1rem 0;
     font-size: 1.5rem;
-    a {
-      margin-left: 1rem;
-      background-color: lightgray;
-    }
     .content {
       padding-bottom: 0;
     }
@@ -344,6 +346,21 @@ footer {
   }
 }
 
+.side-section {
+  text-align: center;
+  .spotify-section {
+    .artist-image {
+      width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    .track-url {
+      padding: 0.3rem;
+      background-color: lightgray;
+      border-radius: 0.3rem;
+    }
+  }
+}
 
 /* comment */
 
