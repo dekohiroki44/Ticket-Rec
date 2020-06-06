@@ -30,15 +30,6 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  def map
-    prefectures = ["都道府県"]
-    @user.events.done.each do |event|
-      prefectures << event.prefecture
-    end
-    gon.prefectures = prefectures.group_by(&:itself).map{ |key, value| [key, value.count] }
-    gon.prefectures[0][1] = "回数" 
-  end
-
   private
 
   def set_user

@@ -14,8 +14,8 @@
       <div class="d-flex h-100px" >
         <%= render "likes/like", event: @event %>
         <% if @event.user == current_user %>
-          <%= link_to '編集', edit_event_path(@event), class: "edit-mark" %>
-          <%= link_to '削除', @event, method: :delete, data: { confirm: '削除してよろしいですか？'}, class: "edit-mark" %>
+          <%= link_to '編集', edit_event_path(@event), remote: true, class: "edit-mark" %>
+          <%= link_to '削除', @event, method: :delete, title: 'イベントの削除', class: "edit-mark", data: { confirm: '削除してよろしいですか？', commit: '削除', cancel: '中止' } %>
         <% end %>
       </div>
       <table>
