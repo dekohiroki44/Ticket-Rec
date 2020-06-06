@@ -2,11 +2,13 @@
   <div class="list-section mt-3 col-lg-10 mx-auto">
     <h3>参加したイベント (<%= @done_events.release.count %>)</h3>
     <% if current_user.events.any? %>
-    <%= render 'events/timeline', user: current_user,
-                                  done_events: @done_events,
-                                  upcomming_events: @upcomming_events,
-                                  unsolved_events: @unsolved_events %>
-    <% end %>
+    <div id="timeline-area">
+      <%= render 'events/timeline', user: current_user,
+                                    done_events: @done_events,
+                                    upcomming_events: @upcomming_events,
+                                    unsolved_events: @unsolved_events %>
+      <% end %>
+    </div>
   </div>
 <% else %>
   <div class="center jumbotron">

@@ -14,7 +14,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @comments = @event.comments.page(params[:page])
     @comment = Comment.new
-    if @event.performer && spotify_artist_id(@event.performer)
+    if @event.performer.present? && spotify_artist_id(@event.performer)
       id = spotify_artist_id(@event.performer)
       @track_url = get_top_track(id)
       @image_url = get_artist_image(id)

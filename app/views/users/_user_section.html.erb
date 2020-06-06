@@ -11,18 +11,6 @@
     <%= link_to "プロフィールを編集", edit_user_registration_path(current_user) if user == current_user %>
   </div>
   <div class="user-section-right col-lg-8">
-    <!-- <div id="regions_div"></div>
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['geochart']});
-      google.charts.setOnLoadCallback(drawRegionsMap);
-      function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable(gon.prefectures);
-        var options = { region: 'JP', resolution: 'provinces' };
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
-        chart.draw(data, options);
-      }
-    </script> -->
     <div class="profile mt-3"><%= user.profile %></div>
     <div class="most-place mt-3 text-center">
       <%= "#{user.name}が最も行った会場" if user.most_places(1).present? %>
@@ -33,7 +21,8 @@
       <strong class="d-block mb-3"><%= user.most_artists(1) %></strong>
       <%= "#{user.most_artists(1)}が好きな方にオススメのアーティスト♪" %>
       <strong class="d-block"><%= user.recommends(3) %></strong>
+      <%= link_to "MAPを表示", map_user_path(user), remote: true %>
     </div>
   </div>
 </div>
-
+<div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
