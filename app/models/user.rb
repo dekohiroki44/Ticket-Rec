@@ -61,7 +61,7 @@ class User < ApplicationRecord
       join(",").
       gsub(" ","").
       downcase.split(",").
-      group_by { |place| place }.
+      group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
       take(count).
@@ -75,7 +75,7 @@ class User < ApplicationRecord
       gsub(", ",",").
       downcase.
       split(",").
-      group_by { |performer| performer }.
+      group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
       take(count).
@@ -95,7 +95,7 @@ class User < ApplicationRecord
     recently_performers = array.join(",").gsub(", ",",").downcase.split(",")
     recently_performers.delete(self.most_artists(1))
     recently_performers.
-      group_by { |performer| performer }.
+      group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
       take(count).

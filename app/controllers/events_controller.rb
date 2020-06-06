@@ -81,6 +81,7 @@ class EventsController < ApplicationController
   end
 
   def spotify_artist_id(performer)
+    performer = performer.split(",").first
     url = 'https://api.spotify.com/v1/search'
     query = { "q": performer, "type": "artist", "market": "JP", "limit": 1 }
     header = { "Authorization": "Bearer #{authenticate_token}" }
