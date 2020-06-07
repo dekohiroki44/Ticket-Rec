@@ -1,2 +1,10 @@
 $("#map-modal").html("<%= escape_javascript(render 'map') %>")
 $("#map-modal").modal("show")
+$("#map-modal").on("shown.bs.modal", function () {
+  google.charts.load('current', {'packages':['geochart']});
+  google.charts.setOnLoadCallback(drawRegionsMap);
+    var data = google.visualization.arrayToDataTable(gon.prefectures);
+    var options = { region: 'JP', resolution: 'provinces', width: '100%', height: 600 };
+    var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+    chart.draw(data, options);
+});

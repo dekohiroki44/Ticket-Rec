@@ -59,7 +59,7 @@ class User < ApplicationRecord
     events.
       pluck(:place).
       join(",").
-      gsub(" ","").
+      gsub(" ", "").
       downcase.split(",").
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
@@ -72,7 +72,7 @@ class User < ApplicationRecord
     events.
       pluck(:performer).
       join(",").
-      gsub(", ",",").
+      gsub(", ", ",").
       downcase.
       split(",").
       group_by(&:itself).
@@ -88,12 +88,12 @@ class User < ApplicationRecord
       where.not(user_id: id).
       pluck(:user_id).
       uniq
-      array = []
+    array = []
     user_ids.each do |user_id|
       array << User.find(user_id).events.done.take(5).pluck(:performer).join(",")
     end
-    recently_performers = array.join(",").gsub(", ",",").downcase.split(",")
-    recently_performers.delete(self.most_artists(1))
+    recently_performers = array.join(",").gsub(", ", ",").downcase.split(",")
+    recently_performers.delete(most_artists(1))
     recently_performers.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
