@@ -7,6 +7,10 @@
 
 .main-wrapper {
   width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 50px;
+  box-sizing: border-box;
 }
 
 @media (min-width: 720px) {
@@ -110,6 +114,7 @@ a {
   transition: margin .25s ease-out;
   position: fixed;
   top: 0px;
+  z-index: 10;
   .sidebar-heading {
     padding: 0.875rem 1.25rem;
     font-size: 1.8rem;
@@ -168,9 +173,12 @@ section {
 /* footer */
 
 footer {
+  width: 100%;
   height: 50px;
   padding-top: 10px;
   color: whitesmoke;
+  position: absolute;
+  bottom: 0;
   small {
     text-align: center;
     display: block;
