@@ -10,6 +10,56 @@ class Event < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  def authenticate_token
+    url = "https://accounts.spotify.com/api/token"
+    query = { "grant_type": "client_credentials" }
+    key = Rails.application.credentials.spotify[:client_base64]
+    header = { "Authorization": "Basic #{key}" }
+    client = HTTPClient.new
+    response = client.post(url, query, header)
+    auth_params = JSON.parse(response.body)
+    auth_params["access_token"]
+  end
+
+  def spotify_artist_id(performer)
+    performer = performer.split(",").first
+    url = 'https://api.spotify.com/v1/search'
+    query = { "q": performer, "type": "artist", "market": "JP", "limit": 1 }
+    header = { "Authorization": "Bearer #{authenticate_token}" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    spotify_artist_en = JSON.parse(response.body)
+    header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    spotify_artist_ja = JSON.parse(response.body)
+    if spotify_artist_en["artists"]["items"].present? && spotify_artist_en["artists"]["items"][0]["name"].downcase == performer.downcase
+      spotify_artist_en["artists"]["items"][0]["id"]
+    elsif spotify_artist_ja["artists"]["items"].present? && spotify_artist_ja["artists"]["items"][0]["name"] == performer
+      spotify_artist_ja["artists"]["items"][0]["id"]
+    end
+  end
+
+  def get_top_track(id)
+    url = "https://api.spotify.com/v1/artists/#{id}/top-tracks"
+    query = { "market": "JP" }
+    header = { "Authorization": "Bearer #{authenticate_token}" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    top_tracks = JSON.parse(response.body)
+    top_tracks["tracks"].sample["preview_url"]
+  end
+
+  def get_artist_image(id)
+    url = "https://api.spotify.com/v1/artists/#{id}"
+    query = { "market": "JP" }
+    header = { "Authorization": "Bearer #{authenticate_token}" }
+    client = HTTPClient.new
+    response = client.get(url, query, header)
+    artist_info = JSON.parse(response.body)
+    artist_info["images"][1]["url"]
+  end
+
   def like(user)
     likes.create(user_id: user.id)
   end
