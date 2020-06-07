@@ -5,9 +5,12 @@ class EventsController < ApplicationController
 
   def index
     @event = current_user.feed
-    @done_events = current_user.feed.done.page(params[:page]).with_attached_images.includes(:user).includes([:like_users])
-    @upcomming_events = current_user.feed.upcomming.page(params[:page]).with_attached_images.includes(:user).includes([:like_users])
-    @unsolved_events = current_user.feed.unsolved.page(params[:page]).with_attached_images.includes(:user).includes([:like_users])
+    @done_events = current_user.feed.done.page(params[:page]).
+      with_attached_images.includes(:user, [:like_users])
+    @upcomming_events = current_user.feed.upcomming.page(params[:page]).
+      with_attached_images.includes(:user, [:like_users])
+    @unsolved_events = current_user.feed.unsolved.page(params[:page]).
+      with_attached_images.includes(:user, [:like_users])
   end
 
   def show
@@ -18,11 +21,6 @@ class EventsController < ApplicationController
       id = spotify_artist_id(@event.performer)
       @track_url = get_top_track(id)
       @image_url = get_artist_image(id)
-      # url = "https://api.spotify.com/v1/artists/#{id}/related-artists"
-      # related_artists = JSON.parse(response.body)
-      # @related_artist_name0 = related_artists["artists"][0]["name"]
-      # @related_artist_name1 = related_artists["artists"][1]["name"]
-      # @related_artist_name2 = related_artists["artists"][2]["name"]
     end
   end
 

@@ -217,15 +217,12 @@ footer {
   }
 }
 
-// #regions_div {
-//   width: 100vw;
-// }
-// #map-modal {
-//   width: 100vw;
-// }
-// .modal-dialog {
-//   width: 0px;
-// }
+
+.modal-dialog {
+  h4 {
+    text-align: center;
+  }
+}
 
 /* list */
 
@@ -236,7 +233,8 @@ footer {
     max-width: 700px;
     padding: 4%;
     margin: 10px;
-    border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
+    border-radius: 0.3rem;
+    // border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
     background-color: lightgray;
     border: 2px solid #333;
   }

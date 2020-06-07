@@ -1,5 +1,21 @@
 <% if user_signed_in? %>
-  <div class="list-section mt-3 col-lg-10 mx-auto">
+  <div class="heading-section">
+    <div class="next-live events">
+      <p>次回のイベント</p>
+      <%= render "events/event", event: @next_event %>
+    </div>
+    <div class="most-place mt-3 text-center">
+      <%= "#{current_user.name}が最も行った会場" if current_user.most_places(1).present? %>
+      <strong class="d-block"><%= current_user.most_places(1) %></strong>
+    </div>
+    <div class="most-artist mt-3 text-center">
+      <%= "#{current_user.name}が最も見に行ったアーティスト" if current_user.most_artists(1).present? %>
+      <strong class="d-block mb-3"><%= current_user.most_artists(1) %></strong>
+      <%= "#{current_user.most_artists(1)}が好きな方にオススメのアーティスト♪" if current_user.recommends(3).present? %>
+      <strong class="d-block"><%= current_user.recommends(3) %></strong>
+    </div>
+  </div>
+  <!-- <div class="list-section mt-3 col-lg-10 mx-auto">
     <h3>参加したイベント (<%= @done_events.release.count %>)</h3>
     <% if current_user.events.any? %>
     <div id="timeline-area">
@@ -9,7 +25,7 @@
                                     unsolved_events: @unsolved_events %>
       <% end %>
     </div>
-  </div>
+  </div> -->
 <% else %>
   <div class="center jumbotron">
     <h1>LIVCALE</h1>

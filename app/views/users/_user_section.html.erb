@@ -12,17 +12,8 @@
   </div>
   <div class="user-section-right col-lg-8">
     <div class="profile mt-3"><%= user.profile %></div>
-    <div class="most-place mt-3 text-center">
-      <%= "#{user.name}が最も行った会場" if user.most_places(1).present? %>
-      <strong class="d-block"><%= user.most_places(1) %></strong>
-    </div>
-    <div class="most-artist mt-3 text-center">
-      <%= "#{user.name}が最も見に行ったアーティスト" if user.most_artists(1).present? %>
-      <strong class="d-block mb-3"><%= user.most_artists(1) %></strong>
-      <%= "#{user.most_artists(1)}が好きな方にオススメのアーティスト♪" %>
-      <strong class="d-block"><%= user.recommends(3) %></strong>
-      <%= link_to "MAPを表示", map_user_path(user), remote: true %>
-    </div>
+    <%= link_to "MAPを表示", map_user_path(user), remote: true, class: "map-link" %>
+    
   </div>
 </div>
 <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>

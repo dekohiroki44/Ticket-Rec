@@ -6,11 +6,14 @@ class UsersController < ApplicationController
     @user.events.done.each do |event|
       prefectures << event.prefecture
     end
-    gon.prefectures = prefectures.group_by(&:itself).map{ |key, value| [key, value.count] }
-    gon.prefectures[0][1] = "回数" 
-    @done_events = @user.events.done.page(params[:page]).with_attached_images.includes([:like_users])
-    @upcomming_events = @user.events.upcomming.page(params[:page]).with_attached_images.includes([:like_users])
-    @unsolved_events = @user.events.unsolved.page(params[:page]).with_attached_images.includes([:like_users])
+    gon.prefectures = prefectures.group_by(&:itself).map { |key, value| [key, value.count] }
+    gon.prefectures[0][1] = "回数"
+    @done_events = @user.events.done.page(params[:page]).
+      with_attached_images.includes([:like_users])
+    @upcomming_events = @user.events.upcomming.page(params[:page]).
+      with_attached_images.includes([:like_users])
+    @unsolved_events = @user.events.unsolved.page(params[:page]).
+      with_attached_images.includes([:like_users])
     if current_user != @user
       @done_events = @done_events.release
       @upcomming_events = @upcomming_events.release
@@ -33,6 +36,6 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user  = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 end
