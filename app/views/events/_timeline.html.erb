@@ -1,14 +1,14 @@
 <div class="timeline mt-3">
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a href="#done" class="nav-link active" data-toggle="tab">参加したイベント</a>
+      <a href="#done" class="nav-link active" data-toggle="tab">参加済みのチケット</a>
     </li>
     <li class="nav-item">
-      <a href="#upcomming" class="nav-link" data-toggle="tab">参加予定のイベント</a>
+      <a href="#upcomming" class="nav-link" data-toggle="tab">参加予定のチッケト</a>
     </li>
     <% if user.id==current_user.id && unsolved_events.present?%>
       <li class="nav-item">
-        <a href="#unsolved" class="nav-link" data-toggle="tab">終了したイベント</a>
+        <a href="#unsolved" class="nav-link" data-toggle="tab">終了したチケットを振り分けよう</a>
       </li>
     <% end %>
   </ul>
@@ -20,7 +20,7 @@
         </ol>
         <%= paginate done_events %>
       <% else %>
-        <p>参加したイベントはありません</p>
+        <p>参加済みのチケットはありません</p>
       <% end %>
     </div>
     <div id="upcomming" class="tab-pane">
@@ -30,7 +30,7 @@
         </ol>
         <%= paginate upcomming_events %>
       <% else %>
-        <p>参加予定のイベントはありません</p>
+        <p>参加予定のチケットはありません</p>
       <% end %>
     </div>
     <div id="unsolved" class="tab-pane">

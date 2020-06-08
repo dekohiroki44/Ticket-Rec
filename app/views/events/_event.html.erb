@@ -17,13 +17,22 @@
           <% else %>
             <span class="event-name"><i class="fas fa-lock"></i><%= event.name %></span>
           <% end %>
-          <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
-          <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
+          <% if event.performer %>
+            <span class="performer"><i class="fas fa-user"></i><%= event.performer%></span>
+          <% end %>
+          <div>
+            <% if event.place %>
+              <span class="place"><i class="fas fa-map-marker-alt"></i><%= event.place %></span>
+            <% end %>
+            <% if event.time %>
+              <span class="time"><i class="fas fa-clock"></i><%= event.time %></span>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
     <%= link_to event_path(event.id) do %>
-      <div class="d-flex event-right  justify-content-around mx-3">
+      <div class="d-flex event-right  align-items-center px-3">
         <%= image_tag event.images.first.variant(resize:'100x100').processed, class:"image" if event.images.attached?  %>
       </div>
     <% end %>
