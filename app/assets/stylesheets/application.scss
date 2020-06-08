@@ -319,10 +319,13 @@ footer {
       .event-name, .name {
         display: block;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 30px;
       }
       .performer {
-        display: block;
+        overflow: hidden;
+        height: 3.6em;
+        font-size: 16px;
+        line-height: 1.8;
       }
       .profile {
         display: block;
@@ -333,7 +336,7 @@ footer {
       }
     }
     .event-right {
-      max-height: 100px;
+      align-items: center;
       .content {
         display: block;
         overflow: hidden;
@@ -342,7 +345,7 @@ footer {
         border-radius: 0.5rem;
         padding: 0.5rem;
       }
-      .image {
+      img {
         margin-left: 0.5em;
       }
     }

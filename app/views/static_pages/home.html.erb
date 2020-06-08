@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <div class="heading-section">
     <div class="next-live events mt-2 mx-auto">
-      <h2>次回のイベント</h2>
+      <h3 class="ml-3">次のチケット(あと<%= "#{time_ago_in_words(@event.date).upcase}" %>)</h3>
       <div class="row next-event-info">
         <div class="col-md-9">
           <%= render "events/event", event: @event %>
