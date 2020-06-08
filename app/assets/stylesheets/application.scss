@@ -232,6 +232,24 @@ footer {
   }
 }
 
+/* home */
+
+.spotify-section {
+  a {
+    text-align: center;
+  }
+  .artist-image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  .track-url {
+    padding: 0.3rem;
+    background-color: lightgray;
+    border-radius: 0.3rem;
+  }
+}
+
 /* list */
 
 .events, .users {
@@ -242,7 +260,6 @@ footer {
     padding: 4%;
     margin: 10px;
     border-radius: 0.3rem;
-    // border-radius: 240px 15px 100px 15px / 15px 200px 15px 185px;
     background-color: lightgray;
     border: 2px solid #333;
   }
@@ -364,18 +381,6 @@ footer {
 
 .side-section {
   text-align: center;
-  .spotify-section {
-    .artist-image {
-      width: 100%;
-      height: auto;
-      margin-bottom: 1rem;
-    }
-    .track-url {
-      padding: 0.3rem;
-      background-color: lightgray;
-      border-radius: 0.3rem;
-    }
-  }
 }
 
 /* comment */

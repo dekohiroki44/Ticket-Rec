@@ -1,11 +1,15 @@
 <% if user_signed_in? %>
   <div class="heading-section">
-    <div class="next-live events mt-2 col-lg-10 mx-auto">
-      <h3>次回のイベント</h3>
-      <%= render "events/event", event: @event %>
-      <div class="spotify-section mb-5">
-        <%= image_tag @image_url, alt: "アーティスト画像", class: "artist-image"  if @image_url %>
-        <%= link_to "♪#{@event.performer.split(",").first}の曲を試聴する", @track_url, target: :_blank, class: "track-url" if @track_url %>
+    <div class="next-live events mt-2 mx-auto">
+      <h2>次回のイベント</h2>
+      <div class="row next-event-info">
+        <div class="col-md-9">
+          <%= render "events/event", event: @event %>
+        </div>
+        <div class="spotify-section mb-5 col-md-3 d-flex flex-column">
+          <%= image_tag @image_url, alt: "アーティスト画像", class: "artist-image" if @image_url %>
+          <%= link_to "♪#{@event.performer.split(",").first}の曲を試聴する", @track_url, target: :_blank, class: "track-url" if @track_url %>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -17,7 +21,7 @@
         <div class="most-artist mt-3 text-center">
           <%= "#{current_user.name}が最も見に行ったアーティスト" if current_user.most_artists(1).present? %>
           <strong class="d-block mb-3"><%= current_user.most_artists(1) %></strong>
-          <%= "#{current_user.most_artists(1)}が好きな方にオススメのアーティスト♪" if current_user.recommends(3).present? %>
+          <%= "#{current_user.most_artists(1)}を見に行った他のユーザーが最近見に行ったアーティスト♪" if current_user.recommends(3).present? %>
           <strong class="d-block"><%= current_user.recommends(3) %></strong>
         </div>
       </div>
