@@ -102,6 +102,12 @@ class User < ApplicationRecord
       join(", ")
   end
 
+  def self.search(word, column)
+    return User.all unless word
+    users = User.arel_table
+    User.where(users[:"#{column}"].matches("%#{word}%"))
+  end
+
   private
 
   def default_image
