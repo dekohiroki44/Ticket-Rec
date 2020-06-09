@@ -2,7 +2,7 @@
   <div class="comment-partial">
     <li id="comment-<%= comment.id %>" class="comment">
       <%= link_to user_path(comment.user.id) do %>
-        <%= image_tag @event.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+        <%= image_tag @ticket.user.image.variant(resize:'50x50').processed, class:"avatar" %>
         <%= comment.user.name %>
       <% end %>
       <span class="content"><%= comment.content %></span>
@@ -11,7 +11,7 @@
           <%= "#{time_ago_in_words(comment.created_at)}前にコメント" %>
         </span>
         <% if comment.user == current_user %>
-          <%= link_to event_comment_path(@event.id, id: comment.id), method: :delete, data: {confirm: "削除してよろしいですか？"} do %>
+          <%= link_to ticket_comment_path(@ticket.id, id: comment.id), method: :delete, data: {confirm: "削除してよろしいですか？"} do %>
             <i class="far fa-trash-alt delete"></i>
           <% end %>
         <% end %>

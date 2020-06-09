@@ -2,24 +2,24 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
 
   def create
-    event = Event.find(params[:event_id])
-    comment = event.comments.build(comment_params)
+    ticket = Ticket.find(params[:ticket_id])
+    comment = ticket.comments.build(comment_params)
     comment.user_id = current_user.id
     if comment.save
-      event.create_notification_comment!(current_user, comment.id)
+      ticket.create_notification_comment!(current_user, comment.id)
       flash[:success] = "コメントしました"
-      redirect_back(fallback_location: event_path(event))
+      redirect_back(fallback_location: ticket_path(ticket))
     else
       flash[:success] = "コメントできませんでした"
-      redirect_back(fallback_location: event_path(event))
+      redirect_back(fallback_location: ticket_path(ticket))
     end
   end
 
   def destroy
-    event = Event.find(params[:event_id])
-    comment = event.comments.find(params[:id])
+    ticket = Ticket.find(params[:ticket_id])
+    comment = ticket.comments.find(params[:id])
     comment.destroy
-    redirect_back(fallback_location: event_path(event))
+    redirect_back(fallback_location: ticket_path(ticket))
   end
 
   private

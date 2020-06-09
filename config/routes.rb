@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get 'likes/create'
   get 'likes/destroy'
-  get 'events/new'
-  get 'events/show'
-  get 'events/edit'
+  get 'tickets/new'
+  get 'tickets/show'
+  get 'tickets/edit'
   root to: "static_pages#home"
   get '/about', to: 'static_pages#about'
   devise_for :users
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       get :following, :followers, :map
     end
   end
-  resources :events do
+  resources :tickets do
     resources :comments, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]

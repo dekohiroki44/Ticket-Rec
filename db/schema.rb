@@ -39,52 +39,34 @@ ActiveRecord::Schema.define(version: 2020_06_05_055215) do
   create_table "comments", force: :cascade do |t|
     t.string "content"
     t.bigint "user_id"
-    t.bigint "event_id"
+    t.bigint "ticket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_comments_on_event_id"
+    t.index ["ticket_id"], name: "index_comments_on_ticket_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "name", default: ""
-    t.string "performer"
-    t.date "date", null: false
-    t.time "time"
-    t.string "place"
-    t.string "price"
-    t.text "content"
-    t.boolean "public", default: false, null: false
-    t.boolean "done", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "prefecture"
-    t.index ["date"], name: "index_events_on_date"
-    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "event_id"
+    t.integer "ticket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_likes_on_event_id"
-    t.index ["user_id", "event_id"], name: "index_likes_on_user_id_and_event_id", unique: true
+    t.index ["ticket_id"], name: "index_likes_on_ticket_id"
+    t.index ["user_id", "ticket_id"], name: "index_likes_on_user_id_and_ticket_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "notifications", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
-    t.integer "event_id"
+    t.integer "ticket_id"
     t.integer "comment_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
-    t.index ["event_id"], name: "index_notifications_on_event_id"
+    t.index ["ticket_id"], name: "index_notifications_on_ticket_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
@@ -97,6 +79,24 @@ ActiveRecord::Schema.define(version: 2020_06_05_055215) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "name", default: ""
+    t.string "performer"
+    t.date "date", null: false
+    t.string "time"
+    t.string "place"
+    t.string "price"
+    t.text "content"
+    t.boolean "public", default: false, null: false
+    t.boolean "done", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "prefecture"
+    t.index ["date"], name: "index_tickets_on_date"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 2020_06_05_055215) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "events"
+  add_foreign_key "comments", "tickets"
   add_foreign_key "comments", "users"
-  add_foreign_key "events", "users"
+  add_foreign_key "tickets", "users"
 end

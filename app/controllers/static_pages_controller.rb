@@ -1,15 +1,15 @@
 class StaticPagesController < ApplicationController
   def home
     if user_signed_in?
-      @event = current_user.events.upcomming.first
+      @ticket = current_user.tickets.upcomming.first
       prefectures = ["都道府県"]
-      current_user.events.done.each do |event|
-        prefectures << event.prefecture
+      current_user.tickets.done.each do |ticket|
+        prefectures << ticket.prefecture
       end
       gon.prefectures = prefectures.group_by(&:itself).map { |key, value| [key, value.count] }
       gon.prefectures[0][1] = "回数"
-      @image_url = @event.spotify[0]
-      @track_url = @event.spotify[1]
+      @image_url = @ticket.spotify[0]
+      @track_url = @ticket.spotify[1]
     end
   end
 

@@ -2,10 +2,10 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @event = Event.find(params[:event_id])
-    unless @event.like?(current_user)
-      @event.like(current_user)
-      @event.create_notification_like!(current_user)
+    @ticket = Ticket.find(params[:ticket_id])
+    unless @ticket.like?(current_user)
+      @ticket.like(current_user)
+      @ticket.create_notification_like!(current_user)
       respond_to do |format|
         format.html { redirect_to request.referrer || root_url }
         format.js
@@ -14,9 +14,9 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @event = Like.find(params[:id]).event
-    if @event.like?(current_user)
-      @event.unlike(current_user)
+    @ticket = Like.find(params[:id]).ticket
+    if @ticket.like?(current_user)
+      @ticket.unlike(current_user)
       respond_to do |format|
         format.html { redirect_to request.referrer || root_url }
         format.js

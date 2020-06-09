@@ -1,4 +1,4 @@
-<div class=" border-right" id="sidebar-wrapper">
+<div class="border-right" id="sidebar-wrapper">
   <%= link_to "LIVCALE", root_path, id: "logo", class: "navbar-brand sidebar-heading" %>
   <section class="current-user-section d-flex">
     <% if user_signed_in? %>
@@ -10,13 +10,13 @@
   </section>
   <div class="list-group list-group-flush">
     <% if user_signed_in? %>
-      <%= link_to events_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+      <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-transparent" do %>
         <i class="far fa-comments fa-2x"></i>検索
       <% end %>
-      <%= link_to events_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+      <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-transparent" do %>
         <i class="far fa-comments fa-2x"></i>皆んなのイベント
       <% end %>
-      <%= link_to new_event_path, remote: true, class:"list-group-item list-group-item-action bg-transparent" do %>
+      <%= link_to new_ticket_path, remote: true, class:"list-group-item list-group-item-action bg-transparent" do %>
         <i class="far fa-edit fa-2x"></i>書き込む
       <% end %>
       <%= link_to notifications_path, class:"list-group-item list-group-item-action bg-transparent" do %>
@@ -39,4 +39,4 @@
     <% end %>
   </div>
 </div>
-<div class="modal fade" id="event-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>

@@ -1,14 +1,14 @@
 <% if user_signed_in? %>
   <div class="heading-section">
-    <div class="next-live events mt-2 mx-auto">
-      <h3 class="ml-3">次のチケット(あと<%= "#{time_ago_in_words(@event.date).upcase}" %>)</h3>
-      <div class="row next-event-info">
+    <div class="next-live tickets mt-2 mx-auto">
+      <h3 class="ml-3">次のチケット(あと<%= "#{time_ago_in_words(@ticket.date).upcase}" %>)</h3>
+      <div class="row next-ticket-info">
         <div class="col-md-9">
-          <%= render "events/event", event: @event %>
+          <%= render "tickets/ticket", ticket: @ticket %>
         </div>
         <div class="spotify-section mb-5 col-md-3 d-flex flex-column">
           <%= image_tag @image_url, alt: "アーティスト画像", class: "artist-image" if @image_url %>
-          <%= link_to "♪#{@event.performer.split(",").first}の曲を試聴する", @track_url, target: :_blank, class: "track-url" if @track_url %>
+          <%= link_to "♪#{@ticket.performer.split(",").first}の曲を試聴する", @track_url, target: :_blank, class: "track-url" if @track_url %>
         </div>
       </div>
     </div>

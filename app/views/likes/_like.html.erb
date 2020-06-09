@@ -1,15 +1,15 @@
 <span class="like">
-  <% if event.like?(current_user) %>
-    <%= form_for(event.likes.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
+  <% if ticket.like?(current_user) %>
+    <%= form_for(ticket.likes.find_by(user_id: current_user.id), method: :delete, remote: true) do |f| %>
       <%= button_tag(class: "btn btn-default btn-xs") do %>
-      <i class="fas fa-thumbs-up"><%= event.likes.count %></i>
+      <i class="fas fa-thumbs-up"><%= ticket.likes.count %></i>
       <% end %>
     <% end %>
   <% else %>
-    <%= form_for(event.likes.build, remote: true) do |f| %>
-      <div><%= hidden_field_tag :event_id, event.id %></div>
+    <%= form_for(ticket.likes.build, remote: true) do |f| %>
+      <div><%= hidden_field_tag :ticket_id, ticket.id %></div>
       <%= button_tag(class: "btn btn-default btn-xs") do %>
-      <i class="far fa-thumbs-up"><%= event.likes.count %></i>
+      <i class="far fa-thumbs-up"><%= ticket.likes.count %></i>
       <% end %>
     <% end %>
   <% end %>

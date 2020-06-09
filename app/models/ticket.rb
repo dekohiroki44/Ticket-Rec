@@ -1,4 +1,4 @@
-class Event < ApplicationRecord
+class Ticket < ApplicationRecord
   scope :done, -> { where(done: true).order(date: "DESC") }
   scope :upcomming, -> { where('date >= ?', Date.current).order(date: "ASC") }
   scope :unsolved, -> { where('date < ? AND done = ?', Date.current, false).order(date: "DESC") }
@@ -57,6 +57,7 @@ class Event < ApplicationRecord
           return nil, nil
         end
       else
+        
         return nil, nil
       end
     else
@@ -78,10 +79,10 @@ class Event < ApplicationRecord
 
   def create_notification_like!(current_user)
     temp = Notification.
-      where(["visitor_id = ? and visited_id = ? and event_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
+      where(["visitor_id = ? and visited_id = ? and ticket_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
     if temp.blank?
       notification = current_user.active_notifications.new(
-        event_id: id,
+        ticket_id: id,
         visited_id: user_id,
         action: 'like'
       )
@@ -95,7 +96,7 @@ class Event < ApplicationRecord
   def create_notification_comment!(current_user, comment_id)
     temp_ids = Comment.
       select(:user_id).
-      where(event_id: id).
+      where(ticket_id: id).
       where.not(user_id: current_user.id).
       distinct
     temp_ids.each do |temp_id|
@@ -106,7 +107,7 @@ class Event < ApplicationRecord
 
   def save_notification_comment!(current_user, comment_id, visited_id)
     notification = current_user.active_notifications.new(
-      event_id: id,
+      ticket_id: id,
       comment_id: comment_id,
       visited_id: visited_id,
       action: 'comment'

@@ -6,39 +6,39 @@
     <li class="nav-item">
       <a href="#upcomming" class="nav-link" data-toggle="tab">参加予定のチッケト</a>
     </li>
-    <% if user.id==current_user.id && unsolved_events.present?%>
+    <% if user.id==current_user.id && unsolved_tickets.present?%>
       <li class="nav-item">
         <a href="#unsolved" class="nav-link" data-toggle="tab">終了したチケットを振り分けよう</a>
       </li>
     <% end %>
   </ul>
-  <div id="events-area" class="tab-content">
+  <div id="tickets-area" class="tab-content">
     <div id="done" class="tab-pane active">
-      <% if done_events.present? %>
-        <ol class="events">
-          <%= render done_events %>
+      <% if done_tickets.present? %>
+        <ol class="tickets">
+          <%= render done_tickets %>
         </ol>
-        <%= paginate done_events %>
+        <%= paginate done_tickets %>
       <% else %>
         <p>参加済みのチケットはありません</p>
       <% end %>
     </div>
     <div id="upcomming" class="tab-pane">
-      <% if upcomming_events.present? %>
-        <ol class="events">
-          <%= render upcomming_events %>
+      <% if upcomming_tickets.present? %>
+        <ol class="tickets">
+          <%= render upcomming_tickets %>
         </ol>
-        <%= paginate upcomming_events %>
+        <%= paginate upcomming_tickets %>
       <% else %>
         <p>参加予定のチケットはありません</p>
       <% end %>
     </div>
     <div id="unsolved" class="tab-pane">
       <p>ライブに参加した場合はチェックを入れよう！</p>
-      <ol class="events">
-        <%= render unsolved_events %>
+      <ol class="tickets">
+        <%= render unsolved_tickets %>
       </ol>
-      <%= paginate unsolved_events %>
+      <%= paginate unsolved_tickets %>
     </div>
   </div>
 </div>
