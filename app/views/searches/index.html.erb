@@ -1,0 +1,48 @@
+<% provide(:title, "検索結果") %>
+
+<h3 class="mb-5"><%= "「#{params[:search]}」で検索した結果" %></h3>
+<div class="timeline mt-3">
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a href="#user" class="nav-link active" data-toggle="tab">ユーザー</a>
+    </li>
+    <li class="nav-item">
+      <a href="#done" class="nav-link" data-toggle="tab">参加済みのチッケト</a>
+    </li>
+    <li class="nav-item">
+      <a href="#upcomming" class="nav-link" data-toggle="tab">参加予定のチケット</a>
+    </li>
+  </ul>
+  <div id="tickets-area" class="tab-content">
+    <div id="user" class="tab-pane active">
+      <% if @users.present? %>
+        <ol class="users">
+          <%= render @users %>
+        </ol>
+        <%= paginate @users %>
+      <% else %>
+        <p>一致するユーザーはいません</p>
+      <% end %>
+    </div>
+    <div id="done" class="tab-pane">
+      <% if @done_tickets.present? %>
+        <ol class="tickets">
+          <%= render @done_tickets %>
+        </ol>
+        <%= paginate @done_tickets %>
+      <% else %>
+        <p>一致する参加済みのチケットはありません</p>
+      <% end %>
+    </div>
+    <div id="upcomming" class="tab-pane">
+      <% if @upcomming_tickets.present? %>
+        <ol class="tickets">
+          <%= render @upcomming_tickets %>
+        </ol>
+        <%= paginate @upcomming_tickets %>
+      <% else %>
+        <p>一致する参加予定のチケットはありません</p>
+      <% end %>
+    </div>
+  </div>
+</div>

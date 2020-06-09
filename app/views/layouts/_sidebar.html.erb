@@ -11,9 +11,6 @@
   <div class="list-group list-group-flush">
     <% if user_signed_in? %>
       <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-transparent" do %>
-        <i class="far fa-comments fa-2x"></i>検索
-      <% end %>
-      <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-transparent" do %>
         <i class="far fa-comments fa-2x"></i>皆んなのイベント
       <% end %>
       <%= link_to new_ticket_path, remote: true, class:"list-group-item list-group-item-action bg-transparent" do %>
@@ -37,6 +34,7 @@
     <%= link_to about_path, class:"list-group-item list-group-item-action bg-transparent" do %>
       <i class="fas fa-info-circle fa-2x"></i>このサイトについて
     <% end %>
+    <%= render "shared/search" %>
   </div>
 </div>
 <div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>

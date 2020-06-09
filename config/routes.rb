@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  get 'likes/create'
-  get 'likes/destroy'
-  get 'tickets/new'
-  get 'tickets/show'
-  get 'tickets/edit'
   root to: "static_pages#home"
   get '/about', to: 'static_pages#about'
   devise_for :users
@@ -19,4 +14,5 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]
   resources :notifications, only: [:index]
+  resources :searches, only: [:index]
 end

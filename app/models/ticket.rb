@@ -117,4 +117,10 @@ class Ticket < ApplicationRecord
     end
     notification.save if notification.valid?
   end
+
+  def self.search(word, column)
+    return Ticket.all unless word
+    tickets = Ticket.arel_table
+    Ticket.where(tickets[:"#{column}"].matches("%#{word}%"))
+  end
 end
