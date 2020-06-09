@@ -5,8 +5,12 @@
   padding: 2rem;
 }
 
-.main-wrapper {
+#wrapper {
   width: 100vw;
+}
+
+.main-wrapper {
+  width: 100%;
   min-height: 100vh;
   position: relative;
   padding-bottom: 50px;
@@ -15,7 +19,7 @@
 
 @media (min-width: 720px) {
   .main-wrapper {
-    padding-left: 15rem;
+    margin-left: 15rem;
   }
 }
 
@@ -107,7 +111,12 @@ a {
 /* sidebar */
 
 #sidebar-wrapper {
+  background-image: url(treble_clef_gray.png);
+  background-size: contain;
+  background-color: black;
+  background-blend-mode: luminosity;
   color: white;
+  text-shadow:3px 3px 0 black;
   width: 15rem;
   min-height: 100vh;
   margin-left: -15rem;
@@ -116,35 +125,42 @@ a {
   top: 0px;
   z-index: 10;
   .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.8rem;
+    color: yellow;
+    padding: 0.875rem 1.25rem 0 1.25rem;
+    font-size: 2.2rem;
+    display: block;
+    text-align: center;
+  }
+  .current-user-section {
+    height: 270px;
+    text-align: center;
+    margin: 0 1.25rem;
+    img {
+      margin-top: 30px;
+      margin-bottom: 5px;
+      width: 160px;
+      height: 160px;
+      border: 2px solid white;
+    }
+    a {
+      color: white;
+      font-size: 1.5rem;
+    }
   }
   .list-group {
     width: 15rem;
     .list-group-item-action {
       padding-top: 0.2rem;
+      padding-bottom: 0.3rem;
       color: white; 
+      font-weight: bold;
+    }
+    .list-group-item-action:hover{
+      color:yellow;
+      background-color:gold;
     }
     .far, .fas {
-      margin: 0.25rem
-    }
-  }
-  .current-user-section {
-    margin: 0 1.25rem;
-    .avatar-box {
-      position: relative;
-      .clef-image {
-        width: 110px;
-      }
-      .avatar {
-        height: 88px;
-        width: 88px;
-        border-radius: 50%;
-        border: 1px solid white;
-        position: absolute;
-        top: 41%;
-        left: 12%;
-      }
+      margin: 0.25rem;
     }
   }
 }
