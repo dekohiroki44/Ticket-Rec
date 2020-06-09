@@ -19,7 +19,7 @@ end
 30.times do
   date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
   date < Date.current ? done = true : done = false
-  User.find(1).events.create!(date: date,
+  User.find(1).tickets.create!(date: date,
                               name: Faker::Music.album,
                               content: Faker::Lorem.sentence,
                               place: Faker::Restaurant.name,
@@ -32,7 +32,7 @@ end
 30.times do
   date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
   date < Date.current ? done = true : done = false
-  User.find(2).events.create!(date: date,
+  User.find(2).tickets.create!(date: date,
                               name: Faker::Music.album,
                               content: Faker::Lorem.sentence,
                               place: Faker::Restaurant.name,

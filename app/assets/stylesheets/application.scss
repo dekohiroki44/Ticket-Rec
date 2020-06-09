@@ -145,6 +145,9 @@ a {
     a {
       color: white;
       font-size: 1.5rem;
+      &:hover{
+        color:yellow;
+      }
     }
   }
   .list-group {
@@ -154,10 +157,9 @@ a {
       padding-bottom: 0.3rem;
       color: white; 
       font-weight: bold;
-    }
-    .list-group-item-action:hover{
-      color:yellow;
-      background-color:gold;
+      &:hover{
+        color:yellow;
+      }
     }
     .far, .fas {
       margin: 0.25rem;
@@ -195,6 +197,7 @@ footer {
   color: whitesmoke;
   position: absolute;
   bottom: 0;
+  background-color: black;
   small {
     text-align: center;
     display: block;
@@ -268,7 +271,7 @@ footer {
 
 /* list */
 
-.events, .users {
+.tickets, .users {
   list-style: none;
   padding: 0;
   li {
@@ -282,7 +285,7 @@ footer {
 }
 
 #done {
-  .events {
+  .tickets {
     li {
       position: relative;
       z-index: 0;
@@ -304,20 +307,20 @@ footer {
   }
 }
 
-.event-partial, .user-partial {
+.ticket-partial, .user-partial {
   a {
     color: #212529;
     &:hover {
       text-decoration: none;
     }
   }
-  .event, .user {
+  .ticket, .user {
     text-decoration: none;
     color: #212529;
     .fas {
       margin-right: 0.25rem;
     }
-    .event-left-1, .user-left {
+    .ticket-left-1, .user-left {
       width: 100px;
       flex-shrink: 0;
       .date {
@@ -325,14 +328,14 @@ footer {
         font-size: 20px;
       }
     }
-    .event-left-2, .user-center {
+    .ticket-left-2, .user-center {
       margin: 0 10px;
       .user-name {
         display: block;
         font-size: 15px;
         font-weight: bold;
       }
-      .event-name, .name {
+      .ticket-name, .name {
         display: block;
         font-weight: bold;
         font-size: 30px;
@@ -351,7 +354,7 @@ footer {
         line-height: 2; 
       }
     }
-    .event-right {
+    .ticket-right {
       align-items: center;
       .content {
         display: block;
@@ -368,7 +371,7 @@ footer {
   }
 }
 
-.event-show {
+.ticket-show {
   table, td, th {
     margin: 30px 0;
     border-bottom: 1px solid gray
@@ -386,7 +389,7 @@ footer {
       width: 4rem;
     }
   }
-  .event-column {
+  .ticket-column {
     padding: 1rem 0;
     font-size: 1.5rem;
     .content {

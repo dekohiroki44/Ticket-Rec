@@ -1,0 +1,7 @@
+<h3>フォロー中のユーサーが参加したイベント</h3>
+<% if @ticket.any? %>
+<%= render 'timeline', user: current_user,
+                              done_tickets: @done_tickets,
+                              upcomming_tickets: @upcomming_tickets,
+                              unsolved_tickets: @unsolved_tickets %>
+<% end %>

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   validates :name, presence: true, length: { maximum: 50 }
   validates :profile, length: { maximum: 200 }
-  has_many :events
+  has_many :tickets
   has_one_attached :image
   before_create :default_image
   has_many :active_relationships, class_name: "Relationship",
@@ -28,7 +28,7 @@ class User < ApplicationRecord
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
-    Event.where("(user_id IN (#{following_ids}) AND public = :public) OR user_id = :user_id", public: true, user_id: id)
+    Ticket.where("(user_id IN (#{following_ids}) AND public = :public) OR user_id = :user_id", public: true, user_id: id)
   end
 
   def follow(other_user)
@@ -56,7 +56,7 @@ class User < ApplicationRecord
   end
 
   def most_places(count)
-    events.
+    tickets.
       pluck(:place).
       join(",").
       gsub(" ", "").
@@ -69,7 +69,7 @@ class User < ApplicationRecord
   end
 
   def most_artists(count)
-    events.
+    tickets.
       pluck(:performer).
       join(",").
       gsub(", ", ",").
@@ -83,14 +83,14 @@ class User < ApplicationRecord
   end
 
   def recommends(count)
-    user_ids = Event.
+    user_ids = Ticket.
       where('UPPER(performer) LIKE ?', "%#{most_artists(1)}%".upcase).
       where.not(user_id: id).
       pluck(:user_id).
       uniq
     array = []
     user_ids.each do |user_id|
-      array << User.find(user_id).events.done.take(5).pluck(:performer).join(",")
+      array << User.find(user_id).tickets.done.take(5).pluck(:performer).join(",")
     end
     recently_performers = array.join(",").gsub(", ", ",").downcase.split(",")
     recently_performers.delete(most_artists(1))

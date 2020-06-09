@@ -1,6 +1,6 @@
 <% if @status == 'success' %>
-  $("#events-area").html("<%= escape_javascript(render "events", events: @events) %>");
+  $("#tickets-area").html("<%= escape_javascript(render "tickets", tickets: @tickets) %>");
 <% elsif @status == 'fail' %>
   alert("イベントを作成できませんでした");
 <% end %>
-$("#event-modal").modal("hide");
+$("#ticket-modal").modal("hide");

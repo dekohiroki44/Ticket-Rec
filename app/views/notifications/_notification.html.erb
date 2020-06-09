@@ -11,16 +11,16 @@
       <% when 'follow' then %>
         <%= "あなたをフォローしました" %>
       <% when 'like' then %>
-        <%= link_to 'あなたの投稿', notification.event, style: "font-weight: bold;" %>
+        <%= link_to 'あなたの投稿', notification.ticket, style: "font-weight: bold;" %>
         <%= "にいいねしました" %>
       <% when 'comment' then %>
-        <% if notification.event.user_id == visited.id %>
-          <%= link_to "あなたの投稿", notification.event, style: "font-weight: bold;" %>
+        <% if notification.ticket.user_id == visited.id %>
+          <%= link_to "あなたの投稿", notification.ticket, style: "font-weight: bold;" %>
         <% else %>
           <span>
-            <%= link_to event_path(notification.event) do %>
-              <%= image_tag notification.event.user.name.image.variant(resize:'50x50').processed, class:"avatar" %>
-              <strong><%= "#{notification.event.user.name}さんの投稿" %></strong>
+            <%= link_to ticket_path(notification.ticket) do %>
+              <%= image_tag notification.ticket.user.name.image.variant(resize:'50x50').processed, class:"avatar" %>
+              <strong><%= "#{notification.ticket.user.name}さんの投稿" %></strong>
             <% end %>
           </span>
         <% end %>

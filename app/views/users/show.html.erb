@@ -3,11 +3,11 @@
   <%= render 'user_section', user: @user %>
 </div>
 <div class="list-section col-lg-10 mx-auto">
-  <% if @user.events.any? %>
-    <h3>参加済みのチッケト (<%= @done_events.release.count %>枚)</h3>
-    <%= render 'events/timeline', user: @user,
-                                  done_events: @done_events,
-                                  upcomming_events: @upcomming_events,
-                                  unsolved_events: @unsolved_events %>
+  <% if @user.tickets.any? %>
+    <h3>参加済みのチッケト (<%= @done_tickets.release.count %>枚)</h3>
+    <%= render 'tickets/timeline', user: @user,
+                                  done_tickets: @done_tickets,
+                                  upcomming_tickets: @upcomming_tickets,
+                                  unsolved_tickets: @unsolved_tickets %>
   <% end %>
 </div>
