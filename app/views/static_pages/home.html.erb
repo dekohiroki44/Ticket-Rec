@@ -1,7 +1,10 @@
 <% if user_signed_in? %>
   <div class="heading-section">
     <div class="next-live tickets mt-2 mx-auto">
-      <h3 class="ml-3">次のチケット(あと<%= "#{time_ago_in_words(@ticket.date).upcase}" %>)</h3>
+      <div class="headline">
+        <%= image_tag "8note.png", class: "eight-note" %>
+        <h3>次のチケット(あと<%= "#{time_ago_in_words(@ticket.date).upcase}" %>)</h3>
+      </div>
       <div class="row next-ticket-info">
         <div class="col-md-9">
           <%= render "tickets/ticket", ticket: @ticket %>
