@@ -114,10 +114,14 @@ a {
 #sidebar-wrapper {
   background-image: url(treble_clef_gray.png);
   background-size: contain;
-  background-color: black;
-  background-blend-mode: luminosity;
-  color: white;
-  text-shadow:3px 3px 0 black;
+  background-color: whitesmoke;
+  // background-blend-mode: hard-light;
+  color: black;
+  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+              0px 1px 0 #FFF,  0-1px 0 #FFF,
+              -1px 0 0 #FFF, 1px 0 0 #FFF;
+
   width: 15rem;
   min-height: 100vh;
   margin-left: -15rem;
@@ -126,14 +130,14 @@ a {
   top: 0px;
   z-index: 10;
   .sidebar-heading {
-    color: yellow;
+    color: crimson;
     padding: 0.875rem 1.25rem 0 1.25rem;
     font-size: 2.2rem;
     display: block;
     text-align: center;
   }
   .current-user-section {
-    height: 270px;
+    height: 240px;
     text-align: center;
     margin: 0 1.25rem;
     img {
@@ -141,13 +145,12 @@ a {
       margin-bottom: 5px;
       width: 160px;
       height: 160px;
-      border: 2px solid white;
+      border: 2px solid black;
     }
     a {
-      color: white;
       font-size: 1.5rem;
       &:hover{
-        color:yellow;
+        color:crimson;
       }
     }
   }
@@ -156,10 +159,9 @@ a {
     .list-group-item-action {
       padding-top: 0.2rem;
       padding-bottom: 0.3rem;
-      color: white; 
       font-weight: bold;
       &:hover{
-        color:yellow;
+        color: crimson;
       }
       imput {
         margin-left: 0.3rem;
@@ -198,10 +200,11 @@ footer {
   width: 100%;
   height: 50px;
   padding-top: 10px;
-  color: whitesmoke;
+  color:black;
   position: absolute;
   bottom: 0;
-  background-color: black;
+  background-color: whitesmoke;
+  border-top: 1px solid lightgrey;
   small {
     text-align: center;
     display: block;
@@ -212,8 +215,24 @@ footer {
 
 .timeline {
   margin-top: 1rem;
-  p {
-    padding: 2rem 0;
+}
+
+#unsolved {
+  .unsolved-explanation {
+    margin-top: 10px;
+    padding: 10px 30px;
+    background-color: lightpink;
+    border: 2px solid #333;
+    border-radius: 0.3rem;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .unsolved-alert {
+    display: block;
+    a {
+      display: block;
+    }
   }
 }
 
@@ -279,11 +298,10 @@ footer {
   list-style: none;
   padding: 0;
   li {
-    max-width: 700px;
     padding: 4%;
-    margin: 10px;
+    margin: 10px 0;
     border-radius: 0.3rem;
-    background-color: lightgray;
+    background-color: white;
     border: 2px solid #333;
   }
 }
@@ -371,6 +389,22 @@ footer {
       img {
         margin-left: 0.5em;
       }
+    }
+  }
+}
+
+.unsolved-alert {
+  display: none;
+  border: 1px solid black;
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  p {
+    padding: 0;
+  }
+  ul {
+    list-style: none;
+    li {
+      background-color: lightpink;
     }
   }
 }

@@ -62,6 +62,13 @@ class TicketsController < ApplicationController
     redirect_to tickets_url
   end
 
+  def unsolved
+    ticket = Ticket.find(params[:id])
+    ticket.update_attributes(done: true)
+    flash[:success] = "参加済みのチケットに移動しました"
+    redirect_to ticket.user
+  end
+
   private
 
   def ticket_params_create

@@ -102,10 +102,15 @@ class User < ApplicationRecord
       join(", ")
   end
 
-  def self.search(word, column)
-    return User.all unless word
-    users = User.arel_table
-    User.where(users[:"#{column}"].matches("%#{word}%"))
+  def self.search(word, date)
+    if word.present?
+      User.where("upper(name) LIKE ? OR upper(profile) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase)
+    elsif word.blank? && date.present?
+      ticket_ids = Ticket.where("date = ?", date).pluck(:user_id)
+      User.where("id = ?", ticket_ids)
+    elsif word.blank? && date.blank?
+      User.all
+    end
   end
 
   private
