@@ -77,12 +77,29 @@ a {
   }
 }
 
+.headline {
+  display: flex;
+  align-items: flex-end;
+  img {
+    height: 90px;
+    margin: 0 0.3rem;
+  }
+  h3 {
+    padding: 0 1rem;
+    margin: 0;
+    height: 3.5rem;
+    border-width: 10px 0;
+    border-style: groove;
+  }
+}
+
 #logo {
   font-size: 1.7em;
   color: white;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
+  color: crimson;
   &:hover {
     color: white;
     text-decoration: none;
@@ -102,6 +119,11 @@ a {
 }
 
 /* header */
+
+#header-wrapper {
+  background-color: whitesmoke;
+  border-bottom: 1px solid lightgray;
+}
 
 @media (min-width: 720px) {
   #header-wrapper {

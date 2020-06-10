@@ -4,7 +4,10 @@
 </div>
 <div class="list-section col-lg-10 mx-auto">
   <% if @user.tickets.any? %>
-    <h3>参加済みのチッケト (<%= @user.tickets.done.release.count %>枚)</h3>
+    <div class="headline">
+      <%= image_tag "8note.png", class: "eight-note" %>
+      <h3>参加済みのチッケト (<%= @user.tickets.done.release.count %>枚)</h3>
+    </div>
     <%= render 'tickets/timeline', user: @user,
                                   done_tickets: @done_tickets,
                                   upcomming_tickets: @upcomming_tickets,
