@@ -4,7 +4,7 @@
 </div>
 <div class="list-section col-lg-10 mx-auto">
   <% if @user.tickets.any? %>
-    <h3>参加済みのチッケト (<%= @done_tickets.release.count %>枚)</h3>
+    <h3>参加済みのチッケト (<%= @user.tickets.done.release.count %>枚)</h3>
     <%= render 'tickets/timeline', user: @user,
                                   done_tickets: @done_tickets,
                                   upcomming_tickets: @upcomming_tickets,

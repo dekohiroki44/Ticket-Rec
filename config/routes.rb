@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     end
   end
   resources :tickets do
+    member do
+      patch :unsolved
+    end
     resources :comments, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]

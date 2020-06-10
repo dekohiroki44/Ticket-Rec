@@ -36,5 +36,12 @@
         <%= image_tag ticket.images.first.variant(resize:'100x100').processed, class:"image" if ticket.images.attached?  %>
       </div>
     <% end %>
+    <div class="unsolved-alert">
+      <p>どちらかをクリック！</p>
+      <ul>
+        <li><%= link_to "参加した", unsolved_ticket_path(ticket.id), method: :patch, class: "unsolved-check" %></li>
+        <li><%= link_to '参加しなかった', ticket, method: :delete, title: 'チケットの削除', class: "unsolved-check", data: { confirm: '削除しますが、よろしいですか？', commit: '削除', cancel: '中止' } %></li>
+      </ul>
+    </div>
   </li>
 </div>

@@ -8,7 +8,7 @@
     </li>
     <% if user.id==current_user.id && unsolved_tickets.present?%>
       <li class="nav-item">
-        <a href="#unsolved" class="nav-link" data-toggle="tab">終了したチケットを振り分けよう</a>
+        <a href="#unsolved" class="nav-link" data-toggle="tab">開催日の過ぎたチケットを振り分けよう</a>
       </li>
     <% end %>
   </ul>
@@ -34,7 +34,11 @@
       <% end %>
     </div>
     <div id="unsolved" class="tab-pane">
-      <p>ライブに参加した場合はチェックを入れよう！</p>
+      <div class="unsolved-explanation">
+        <strong>「参加した」「参加しなかった」のどちらかをクリックしてください。</strong>
+        <p>・「参加した」をクリック → 参加済みのチケットに移動します。</p>
+        <p>・「参加しなかった」をクリック → チケットを削除します。</p>
+      </div>
       <ol class="tickets">
         <%= render unsolved_tickets %>
       </ol>

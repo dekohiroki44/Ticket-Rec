@@ -118,9 +118,15 @@ class Ticket < ApplicationRecord
     notification.save if notification.valid?
   end
 
-  def self.search(word, column)
-    return Ticket.all unless word
-    tickets = Ticket.arel_table
-    Ticket.where(tickets[:"#{column}"].matches("%#{word}%"))
+  def self.search(word, date)
+    if word.present? && date.present?
+      Ticket.where("(upper(name) LIKE ? OR upper(performer) LIKE ?) AND date = ?", "%#{word}%".upcase, "%#{word}%".upcase, date)
+    elsif word.present? && date.blank?
+      Ticket.where("upper(name) LIKE ? OR upper(performer) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase)
+    elsif word.blank? && date.present?
+      Ticket.where("date = ?", date)
+    else
+      Ticket.all
+    end
   end
 end
