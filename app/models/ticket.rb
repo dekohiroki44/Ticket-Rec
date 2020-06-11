@@ -17,7 +17,7 @@ class Ticket < ApplicationRecord
     header = { "Authorization": "Basic #{key}" }
     client = HTTPClient.new
     response = client.post(url, query, header)
-  
+
     if response.status == 200
       auth_params = JSON.parse(response.body)
       authenticate_token = auth_params["access_token"]
@@ -57,7 +57,7 @@ class Ticket < ApplicationRecord
           return nil, nil
         end
       else
-        
+
         return nil, nil
       end
     else
