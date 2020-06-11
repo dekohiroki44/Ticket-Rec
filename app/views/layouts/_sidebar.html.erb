@@ -11,7 +11,7 @@
   <div class="list-group list-group-flush">
     <% if user_signed_in? %>
       <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-transparent" do %>
-        <i class="far fa-comments fa-2x"></i>皆んなのイベント
+        <i class="far fa-comments fa-2x"></i>皆んなのチケット
       <% end %>
       <%= link_to new_ticket_path, remote: true, class:"list-group-item list-group-item-action bg-transparent" do %>
         <i class="far fa-edit fa-2x"></i>書き込む

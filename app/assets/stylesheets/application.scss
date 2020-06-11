@@ -79,7 +79,7 @@ a {
 
 .headline {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   img {
     height: 90px;
     margin: 0 0.3rem;
@@ -87,9 +87,10 @@ a {
   h3 {
     padding: 0 1rem;
     margin: 0;
-    height: 3.5rem;
+    line-height: 2.5rem;
     border-width: 10px 0;
     border-style: groove;
+    background-color: white;
   }
 }
 
@@ -137,7 +138,6 @@ a {
   background-image: url(treble_clef_gray.png);
   background-size: contain;
   background-color: whitesmoke;
-  // background-blend-mode: hard-light;
   color: black;
   text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
               -1px 1px 0 #FFF, 1px -1px 0 #FFF,
@@ -260,31 +260,48 @@ footer {
 
 /* user_section */
 
-.user-section-left {
-  text-align: center;
-  .avatar {
-    height: 150px;
-    width: 150px;
-  }
-  .name {
-    font-size: 2rem;
-  }
-  .stats {
-    overflow: auto;
-    margin-top: 5px;
-    a {
-      margin: 0 10px;
-      padding: 0.5rem;
-      background-color: lightgray;
-      border-radius: 0.5rem;
-      color: black;
-      &:hover {
-        text-decoration: none;
-        color: blue;
+.user-section {
+  background-color: white;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 0.3rem;
+  .user-section-left {
+    text-align: center;
+    .avatar {
+      height: 150px;
+      width: 150px;
+    }
+    .name {
+      font-size: 2rem;
+    }
+    .stats {
+      overflow: auto;
+      margin-top: 5px;
+      a {
+        margin: 0 10px;
+        padding: 0.5rem;
+        background-color: lightgray;
+        border-radius: 0.5rem;
+        color: black;
+        &:hover {
+          text-decoration: none;
+          background-color: crimson;
+        }
+      }
+      strong {
+        display: block;
       }
     }
-    strong {
-      display: block;
+  }
+  .user-section-right {
+    .user-items {
+      p {
+        display: inline;
+        margin: 0;
+      }
+      .fas {
+        margin-right: 5px;
+      }
     }
   }
 }
@@ -310,6 +327,28 @@ footer {
   .track-url {
     padding: 0.3rem;
     background-color: lightgray;
+    border-radius: 0.3rem;
+  }
+}
+
+.second-section-info {
+  border: 2px solid #333;
+  border-radius: 0.3rem;
+  background-color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin: 10px 0;
+  .recommends-setion {
+    font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .index {
+      background: linear-gradient(transparent 70%, lightgray 70%);
+    }
+  }
+  #regions {
+    border: 2px solid #333;
     border-radius: 0.3rem;
   }
 }
@@ -344,7 +383,7 @@ footer {
       height: 0px;
       margin: auto;
       border-style: solid;
-      border-color: transparent white white white;
+      border-color: transparent whitesmoke whitesmoke whitesmoke;
       border-width: 20px 20px 15px 20px;
       z-index: 1;
     }
@@ -420,6 +459,7 @@ footer {
   border: 1px solid black;
   border-radius: 0.3rem;
   padding: 0.3rem;
+  background-color: lightgrey;
   p {
     padding: 0;
   }
