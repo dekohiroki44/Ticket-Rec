@@ -8,11 +8,22 @@
       <%= render 'shared/stats', user: user %>
     </div>
     <%= render 'follow_btn', user: user %>
-    <%= link_to "プロフィールを編集", edit_user_registration_path(current_user) if user == current_user %>
   </div>
   <div class="user-section-right col-lg-8">
-    <div class="profile mt-3"><%= user.profile %></div>
-    <%= link_to "MAPを表示", map_user_path(user), remote: true, class: "map-link" %>
+    <div class="profile my-3"><%= user.profile %></div>
+    <div class="user-items d-flex flex-column align-items-center align-items-lg-stretch">
+      <a href="#user-ticket">
+        <P><i class="fas fa-ticket-alt"></i>参加済みのチケット (<%= @user.tickets.done.release.count %>枚)</P>
+      </a>
+      <%= link_to map_user_path(user), remote: true, class: "map-link" do %>
+        <i class="fas fa-map"></i><p>都道府県MAPを表示</p>
+      <% end %>
+      <% if user == current_user %>
+        <%= link_to edit_user_registration_path(current_user) do %>
+          <i class="fas fa-user-edit"></i><p>アカウント情報を編集</p>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
 <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
