@@ -1,6 +1,10 @@
 <header class="navbar navbar-expand-md sticky-top" id="header-wrapper">
   <%= link_to "LIVCALE", root_path, id: "logo", class: "navbar-brand" %>
-  <%= render "shared/search" %>
+  <%= form_tag searches_path, method: :get, class: "px-2" do %>
+    <%= text_field_tag :word, '', placeholder: "キーワードを入力", class: "form-control" %>
+    <%= date_field_tag :date, class: "form-control" %>
+    <%= submit_tag '検索', class: "btn btn-dark" %>
+  <% end %>
   <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

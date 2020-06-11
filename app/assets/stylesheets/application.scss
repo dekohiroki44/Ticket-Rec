@@ -132,6 +132,18 @@ a {
   }
 }
 
+/* searchbar */
+
+.search-form {
+  height: 30px;
+}
+
+@media (max-width: 720px) {
+  #searchbar {
+    display: none;
+  }
+}
+
 /* sidebar */
 
 #sidebar-wrapper {
