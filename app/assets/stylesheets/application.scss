@@ -183,7 +183,8 @@ a {
     background-blend-mode: color-dodge;
     .current-user-section {
       height: 240px;
-      text-align: center;
+      
+      
       margin: 0 1.25rem;
       img {
         margin-top: 30px;
@@ -196,6 +197,9 @@ a {
         font-size: 1.5rem;
         &:hover{
           color:crimson;
+        }
+        h1 {
+          text-align: center;
         }
       }
     }
@@ -592,4 +596,18 @@ footer {
   padding-left: 1rem;
   padding-top: 0rem;
   color: #efa04c;
+}
+
+/* tos */
+
+#tos {
+  ol {
+    // margin-top: 2rem;
+  }
+  table, td, tr{
+    border: 1px solid gray;
+    tr:first-child td {
+      width:100px;
+    }
+  }
 }

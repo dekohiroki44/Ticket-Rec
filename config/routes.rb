@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: "static_pages#home"
   get '/about', to: 'static_pages#about'
+  get '/tos', to: 'static_pages#tos'
   devise_for :users
   resources :users, only: [:show]
   resources :users do
