@@ -134,6 +134,12 @@ a {
 
 /* searchbar */
 
+#searchbar {
+  background-color: whitesmoke;
+  border-bottom: 1px solid lightgrey;
+  justify-content: center;
+}
+
 .search-form {
   height: 30px;
 }
@@ -147,8 +153,6 @@ a {
 /* sidebar */
 
 #sidebar-wrapper {
-  background-image: url(treble_clef_gray.png);
-  background-size: contain;
   background-color: whitesmoke;
   color: black;
   text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
@@ -170,39 +174,48 @@ a {
     display: block;
     text-align: center;
   }
-  .current-user-section {
-    height: 240px;
-    text-align: center;
-    margin: 0 1.25rem;
-    img {
-      margin-top: 30px;
-      margin-bottom: 5px;
-      width: 160px;
-      height: 160px;
-      border: 2px solid black;
-    }
-    a {
-      font-size: 1.5rem;
-      &:hover{
-        color:crimson;
+  .clef {
+    height: 700px;
+    background-image: url(treble_clef_gray.png);
+    background-size: contain;
+    // background-color: rgb(245, 243, 219);
+    background-color: whitesmoke;
+    background-blend-mode: color-dodge;
+    .current-user-section {
+      height: 240px;
+      text-align: center;
+      margin: 0 1.25rem;
+      img {
+        margin-top: 30px;
+        margin-bottom: 5px;
+        width: 160px;
+        height: 160px;
+        border: 2px solid black;
+      }
+      a {
+        font-size: 1.5rem;
+        &:hover{
+          color:crimson;
+        }
       }
     }
-  }
-  .list-group {
-    width: 15rem;
-    .list-group-item-action {
-      padding-top: 0.2rem;
-      padding-bottom: 0.3rem;
-      font-weight: bold;
-      &:hover{
-        color: crimson;
+    .list-group {
+      width: 15rem;
+      .list-group-item-action {
+        padding-top: 0.2rem;
+        padding-bottom: 0.3rem;
+        font-weight: bold;
+        border: 0;
+        &:hover{
+          color: crimson;
+        }
+        imput {
+          margin-left: 0.3rem;
+        }
       }
-      imput {
-        margin-left: 0.3rem;
+      .far, .fas {
+        margin: 0.25rem;
       }
-    }
-    .far, .fas {
-      margin: 0.25rem;
     }
   }
 }
@@ -362,6 +375,30 @@ footer {
   #regions {
     border: 2px solid #333;
     border-radius: 0.3rem;
+  }
+}
+
+.top {
+  padding-top: 40px;
+  height: 500px;
+  background-image: url(live.png);
+  background-size: cover;
+  background-color: white;
+  text-align: center;
+  h1 {
+    color: crimson;
+  }
+}
+.signup {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding-bottom: 30px;
+  a {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 15px;
+    width: 80%;
   }
 }
 

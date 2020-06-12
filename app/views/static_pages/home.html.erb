@@ -59,14 +59,14 @@
     </div>
   </div>
 <% else %>
-  <div class="center jumbotron">
-    <h1>LIVCALE</h1>
-    <h2>
-      This is the home page for the
-      <a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-      sample application.
-    </h2>
-    <%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+  <div>
+    <div class="top">
+      <h1>感動を永遠に</h1>
+      <p>Ticket Noteで思い出のチケットを記録しよう</p>
+    </div>
+    <div class="signup">
+      <%= link_to "今すぐ登録して始めよう!", new_user_registration_path, class: "btn btn-lg btn-light" %>
+    </div>
   </div>
 <% end %>
 <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
