@@ -5,7 +5,7 @@ RSpec.describe Relationship, type: :model do
   let(:user_b) { create(:user) }
   let(:relationship) { build(:relationship, follower_id: user_a.id, followed_id: user_b.id) }
 
-  it 'is valid with valid info' do
+  it 'is valid with correct info' do
     expect(relationship).to be_valid
   end
 
