@@ -4,8 +4,8 @@ class Ticket < ApplicationRecord
   scope :unsolved, -> { where('date < ? AND done = ?', Date.current, false).order(date: "DESC") }
   scope :release, -> { where('public = ?', true) }
   validates :date, presence: true
-  validates :public, inclusion: {in: [true, false]}
-  validates :done, inclusion: {in: [true, false]}
+  validates :public, inclusion: { in: [true, false] }
+  validates :done, inclusion: { in: [true, false] }
   belongs_to :user
   has_many_attached :images
   has_many :likes, dependent: :destroy

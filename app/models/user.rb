@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :profile, length: { maximum: 200 }
   validates_acceptance_of :agreement, allow_nil: false, on: :create
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
   validates :email, format: { with: VALID_EMAIL_REGEX }
   has_many :tickets, dependent: :destroy
   has_one_attached :image
