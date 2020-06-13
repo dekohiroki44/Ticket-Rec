@@ -21,7 +21,7 @@ RSpec.describe Notification, type: :model do
       expect(notification).to be_valid
     end
   end
-  
+
   context 'comment' do
     it 'is valid with correct info' do
       notification.action = "comment"

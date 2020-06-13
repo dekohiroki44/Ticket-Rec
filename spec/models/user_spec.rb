@@ -76,7 +76,7 @@ RSpec.describe User, type: :model do
     it 'associated tickets are destroyed' do
       user.save
       user.tickets.create!(date: Date.current, done: false)
-      expect { user.destroy }.to change { Ticket.count }.by(-1)
+      expect { user.destroy }.to change(Ticket, :count).by(-1)
     end
   end
 
