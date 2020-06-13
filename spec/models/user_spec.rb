@@ -73,7 +73,7 @@ RSpec.describe User, type: :model do
       expect(user).to be_invalid
     end
 
-    it 'associated microposts are destroyed' do
+    it 'associated tickets are destroyed' do
       user.save
       user.tickets.create!(date: Date.current, done: false)
       expect { user.destroy }.to change { Ticket.count }.by(-1)
@@ -93,6 +93,38 @@ RSpec.describe User, type: :model do
       expect(user_a.feed).to include(ticket_self)
       expect(user_a.feed).to include(ticket_following)
       expect(user_a.feed).not_to include(ticket_unfollow)
+    end
+  end
+
+  describe 'analysis' do
+    let(:user_a) { create(:user) }
+    let(:user_b) { create(:user) }
+    let(:user_c) { create(:user) }
+    let!(:ticket_a_1) { create(:ticket, user: user_a, performer: 'artist_a', place: 'venue_a') }
+    let!(:ticket_a_2) { create(:ticket, user: user_a, performer: 'artist_a', place: 'venue_b') }
+    let!(:ticket_a_3) { create(:ticket, user: user_a, performer: 'artist_b', place: 'venue_c') }
+    let!(:ticket_a_4) { create(:ticket, user: user_a, performer: 'artist_c', place: 'venue_c') }
+    let!(:ticket_b_1) { create(:ticket, user: user_b, performer: 'artist_a') }
+    let!(:ticket_b_2) { create(:ticket, user: user_b, performer: 'artist_d') }
+    let!(:ticket_b_3) { create(:ticket, user: user_b, performer: 'artist_e') }
+    let!(:ticket_c_1) { create(:ticket, user: user_c, performer: 'artist_a') }
+    let!(:ticket_c_2) { create(:ticket, user: user_c, performer: 'artist_d') }
+    let!(:ticket_c_3) { create(:ticket, user: user_c, performer: 'artist_f') }
+
+    before do
+      Ticket.update_all(done: true)
+    end
+
+    it 'presents most visited place' do
+      expect(user_a.most_places(1)).to eq 'venue_c'
+    end
+
+    it 'presents most visited performer' do
+      expect(user_a.most_artists(1)).to eq 'artist_a'
+    end
+
+    it 'recommends artists' do
+      expect(user_a.recommends(1)).to eq 'artist_d'
     end
   end
 end

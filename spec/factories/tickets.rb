@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :ticket do
-    user { nil }
     date { Date.current }
-    public { true }
     done { false }
+    public { true }
+    user
   end
 end
