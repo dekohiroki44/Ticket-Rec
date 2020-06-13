@@ -5,6 +5,7 @@ class NotificationsController < ApplicationController
     notifications.where(checked: false).each do |notification|
       notification.update_attributes(checked: true)
     end
-    @notifications = notifications.where.not(visitor_id: current_user.id).page(params[:page]).includes([:visitor], [:visited], [:ticket])
+    @notifications = notifications.where.not(visitor_id: current_user.id).page(params[:page]).
+      includes([:visitor], [:visited], [:ticket])
   end
 end

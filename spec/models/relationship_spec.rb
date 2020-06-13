@@ -19,12 +19,14 @@ RSpec.describe Relationship, type: :model do
     expect(relationship).to be_invalid
   end
 
-  it 'is created by follow and unfollow a user' do
-    expect(user_a.following?(user_b)).to be_falsey
-    user_a.follow(user_b)
-    expect(user_a.following?(user_b)).to be_truthy
-    expect(user_b.followers.include?(user_a)).to be_truthy
-    user_a.unfollow(user_b)
-    expect(user_a.following?(user_b)).to be_falsey
+  describe 'relationship_method' do
+    it 'created relationship by follow and unfollow a user' do
+      expect(user_a.following?(user_b)).to be_falsey
+      user_a.follow(user_b)
+      expect(user_a.following?(user_b)).to be_truthy
+      expect(user_b.followers.include?(user_a)).to be_truthy
+      user_a.unfollow(user_b)
+      expect(user_a.following?(user_b)).to be_falsey
+    end
   end
 end
