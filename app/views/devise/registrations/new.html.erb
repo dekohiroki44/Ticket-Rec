@@ -27,7 +27,7 @@
       <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
     </div>
 
-    <%= f.check_box :agreement, as: :boolean, checked: false %>
+    <%= f.check_box :agreement, as: :boolean, checked: false, id: "tos" %>
             <span><%= link_to "利用規約", tos_path, target: :_blank, style: "text-decoration: underline; color: blue;" %>に同意する</span>
 
     <div class="form-group">
