@@ -1,3 +1,7 @@
+/*
+ *= require simple_calendar 
+ */
+
 @import "bootstrap";
 
 .container {
@@ -342,6 +346,31 @@ footer {
   }
 }
 
+/* simple-calendar */
+
+.simple-calendar {
+  .calendar-heading {
+    font-size: 2rem;
+    text-align: center;
+    .calendar-title {
+      margin: 0 10px;
+    }
+  }
+  table {
+    border: 2px solid #333;
+    border-radius: 0.3rem;
+  }
+  .has-events {
+    background-color: rgb(222, 247, 173);
+    a {
+      overflow: hidden;
+      display: inline-block;
+      max-height: 50px;
+      // background: linear-gradient(transparent 70%, crimson 70%);
+    }
+  }
+}
+
 /* home */
 
 .spotify-section {
@@ -360,14 +389,14 @@ footer {
   }
 }
 
-.second-section-info {
+.data-section {
+  text-align: center;
+  padding: 10px;
+  margin: 10px 0;
   border: 2px solid #333;
   border-radius: 0.3rem;
   background-color: white;
-  text-align: center;
-  padding: 10px 0;
-  margin: 10px 0;
-  .recommends-setion {
+  .recommends-section {
     font-size: 1.3rem;
     display: flex;
     flex-direction: column;
@@ -376,7 +405,7 @@ footer {
       background: linear-gradient(transparent 70%, lightgray 70%);
     }
   }
-  #regions {
+  .map-section {
     border: 2px solid #333;
     border-radius: 0.3rem;
   }

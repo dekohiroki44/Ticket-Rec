@@ -2,6 +2,8 @@ class StaticPagesController < ApplicationController
   def home
     if user_signed_in?
       @ticket = current_user.tickets.upcomming.first
+      @tickets = current_user.tickets.where.not('date < ? AND done = ?', DateTime.current, false)
+      
       prefectures = ["都道府県"]
       current_user.tickets.done.each do |ticket|
         prefectures << ticket.prefecture

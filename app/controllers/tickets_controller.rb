@@ -72,7 +72,7 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params_create
-    params[:ticket][:date].to_date < Date.current ? done = true : done = false
+    params[:ticket][:date].to_date < DateTime.current ? done = true : done = false
     params.
       require(:ticket).
       permit(:name, :content, :date, :place, :prefecture, :price, :performer, :public, images: []).

@@ -1,7 +1,7 @@
 class Ticket < ApplicationRecord
   scope :done, -> { where(done: true).order(date: "DESC") }
-  scope :upcomming, -> { where('date >= ?', Date.current).order(date: "ASC") }
-  scope :unsolved, -> { where('date < ? AND done = ?', Date.current, false).order(date: "DESC") }
+  scope :upcomming, -> { where('date >= ?', DateTime.current).order(date: "ASC") }
+  scope :unsolved, -> { where('date < ? AND done = ?', DateTime.current, false).order(date: "DESC") }
   scope :release, -> { where('public = ?', true) }
   validates :date, presence: true
   validates :public, inclusion: { in: [true, false] }
@@ -131,5 +131,9 @@ class Ticket < ApplicationRecord
     else
       Ticket.all
     end
+  end
+
+  def start_time
+    self.date
   end
 end

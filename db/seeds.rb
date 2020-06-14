@@ -3,7 +3,8 @@ User.create!(name: "example user",
              password: "foobar",
              password_confirmation: "foobar",
              admin: true,
-             profile: "こんにちは、example userです。ライブに行くのが趣味です。")
+             profile: "こんにちは、example userです。ライブに行くのが趣味です。",
+             agreement: true)
 
 20.times do |n|
   name = Faker::Name.name
@@ -13,12 +14,14 @@ User.create!(name: "example user",
                email: email,
                password: password,
                password_confirmation: password,
-               profile: "こんにちは、#{name}です。ライブに行くのが趣味です。気軽 にフォローしてください！")
+               profile: "こんにちは、#{name}です。音楽が好きでライブに行くのが趣味です。もっと色んな音楽を知りたいので気軽にフォローしてください！",
+               agreement: true)
 end
 
 30.times do
-  date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
-  date < Date.current ? done = true : done = false
+  date = Faker::Time.between(from: DateTime.current.ago(1.year), to: DateTime.current.since(1.year))
+  date.change(hour: rand(17..20))
+  date < DateTime.current ? done = true : done = false
   User.find(1).tickets.create!(date: date,
                               name: Faker::Music.album,
                               content: Faker::Lorem.sentence,
@@ -30,8 +33,9 @@ end
 end
 
 30.times do
-  date = Faker::Date.between(from: 1.year.ago, to: 1.year.from_now)
-  date < Date.current ? done = true : done = false
+  date = Faker::Time.between(from: DateTime.current.ago(1.year), to: DateTime.current.since(1.year))
+  date.change(hour: rand(17..20))
+  date < DateTime.current ? done = true : done = false
   User.find(2).tickets.create!(date: date,
                               name: Faker::Music.album,
                               content: Faker::Lorem.sentence,

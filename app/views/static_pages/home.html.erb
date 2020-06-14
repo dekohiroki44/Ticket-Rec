@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <% if @ticket %>
-    <div class="next-live-section tickets mt-2 mx-auto">
+    <div class="next-live-section tickets mt-2 mb-5 mx-auto">
       <div class="headline">
         <%= image_tag "8note.png", class: "eight-note" %>
         <h3>次のチケット(あと<%= "#{time_ago_in_words(@ticket.date).upcase}" %>)</h3>
@@ -9,53 +9,56 @@
         <div class="col-md-9">
           <%= render "tickets/ticket", ticket: @ticket %>
         </div>
-        <div class="spotify-section mb-5 col-md-3 d-flex flex-column">
+        <div class="spotify-section col-md-3 d-flex flex-column mt-2">
           <%= image_tag @image_url, alt: "アーティスト画像", class: "artist-image" if @image_url %>
           <%= link_to "♪#{@ticket.performer.split(",").first}の曲を試聴する", @track_url, target: :_blank, class: "track-url" if @track_url %>
         </div>
       </div>
     </div>
   <% end %>
-  <div class="second-section mt-5">
-    <div class="headline">
-      <%= image_tag "8note.png", class: "eight-note" %>
-      <h3>全ての参加済みチケット (<%= current_user.tickets.done.release.count %>枚)</h3>
+  <div calendar-section>
+    <%= month_calendar events: @tickets do |date, tickets| %>
+      <%= date.strftime("%-d") %>
+      <% tickets.each do |ticket| %>
+        <%= link_to ticket.name, ticket %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="data-section row mt-5">
+    <div class="col-lg-6 recommends-section">
+      <strong>全ての参加済みチケット (<%= current_user.tickets.done.release.count %>枚)</strong>
+      <div class="most-place mt-3">
+        <div class="index"><%= "#{current_user.name}が最も行った会場" if current_user.most_places(1).present? %></div>
+        <strong class="d-block"><%= current_user.most_places(1) %></strong>
+      </div>
+      <div class="most-artist mt-3">
+        <div class="index"><%= "#{current_user.name}が最も見に行ったアーティスト" if current_user.most_artists(1).present? %></div>
+        <strong class="d-block mb-3"><%= current_user.most_artists(1) %></strong>
+      </div>
+      <% if current_user.most_artists(1).blank? %>
+        <p class="index">他のユーザーが最近見に行ったアーティスト</p>
+        <strong class="d-block"><%= current_user.recommends(3) %></strong>
+      <% elsif current_user.most_artists(1).present? && current_user.recommends(3).present?%>
+        <div class="index"><%= "#{current_user.most_artists(1)}を見に行った他のユーザーが最近見に行ったアーティスト" %></div>
+        <strong class="d-block"><%= current_user.recommends(3) %></strong>
+      <% end %>
     </div>
-    <div class="row second-section-info">
-      <div class="col-lg-6 recommends-setion">
-        <div class="most-place mt-3">
-          <div class="index"><%= "#{current_user.name}が最も行った会場" if current_user.most_places(1).present? %></div>
-          <strong class="d-block"><%= current_user.most_places(1) %></strong>
-        </div>
-        <div class="most-artist mt-3">
-          <div class="index"><%= "#{current_user.name}が最も見に行ったアーティスト" if current_user.most_artists(1).present? %></div>
-          <strong class="d-block mb-3"><%= current_user.most_artists(1) %></strong>
-        </div>
-        <% if current_user.most_artists(1).blank? %>
-          <p class="index">他のユーザーが最近見に行ったアーティスト</p>
-          <strong class="d-block"><%= current_user.recommends(3) %></strong>
-        <% elsif current_user.most_artists(1).present? && current_user.recommends(3).present?%>
-          <div class="index"><%= "#{current_user.most_artists(1)}を見に行った他のユーザーが最近見に行ったアーティスト" %></div>
-          <strong class="d-block"><%= current_user.recommends(3) %></strong>
-        <% end %>
-      </div>
-      <div class="col-lg-6 map-section">
-        <%= link_to map_user_path(current_user), remote: true, class: "map-link" do %>
-          <div id="regions"></div>
-          <script src="https://www.gstatic.com/charts/loader.js"></script>
-          <script type="text/javascript">
-            google.charts.load('current', {'packages':['geochart']});
-            google.charts.setOnLoadCallback(drawRegionsMap);
-            function drawRegionsMap() {
-              var data = google.visualization.arrayToDataTable(gon.prefectures);
-              var options = { region: 'JP', resolution: 'provinces' };
-              var chart = new google.visualization.GeoChart(document.getElementById('regions'));
-              chart.draw(data, options);
-            }
-          </script>
-        <% end %>
-        <small>地図をクリックすると拡大できます</small>
-      </div>
+    <div class="col-lg-6 map-section">
+      <%= link_to map_user_path(current_user), remote: true, class: "map-link" do %>
+        <div id="regions"></div>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['geochart']});
+          google.charts.setOnLoadCallback(drawRegionsMap);
+          function drawRegionsMap() {
+            var data = google.visualization.arrayToDataTable(gon.prefectures);
+            var options = { region: 'JP', resolution: 'provinces' };
+            var chart = new google.visualization.GeoChart(document.getElementById('regions'));
+            chart.draw(data, options);
+          }
+        </script>
+      <% end %>
+      <small>地図をクリックすると拡大できます</small>
     </div>
   </div>
 <% else %>
