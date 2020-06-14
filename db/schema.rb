@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_05_055215) do
+ActiveRecord::Schema.define(version: 2020_05_31_040843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,16 +85,16 @@ ActiveRecord::Schema.define(version: 2020_06_05_055215) do
     t.bigint "user_id"
     t.string "name", default: ""
     t.string "performer"
-    t.date "date", null: false
+    t.datetime "date", null: false
     t.string "time"
     t.string "place"
+    t.string "prefecture"
     t.string "price"
     t.text "content"
     t.boolean "public", default: false, null: false
     t.boolean "done", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "prefecture"
     t.index ["date"], name: "index_tickets_on_date"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
