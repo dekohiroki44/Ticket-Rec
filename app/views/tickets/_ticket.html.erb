@@ -24,8 +24,8 @@
             <% if ticket.place %>
               <span class="place"><i class="fas fa-map-marker-alt"></i><%= ticket.place %></span>
             <% end %>
-            <% if ticket.time %>
-              <span class="time"><i class="fas fa-clock"></i><%= ticket.time %></span>
+            <% if ticket.date %>
+              <span class="time"><i class="fas fa-clock"></i><%= ticket.date.strftime("%R") %></span>
             <% end %>
           </div>
         </div>

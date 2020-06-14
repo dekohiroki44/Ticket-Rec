@@ -16,7 +16,7 @@ describe 'signup', type: :system do
     expect(page).to have_css '.alert'
   end
 
-  it 'is valid correct input' do
+  it 'is valid with correct input' do
     expect do
       fill_in '名前', with: 'testuser'
       fill_in 'Eメール', with: 'test1@example.com'
