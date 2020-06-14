@@ -28,9 +28,10 @@ class TicketsController < ApplicationController
   def create
     ticket = current_user.tickets.build(ticket_params_create)
     if ticket.save
-      flash[:success] = "イベントを作成しました"
+      flash[:success] = "チケットを作成しました"
       redirect_to ticket
     else
+      flash[:alert] = "チケットを作成できませんでした"
       render new_ticket_path
     end
   end
@@ -48,7 +49,7 @@ class TicketsController < ApplicationController
       end
     end
     if ticket.update_attributes(ticket_params_update)
-      flash[:success] = "イベントを編集しました"
+      flash[:success] = "チケットを編集しました"
       redirect_to ticket
     else
       render edit_ticket_path
@@ -58,7 +59,7 @@ class TicketsController < ApplicationController
   def destroy
     ticket = Ticket.find(params[:id])
     ticket.destroy
-    flash[:success] = "イベントを削除しました"
+    flash[:success] = "チケットを削除しました"
     redirect_to tickets_url
   end
 
@@ -72,11 +73,13 @@ class TicketsController < ApplicationController
   private
 
   def ticket_params_create
-    params[:ticket][:date].to_date < DateTime.current ? done = true : done = false
-    params.
-      require(:ticket).
-      permit(:name, :content, :date, :place, :prefecture, :price, :performer, :public, images: []).
-      merge(done: done)
+    if params[:ticket][:date].present?
+      params[:ticket][:date].to_date < DateTime.current ? done = true : done = false 
+      params.
+        require(:ticket).
+        permit(:name, :content, :date, :place, :prefecture, :price, :performer, :public, images: []).
+        merge(done: done)
+    end
   end
 
   def ticket_params_update

@@ -134,6 +134,6 @@ class Ticket < ApplicationRecord
   end
 
   def start_time
-    self.date
+    date
   end
 end
