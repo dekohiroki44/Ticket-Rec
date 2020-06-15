@@ -5,7 +5,7 @@
       <h3>イベントを作成</h3>
     </div>
     <div class="form-container">
-      <%= form_with(model: @ticket, local: true) do |f| %>
+      <%= form_with(model: @ticket, remote: true) do |f| %>
         <div class="form-group">
           <%= f.label :date, '日付' %>
           <%= f.datetime_field :date, autofocus: true, autocomplete: 'date', class: 'form-control' %>

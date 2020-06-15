@@ -19,8 +19,7 @@ User.create!(name: "example user",
 end
 
 30.times do
-  date = Faker::Time.between(from: DateTime.current.ago(1.year), to: DateTime.current.since(1.year))
-  date.change(hour: rand(17..20))
+  date = Faker::Time.between(from: DateTime.current.ago(1.year), to: DateTime.current.since(1.year)).change(hour: rand(17..20))
   date < DateTime.current ? done = true : done = false
   User.find(1).tickets.create!(date: date,
                               name: Faker::Music.album,
@@ -33,8 +32,7 @@ end
 end
 
 30.times do
-  date = Faker::Time.between(from: DateTime.current.ago(1.year), to: DateTime.current.since(1.year))
-  date.change(hour: rand(17..20))
+  date = Faker::Time.between(from: DateTime.current.ago(1.year), to: DateTime.current.since(1.year)).change(hour: rand(17..20))
   date < DateTime.current ? done = true : done = false
   User.find(2).tickets.create!(date: date,
                               name: Faker::Music.album,
