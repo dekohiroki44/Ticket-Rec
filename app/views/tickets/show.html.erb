@@ -1,4 +1,24 @@
 <% provide(:title, @ticket.name) %>
+<div class="previous-next d-flex justify-content-between">
+  <%= link_to ticket_path(@ticket.previous.id) if @ticket.previous do %>
+    <div class="d-flex align-items-center">
+      <p>←</p>
+      <div class="d-flex flex-column">
+        <small><%= @ticket.user.name %></small>
+        <small>の前のチケット</small>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to ticket_path(@ticket.next.id) if @ticket.next do%>
+    <div class="d-flex align-items-center">
+      <div class="d-flex flex-column">
+        <small><%= @ticket.user.name %></small>
+        <small>の次のチケット</small>
+      </div>
+      <p>→</p>
+    </div>
+  <% end %>
+</div>
 <div id="ticket-<%= @ticket.id %>" class="ticket-show" >
   <%= link_to user_path(@ticket.user), class: "user d-flex justify-content-center" do %>
     <%= image_tag @ticket.user.image.variant(resize:'50x50').processed, class:"avatar" %>
