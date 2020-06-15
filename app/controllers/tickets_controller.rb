@@ -73,10 +73,18 @@ class TicketsController < ApplicationController
 
   def ticket_params_create
     if params[:ticket][:date].present?
-      params[:ticket][:date].to_date < DateTime.current ? done = true : done = false 
+      params[:ticket][:date].to_date < DateTime.current ? done = true : done = false
       params.
         require(:ticket).
-        permit(:name, :content, :date, :place, :prefecture, :price, :performer, :public, images: []).
+        permit(:name,
+               :content,
+               :date,
+               :place,
+               :prefecture,
+               :price,
+               :performer,
+               :public,
+               images: []).
         merge(done: done)
     end
   end
@@ -84,6 +92,15 @@ class TicketsController < ApplicationController
   def ticket_params_update
     params.
       require(:ticket).
-      permit(:name, :content, :date, :place, :prefecture, :price, :performer, :public, :done, images: [])
+      permit(:name,
+             :content,
+             :date,
+             :place,
+             :prefecture,
+             :price,
+             :performer,
+             :public,
+             :done,
+             images: [])
   end
 end

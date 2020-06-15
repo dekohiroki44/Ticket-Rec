@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'microposts_interface', type: :system do
+describe 'tickets_interface', type: :system do
   let(:user) { create(:user) }
   let(:ticket) { create(:ticket, user: user) }
 

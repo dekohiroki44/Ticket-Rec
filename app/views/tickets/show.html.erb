@@ -81,6 +81,7 @@
         </div>
         <div class="comment-form">
           <%= form_with model: [@ticket, @comment] do |f| %>
+          <%= render 'layouts/error_messages', model: f.object %>
             <%= f.text_area :content, class: "area" %>
             <br>
             <%= f.submit 'コメントする', class: "btn btn-primary btn-block" %>
