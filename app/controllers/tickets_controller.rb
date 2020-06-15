@@ -31,8 +31,7 @@ class TicketsController < ApplicationController
       flash[:success] = "チケットを作成しました"
       redirect_to ticket
     else
-      flash[:alert] = "チケットを作成できませんでした"
-      render new_ticket_path
+      format.js { render :new }
     end
   end
 
@@ -52,7 +51,7 @@ class TicketsController < ApplicationController
       flash[:success] = "チケットを編集しました"
       redirect_to ticket
     else
-      render edit_ticket_path
+      format.js { render :edit }
     end
   end
 

@@ -5,7 +5,7 @@
       <h3>イベントを編集</h3>
     </div>
     <div class="form-container">
-      <%= form_with(model: @ticket, local: true) do |f| %>
+      <%= form_with(model: @ticket, remote: true) do |f| %>
         <div class="form-group">
           <%= f.label :public, '公開する' %>
           <%= f.check_box :public %>
