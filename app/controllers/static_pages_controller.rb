@@ -3,7 +3,6 @@ class StaticPagesController < ApplicationController
     if user_signed_in?
       @ticket = current_user.tickets.upcomming.first
       @tickets = current_user.tickets.solved
-      
       prefectures = ["都道府県"]
       current_user.tickets.done.each do |ticket|
         prefectures << ticket.prefecture
