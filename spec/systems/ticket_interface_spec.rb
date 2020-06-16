@@ -28,7 +28,7 @@ describe 'tickets_interface', type: :system, js: true do
       expect do
         fill_in '日付', with: DateTime.current
         click_button '投稿する'
-        expect(page).to have_content 'チケットを作成しました' 
+        expect(page).to have_content 'チケットを作成しました'
       end.to change(Ticket, :count).by(1)
       expect(current_path).to eq ticket_path(Ticket.order(created_at: "asc").last.id)
     end
