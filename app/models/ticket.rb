@@ -69,8 +69,6 @@ class Ticket < ApplicationRecord
       else
         return nil, nil
       end
-    else
-      return nil, nil
     end
   end
 
