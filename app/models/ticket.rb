@@ -16,53 +16,57 @@ class Ticket < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   def spotify
-    url = "https://accounts.spotify.com/api/token"
-    query = { "grant_type": "client_credentials" }
-    key = Rails.application.credentials.spotify[:client_base64]
-    header = { "Authorization": "Basic #{key}" }
-    client = HTTPClient.new
-    response = client.post(url, query, header)
+    if performer.present?
+      url = "https://accounts.spotify.com/api/token"
+      query = { "grant_type": "client_credentials" }
+      key = Rails.application.credentials.spotify[:client_base64]
+      header = { "Authorization": "Basic #{key}" }
+      client = HTTPClient.new
+      response = client.post(url, query, header)
 
-    if response.status == 200
-      auth_params = JSON.parse(response.body)
-      authenticate_token = auth_params["access_token"]
-      url = 'https://api.spotify.com/v1/search'
-      query = { "q": performer.split(",").first, "type": "artist", "market": "JP", "limit": 1 }
-      header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
-      response_ja = client.get(url, query, header)
-      spotify_artist_ja = JSON.parse(response_ja.body)
-      header = { "Authorization": "Bearer #{authenticate_token}" }
-      response_en = client.get(url, query, header)
-      spotify_artist_en = JSON.parse(response_en.body)
+      if response.status == 200
+        auth_params = JSON.parse(response.body)
+        authenticate_token = auth_params["access_token"]
+        url = 'https://api.spotify.com/v1/search'
+        query = { "q": performer.split(",").first, "type": "artist", "market": "JP", "limit": 1 }
+        header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
+        response_ja = client.get(url, query, header)
+        spotify_artist_ja = JSON.parse(response_ja.body)
+        header = { "Authorization": "Bearer #{authenticate_token}" }
+        response_en = client.get(url, query, header)
+        spotify_artist_en = JSON.parse(response_en.body)
 
-      if response_ja.status == 200 || response_en.status == 200
-        if spotify_artist_ja["artists"]["items"][0]["name"] == performer.split(",").first
-          spotify_id = spotify_artist_ja["artists"]["items"][0]["id"]
-          image_url = spotify_artist_ja["artists"]["items"][0]["images"][1]["url"]
-        elsif spotify_artist_en["artists"]["items"][0]["name"].downcase == performer.split(",").first.downcase
-          spotify_id = spotify_artist_en["artists"]["items"][0]["id"]
-          image_url = spotify_artist_en["artists"]["items"][0]["images"][1]["url"]
-        else
-          return nil, nil
-        end
-
-        if spotify_id.present?
-          url = "https://api.spotify.com/v1/artists/#{spotify_id}/top-tracks"
-          query = { "market": "JP", "limit": 1 }
-          response = client.get(url, query, header)
-
-          if response.status == 200
-            top_tracks = JSON.parse(response.body)
-            track_url = top_tracks["tracks"].sample["preview_url"]
-            return image_url, track_url
+        if response_ja.status == 200 || response_en.status == 200
+          if spotify_artist_ja["artists"]["items"][0]["name"] == performer.split(",").first
+            spotify_id = spotify_artist_ja["artists"]["items"][0]["id"]
+            image_url = spotify_artist_ja["artists"]["items"][0]["images"][1]["url"]
+          elsif spotify_artist_en["artists"]["items"][0]["name"].downcase == performer.split(",").first.downcase
+            spotify_id = spotify_artist_en["artists"]["items"][0]["id"]
+            image_url = spotify_artist_en["artists"]["items"][0]["images"][1]["url"]
           else
-            return image_url, nil
+            return nil, nil
+          end
+
+          if spotify_id.present?
+            url = "https://api.spotify.com/v1/artists/#{spotify_id}/top-tracks"
+            query = { "market": "JP", "limit": 1 }
+            response = client.get(url, query, header)
+
+            if response.status == 200
+              top_tracks = JSON.parse(response.body)
+              track_url = top_tracks["tracks"].sample["preview_url"]
+              return image_url, track_url
+            else
+              return image_url, nil
+            end
+          else
+            return nil, nil
           end
         else
+
           return nil, nil
         end
       else
-
         return nil, nil
       end
     else

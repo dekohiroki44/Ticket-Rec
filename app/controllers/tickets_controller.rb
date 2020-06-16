@@ -31,7 +31,9 @@ class TicketsController < ApplicationController
       flash[:success] = "チケットを作成しました"
       redirect_to ticket
     else
-      format.js { render :new }
+      respond_to do |format|
+        format.js { render :new }
+      end
     end
   end
 
