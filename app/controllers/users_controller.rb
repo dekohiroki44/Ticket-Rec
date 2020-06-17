@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :destroy, :following, :followers]
   before_action :set_user
+  before_action :admin_user, only: :destroy
 
   def show
     prefectures = ["都道府県"]
@@ -21,6 +23,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    flash[:success] = "#{user.naem}を削除しました"
+    redirect_to root_url
+  end
+
   def following
     @title = "#{@user.name}がフォローしているユーザー"
     @users = @user.following.page(params[:page]).with_attached_image
@@ -37,5 +46,9 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 end
