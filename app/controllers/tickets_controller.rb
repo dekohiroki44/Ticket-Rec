@@ -17,8 +17,10 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @comments = @ticket.comments.page(params[:page])
     @comment = Comment.new
-    @image_url = @ticket.spotify[0]
-    @track_url = @ticket.spotify[1]
+    if @ticket && @ticket.spotify.present?
+      @image_url = @ticket.spotify[0]
+      @track_url = @ticket.spotify[1]
+    end
   end
 
   def new

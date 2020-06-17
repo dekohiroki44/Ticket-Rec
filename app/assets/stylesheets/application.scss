@@ -553,6 +553,20 @@ footer {
   }
 }
 
+/* tickets/show */
+
+.previous-next {
+  small {
+    text-align: center;
+  }
+  .previous {
+    float: left;
+  }
+  .next {
+    float: right;
+  }
+}
+
 .ticket-show {
   table, td, th {
     margin: 30px 0;
@@ -588,7 +602,6 @@ footer {
 }
 
 /* comment */
-
 
 .comment-list {
   a {

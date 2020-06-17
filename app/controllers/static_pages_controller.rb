@@ -9,7 +9,7 @@ class StaticPagesController < ApplicationController
       end
       gon.prefectures = prefectures.group_by(&:itself).map { |key, value| [key, value.count] }
       gon.prefectures[0][1] = "回数"
-      if @ticket
+      if @ticket && @ticket.spotify.present?
         @image_url = @ticket.spotify[0]
         @track_url = @ticket.spotify[1]
       end

@@ -1,22 +1,26 @@
 <% provide(:title, @ticket.name) %>
-<div class="previous-next d-flex justify-content-between">
-  <%= link_to ticket_path(@ticket.previous.id) if @ticket.previous do %>
-    <div class="d-flex align-items-center">
-      <p>←</p>
-      <div class="d-flex flex-column">
-        <small><%= @ticket.user.name %></small>
-        <small>の前のチケット</small>
+<div class="previous-next">
+  <% if @ticket.previous %>
+    <%= link_to ticket_path(@ticket.previous.id), class:'previous' do %>
+      <div class="d-flex align-items-center">
+        <span><<</span>
+        <div class="d-flex flex-column justify-content-center">
+          <small><%= @ticket.user.name %></small>
+          <small>の前のチケット</small>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-  <%= link_to ticket_path(@ticket.next.id) if @ticket.next do%>
-    <div class="d-flex align-items-center">
-      <div class="d-flex flex-column">
-        <small><%= @ticket.user.name %></small>
-        <small>の次のチケット</small>
+  <% if @ticket.next %>
+    <%= link_to ticket_path(@ticket.next.id), class:'next' do %>
+      <div class="d-flex align-items-center">
+        <div class="d-flex flex-column">
+          <small><%= @ticket.user.name %></small>
+          <small>の次のチケット</small>
+        </div>
+        <span>>></span>
       </div>
-      <p>→</p>
-    </div>
+    <% end %>
   <% end %>
 </div>
 <div id="ticket-<%= @ticket.id %>" class="ticket-show" >

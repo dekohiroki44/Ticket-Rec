@@ -39,6 +39,7 @@ describe 'tickets_interface', type: :system, js: true do
   #   expect do
   #     page.accept_confirm do
   #       click_link '削除'
+  #       wait_for_ajax
   #     end
   #   end.to change(Ticket, :count).by(-1)
   # end
