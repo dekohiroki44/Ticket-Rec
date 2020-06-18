@@ -34,13 +34,13 @@ describe 'tickets_interface', type: :system, js: true do
     end
   end
 
-  # it 'is valid delete a ticket' do
-  #   visit ticket_path(ticket.id)
-  #   expect do
-  #     page.accept_confirm do
-  #       click_link '削除'
-  #       wait_for_ajax
-  #     end
-  #   end.to change(Ticket, :count).by(-1)
-  # end
+  it 'is valid delete a ticket' do
+    visit ticket_path(ticket.id)
+    expect do
+      page.accept_confirm do
+        click_link '削除'
+      end
+      wait_for_ajax
+    end.to change(Ticket, :count).by(-1)
+  end
 end

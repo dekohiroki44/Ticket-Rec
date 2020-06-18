@@ -26,7 +26,6 @@ gem 'faker'
 gem "kaminari", ">= 1.2.1"
 gem 'httpclient'
 gem 'gon'
-gem 'data-confirm-modal'
 gem 'simple_calendar', '~> 2.0'
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
