@@ -1,21 +1,20 @@
-<div class="mx-auto">
-  <div class="comment-partial">
-    <li id="comment-<%= comment.id %>" class="comment">
-      <%= link_to user_path(comment.user.id) do %>
-        <%= image_tag @ticket.user.image.variant(resize:'50x50').processed, class:"avatar" %>
-        <%= comment.user.name %>
-      <% end %>
-      <span class="content"><%= comment.content %></span>
-      <div class="small text-muted text-right">
-        <span class="timestamp">
-          <%= "#{time_ago_in_words(comment.created_at)}前にコメント" %>
-        </span>
-        <% if comment.user == current_user %>
-          <%= link_to ticket_comment_path(@ticket.id, id: comment.id), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "comment-delete" do %>
-            <i class="far fa-trash-alt delete"></i>
-          <% end %>
+<div class="comment-partial">
+  <li id="comment-<%= comment.id %>" class="comment">
+    <%= link_to user_path(comment.user.id) do %>
+      <%= image_tag @ticket.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+      <%= comment.user.name %>
+    <% end %>
+    <span class="content"><%= comment.content %></span>
+    <div class="small text-muted text-right">
+      <span class="timestamp">
+        <%= "#{time_ago_in_words(comment.created_at)}前にコメント" %>
+      </span>
+      <% if comment.user == current_user %>
+        <%= link_to ticket_comment_path(@ticket.id, id: comment.id), method: :delete, data: {confirm: "削除してよろしいですか？"}, class: "comment-delete" do %>
+          <i class="far fa-trash-alt delete"></i>
         <% end %>
-      </div>
-    </li>
-  </div>
+      <% end %>
+    </div>
+  </li>
 </div>
+
