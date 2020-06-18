@@ -7,12 +7,13 @@ RSpec.describe "tickets", type: :request do
 
   context 'when creating without log in' do
     it 'redirect to new_user_session_path' do
-      expect{ post tickets_path params: { ticket: { date: DateTime.current } } }.to_not change(Ticket, :count)
+      expect { post tickets_path params: { ticket: { date: DateTime.current } } }.
+        not_to change(Ticket, :count)
       expect(response).to redirect_to new_user_session_path
     end
   end
 
-  context 'when editing without log in' do   
+  context 'when editing without log in' do
     it 'redirect to new_user_session_path' do
       get edit_ticket_path(ticket)
       expect(response).to redirect_to new_user_session_path
@@ -28,7 +29,7 @@ RSpec.describe "tickets", type: :request do
 
   context 'when deleting without log in' do
     it 'redirect to new_user_session_path' do
-      expect{ delete ticket_path(ticket) }.to_not change(Ticket, :count)
+      expect { delete ticket_path(ticket) }.not_to change(Ticket, :count)
       expect(response).to redirect_to new_user_session_path
     end
   end
@@ -36,7 +37,7 @@ RSpec.describe "tickets", type: :request do
   context 'when deleting with log in as wrong user' do
     it 'redirect to new_user_session_path' do
       log_in_as(otheruser)
-      expect{ delete ticket_path(ticket) }.to_not change(Ticket, :count)
+      expect { delete ticket_path(ticket) }.not_to change(Ticket, :count)
       expect(response).to redirect_to new_user_session_path
     end
   end

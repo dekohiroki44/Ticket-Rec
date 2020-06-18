@@ -20,7 +20,7 @@ describe 'comments_interface', type: :system, js: true do
   it 'is valid with content' do
     visit ticket_path(ticket.id)
     expect do
-      find(".area").set("コメント")
+      find(".area").set("test")
       click_button 'コメントする'
       expect(page).to have_content 'コメントしました'
     end.to change(Comment, :count).by(1)

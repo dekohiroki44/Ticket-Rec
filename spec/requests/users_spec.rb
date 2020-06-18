@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "users", type: :request do
   let!(:user) { create(:user, admin: true) }
-  let!(:other) { create(:user) }
+  let!(:other) { create(:user, password: "password") }
 
   context 'when editing without logging in' do
     it 'redirect to new_user_session_path' do
@@ -20,7 +20,7 @@ RSpec.describe "users", type: :request do
 
   context 'when deleting without logging in' do
     it 'redirect to new_user_session_path' do
-      expect{ delete user_registration_path }.not_to change(User, :count)
+      expect { delete user_registration_path }.not_to change(User, :count)
       expect(response).to redirect_to new_user_session_path
     end
   end
@@ -58,7 +58,7 @@ RSpec.describe "users", type: :request do
   context 'when deleting with log in as non admin user' do
     it 'redirect to new_user_session_path' do
       log_in_as other
-      expect{ delete user_path(user) }.not_to change(User, :count)
+      expect { delete user_path(user) }.not_to change(User, :count)
       expect(response).to redirect_to new_user_session_path
     end
   end
@@ -67,7 +67,12 @@ RSpec.describe "users", type: :request do
     it 'does not change' do
       log_in_as other
       expect(other.reload.admin).to be_falsey
-      patch user_registration_path(other), params: { user: { password: other.password, password_confirmation: other.password_confirmation, admin: true } }
+      patch user_registration_path(other), params: { user:
+        {
+          password: "password",
+          password_confirmation: "password",
+          admin: true,
+        } }
       expect(other.reload.admin).to be_falsey
     end
   end
