@@ -2,3 +2,9 @@
 2020-06-19 21:07:36.906 JST [29557] HINT:  Is another postmaster (PID 29543) running in data directory "/usr/local/var/postgres"?
 2020-06-19 21:08:10.139 JST [29580] FATAL:  lock file "postmaster.pid" already exists
 2020-06-19 21:08:10.139 JST [29580] HINT:  Is another postmaster (PID 29543) running in data directory "/usr/local/var/postgres"?
+2020-06-24 18:10:08.181 JST [83179] FATAL:  lock file "postmaster.pid" already exists
+2020-06-24 18:10:08.181 JST [83179] HINT:  Is another postmaster (PID 83166) running in data directory "/usr/local/var/postgres"?
+2020-06-24 18:15:54.519 JST [83348] FATAL:  lock file "postmaster.pid" already exists
+2020-06-24 18:15:54.519 JST [83348] HINT:  Is another postmaster (PID 83336) running in data directory "/usr/local/var/postgres"?
+2020-06-25 18:19:54.021 JST [6020] FATAL:  lock file "postmaster.pid" already exists
+2020-06-25 18:19:54.021 JST [6020] HINT:  Is another postmaster (PID 87344) running in data directory "/usr/local/var/postgres"?
