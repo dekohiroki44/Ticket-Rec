@@ -5,13 +5,14 @@ class CreateTickets < ActiveRecord::Migration[5.2]
       t.string :name, default: ""
       t.string :performer
       t.datetime :date, null: false
-      t.string :time
       t.string :place
       t.string :prefecture
       t.string :price
       t.text :content
       t.boolean :public, default: false, null: false
       t.boolean :done, null: false
+      t.string :weather
+      t.integer :temperature
       t.index :date
 
       t.timestamps
