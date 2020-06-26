@@ -18,13 +18,13 @@ class Ticket < ApplicationRecord
   def q
     case prefecture
     when "北海道"
-      return 43.06417, 141.34694
+      [43.06417, 141.34694]
     when "青森県"
-      return 43.06417, 141.34694
+      [43.06417, 141.34694]
     when "北海道"
-      return 43.06417, 141.34694
+      [43.06417, 141.34694]
     else
-      return nil, nil
+      [nil, nil]
     end
   end
 
@@ -39,7 +39,7 @@ class Ticket < ApplicationRecord
       response = client.get(url, query)
       data = JSON.parse(response.body)
       return data["list"][i]["weather"][0]["icon"], data["list"][i]["main"]["temp"].to_i
-    elsif DateTime.current > date && (DateTime.current - date ) < 5.day
+    elsif DateTime.current > date && (DateTime.current - date) < 5.day
     else
       return nil, nil
     end
