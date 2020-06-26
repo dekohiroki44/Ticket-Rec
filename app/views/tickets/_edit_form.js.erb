@@ -52,6 +52,16 @@
         </div>
 
         <div class="form-group">
+          <%= f.label :weather, '天気' %>
+          <%= f.select :weather, [["晴れ", "01d.png"], ["薄曇り", "02d.png"], ["曇り", "03d.png"], ["千切れ雲", "04d.png"], ["霧雨", "09d.png"], ["晴れ", "01d.png"], ["雨", "10d.png"], ["雷", "11d.png"], ["雪", "13d.png"], ["霧", "50d.png"]], include_blank: "未設定", class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :temperature, '気温(数字)' %>
+          <%= f.number_field :temperature, class: 'form-control' %>
+        </div>
+        
+        <div class="form-group">
           <%= f.label :content, '詳細' %>
           <%= f.text_area :content, autocomplete: 'current-password', class: 'form-control' %>
         </div>
