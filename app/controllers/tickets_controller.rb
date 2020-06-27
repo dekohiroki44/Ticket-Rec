@@ -17,9 +17,9 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @comments = @ticket.comments.page(params[:page])
     @comment = Comment.new
-    if @ticket.prefecture && (@ticket.weather.blank? || @ticket.temperature.blank?)
-      @ticket.update_attributes(weather: @ticket.weather_forecast[0], temperature: @ticket.weather_forecast[1])
-    end
+    # if @ticket.prefecture && (@ticket.weather.blank? || @ticket.temperature.blank?)
+    #   @ticket.update_attributes(weather: @ticket.weather_forecast[0], temperature: @ticket.weather_forecast[1])
+    # end
     # if @ticket && @ticket.spotify.present?
     #   @image_url = @ticket.spotify[0]
     #   @track_url = @ticket.spotify[1]
