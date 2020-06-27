@@ -16,34 +16,27 @@ class Ticket < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   def q
-    case prefecture
-    when "北海道"
-      [43.06417, 141.34694]
-    when "青森県"
-      [43.06417, 141.34694]
-    when "北海道"
-      [43.06417, 141.34694]
-    else
-      [nil, nil]
-    end
+    
   end
 
-  def weather_forecast
-    key = "125f71a443e467d5d9a36298cfd19bca"
-    client = HTTPClient.new
-    if date > DateTime.current && (date - DateTime.current) < 5.day
-      time_lag = (date - DateTime.current) / 3600
-      i = (time_lag / 3).to_i
-      url = "https://api.openweathermap.org/data/2.5/forecast"
-      query = { "lat": q[0], "lon": q[1], "units": "metric", "APPID": key }
-      response = client.get(url, query)
-      data = JSON.parse(response.body)
-      return data["list"][i]["weather"][0]["icon"], data["list"][i]["main"]["temp"].to_i
-    elsif DateTime.current > date && (DateTime.current - date) < 5.day
-    else
-      return nil, nil
-    end
-  end
+  # def weather_forecast
+  #   geography = Geography.find_by(name: prefecture)
+  #   key = Rails.application.credentials.open_weather_map[:api_key]
+  #   client = HTTPClient.new
+  #   if date > DateTime.current && (date - DateTime.current) < 5.day
+  #     time_lag = (date - DateTime.current) / 3600
+  #     i = (time_lag / 3).to_i
+  #     url = "https://api.openweathermap.org/data/2.5/forecast"
+  #     query = { "lat": geography.latitude, "lon": geography.longitude, "units": "metric", "APPID": key }
+  #     response = client.get(url, query)
+  #     data = JSON.parse(response.body)
+  #     binding.pry
+  #     return data["list"][i]["weather"][0]["icon"], data["list"][i]["main"]["temp"].to_i
+  #   elsif DateTime.current > date && (DateTime.current - date) < 5.day
+  #   else
+  #     return nil, nil
+  #   end
+  # end
 
   # def spotify
   #   if performer.present?
