@@ -15,10 +15,6 @@ class Ticket < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  def q
-    
-  end
-
   # def weather_forecast
   #   geography = Geography.find_by(name: prefecture)
   #   key = Rails.application.credentials.open_weather_map[:api_key]
