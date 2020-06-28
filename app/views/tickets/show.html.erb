@@ -73,10 +73,8 @@
       <% end %>
     </div>
     <div class="col-lg-5 mt-5 side-section">
-      <!-- <div class="spotify-section mb-5">
-        <%= image_tag @image_url, alt: "アーティスト画像", class: "artist-image" if @image_url%>
-        <%= link_to "♪#{@ticket.performer.split(",").first}の曲を試聴する", @track_url, target: :_blank, class: "track-url" if @track_url %>
-      </div> -->
+      <div class="weather-section mb-5">
+      </div>
       <div class="comment-section mt-3">
         <div class="comment-list">
           <h2><%= @comments.present? ? "コメント一覧" : "コメントはありません"  %></h2>
