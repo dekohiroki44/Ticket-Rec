@@ -17,8 +17,10 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @comments = @ticket.comments.page(params[:page])
     @comment = Comment.new
-    if @ticket.prefecture.present? && (@ticket.weather.blank? || @ticket.temperature.blank?)
-      @ticket.update_attributes(weather: @ticket.get_weather[0], temperature: @ticket.get_weather[1])
+    if (@ticket.date - DateTime.current).abs < 5.day &&
+      @ticket.prefecture.present? &&
+        (@ticket.weather.blank? || @ticket.temperature.blank?)
+      @ticket.update(weather: @ticket.get_weather[0], temperature: @ticket.get_weather[1])
     end
   end
 

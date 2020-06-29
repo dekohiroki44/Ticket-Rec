@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Geography, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:geography) { build(:geography) }
+
+  it 'is valid' do
+    expect(geography).to be_valid
+  end
 end

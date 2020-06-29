@@ -2,7 +2,7 @@
   <% if @ticket %>
     <div class="next-live-section tickets mt-2 mb-5 mx-auto">
       <div class="headline">
-        <%= image_tag "8note.png", class: "eight-note" %>
+        <%= image_tag "/images/8note.png", class: "eight-note" %>
         <% if @ticket.date > DateTime.current %>
           <h3>次のチケット(あと<%= "#{time_ago_in_words(@ticket.date).upcase}" %>)</h3>
         <% else @ticket.date <= DateTime.current %>
@@ -13,9 +13,8 @@
         <div class="col-md-9">
           <%= render "tickets/ticket", ticket: @ticket %>
         </div>
-        <div class="spotify-section col-md-3 d-flex flex-column mt-2">
-          <%= image_tag @image_url, alt: "アーティスト画像", class: "artist-image" if @image_url %>
-          <%= link_to "♪#{@ticket.performer.split(",").first}の曲を試聴する", @track_url, target: :_blank, class: "track-url" if @track_url %>
+        <div class="weather-section col-md-3">
+          <%= render "shared/weather", ticket: @ticket %>
         </div>
       </div>
     </div>
@@ -40,7 +39,7 @@
         <strong class="d-block mb-3"><%= current_user.most_artists(1) %></strong>
       </div>
       <% if current_user.most_artists(1).blank? %>
-        <p class="index">他のユーザーが最近見に行ったアーティスト</p>
+        <p class="index" style="font-size: 1.2rem;">他のユーザーが最近見に行ったアーティスト</p>
         <strong class="d-block"><%= current_user.recommends(3) %></strong>
       <% elsif current_user.most_artists(1).present? && current_user.recommends(3).present?%>
         <div class="index"><%= "#{current_user.most_artists(1)}を見に行った他のユーザーが最近見に行ったアーティスト" %></div>
