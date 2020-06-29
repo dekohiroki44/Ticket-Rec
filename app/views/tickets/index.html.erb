@@ -2,7 +2,7 @@
 <div class="list-section col-lg-10 mx-auto">
   <% if @ticket.any? %>
     <div class="headline">
-      <%= image_tag "8note.png", class: "eight-note" %>
+      <%= image_tag "/images/8note.png", class: "eight-note" %>
       <h3>フォロー中のユーザーと自分のチケット</h3>
     </div>
     <%= render 'timeline', user: current_user,

@@ -16,9 +16,9 @@ class Ticket < ApplicationRecord
   has_many :notifications, dependent: :destroy
 
   def get_weather
-    if date >= DateTime.current && (date - DateTime.current) < 5.day
+    if date >= DateTime.current
       weather_forecast
-    elsif DateTime.current > date && date > (DateTime.current - 5.day)
+    elsif date < DateTime.current
       weather_past
     else
       [nil, nil]

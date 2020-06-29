@@ -181,7 +181,7 @@ a {
   }
   .clef {
     height: 700px;
-    background-image: url(treble_clef_gray.png);
+    background-image: url(/images/treble_clef_gray.png);
     background-size: contain;
     // background-color: rgb(245, 243, 219);
     background-color: whitesmoke;
@@ -372,20 +372,6 @@ footer {
 
 /* home */
 
-.spotify-section {
-  text-align: center;
-  .artist-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 1rem;
-  }
-  .track-url {
-    padding: 0.3rem;
-    background-color: lightgray;
-    border-radius: 0.3rem;
-  }
-}
-
 .data-section {
   text-align: center;
   padding: 10px;
@@ -411,7 +397,7 @@ footer {
 .top {
   padding-top: 40px;
   height: 500px;
-  background-image: url(top.png);
+  background-image: url(/images/top.png);
   background-size: cover;
   background-color: white;
   text-align: center;
@@ -647,4 +633,21 @@ footer {
       width:100px;
     }
   }
+}
+
+/* weather */
+
+.weather-section {
+  background-color: lightblue;
+  padding: 0.5rem;
+  text-align: center;
+}
+.weather-section > p {
+  margin-bottom: 0;
+}
+.weather-section > img {
+  margin: 0 auto;
+  margin-top: -2rem;
+  margin-bottom: -2rem;
+  display: block;
 }

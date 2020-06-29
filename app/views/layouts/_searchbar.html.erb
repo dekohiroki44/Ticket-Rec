@@ -3,7 +3,7 @@
     <%= form_tag searches_path, method: :get, class: "form-inline" do %>
       <%= text_field_tag :word, '', placeholder: "キーワードを入力", class: "form-control search-form mr-sm-2" %>
       <%= date_field_tag :date, class: "form-control search-form date-form mr-sm-5" %>
-      <%= submit_tag '検索', class: "btn btn-outline-success ml-3" %>
+      <%= submit_tag '検索', class: "btn btn-outline-primary ml-3" %>
     <% end %>
   </nav>
 <% end %>

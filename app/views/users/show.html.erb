@@ -5,7 +5,7 @@
 <div class="list-section col-lg-10 mx-auto">
   <% if @user.tickets.any? %>
     <div class="headline">
-      <%= image_tag "8note.png", class: "eight-note" %>
+      <%= image_tag "/images/8note.png", class: "eight-note" %>
       <h3 id="user-ticket"><%= "#{@user.name}のチッケト" %></h3>
     </div>
     <%= render 'tickets/timeline', user: @user,

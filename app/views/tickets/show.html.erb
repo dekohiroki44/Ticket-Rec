@@ -34,7 +34,7 @@
     <h1 class="ticket-name mt-3"><i class="fas fa-lock"></i><%= @ticket.name %></h1>
   <% end %>
   <div class="row">
-    <div class="main-section col-lg-7">
+    <div class="main-section col-lg-8">
       <div class="d-flex h-100px" >
         <%= render "likes/like", ticket: @ticket %>
         <% if @ticket.user == current_user %>
@@ -72,8 +72,9 @@
         <% end %>
       <% end %>
     </div>
-    <div class="col-lg-5 mt-5 side-section">
+    <div class="col-lg-4 mt-5 side-section">
       <div class="weather-section mb-5">
+        <%= render "shared/weather", ticket: @ticket %>
       </div>
       <div class="comment-section mt-3">
         <div class="comment-list">
