@@ -639,8 +639,12 @@ footer {
 
 .weather-section {
   background-color: lightblue;
-  padding: 0.5rem;
+  padding: 0.8rem;
+  margin-top: 0.8rem;
   text-align: center;
+  .weather-icon {
+    width: 30%;
+  }
 }
 .weather-section > p {
   margin-bottom: 0;

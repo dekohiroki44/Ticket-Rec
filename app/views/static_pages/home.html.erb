@@ -13,8 +13,10 @@
         <div class="col-md-9">
           <%= render "tickets/ticket", ticket: @ticket %>
         </div>
-        <div class="weather-section col-md-3">
-          <%= render "shared/weather", ticket: @ticket %>
+        <div class="col-md-3">
+          <div class="weather-section">
+            <%= render "shared/weather", ticket: @ticket %>
+          </div>
         </div>
       </div>
     </div>
