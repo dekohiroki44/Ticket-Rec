@@ -109,8 +109,8 @@ class User < ApplicationRecord
     if word.present?
       User.where("upper(name) LIKE ? OR upper(profile) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase)
     elsif word.blank? && date.present?
-      ticket_ids = Ticket.where("date = ?", date).pluck(:user_id)
-      User.where("id = ?", ticket_ids)
+      user_ids = Ticket.where(date: date..date + 1.day).release.pluck(:user_id)
+      User.where(id: user_ids)
     elsif word.blank? && date.blank?
       User.all
     end

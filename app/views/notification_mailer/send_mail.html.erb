@@ -1,0 +1,38 @@
+<%= @user.name %> 様
+明日のチケットの詳細をお送りします。
+
+<% @tickets.each do |ticket| %>
+  <p>日にち: <%= ticket.date.strftime("%Y/%-m/%-d") %></p>
+  <p>時間: <%= ticket.date.strftime("%R") %></p>
+  <p>イベント名: <%= ticket.name if ticket.name.present? %></p>
+  <p>アーティスト: <%= ticket.name if ticket.performer.present? %></p>
+  <p>会場: <%= ticket.place if ticket.place.present? %></p>
+  <p>料金: <%= ticket.price if ticket.price.present? %></p>
+  <p>詳細: <%= simple_format(h(ticket.content)) if ticket.content.present? %></p>
+  天気: 
+  <% case ticket.weather %>
+  <% when "01d", "01n" %>
+    <p>快晴</p>
+  <% when "02d", "02n" %>
+    <p>晴れ</p>
+  <% when "03d", "03n" %>
+    <p>薄曇り</p>
+  <% when "04d", "04n" %>
+    <p>曇り</p>
+  <% when "09d", "09n" %>
+    <p>にわか雨</p>
+  <% when "10d", "10n" %>
+    <p>雨</p>
+  <% when "11d", "11n" %>
+    <p>雷</p>
+  <% when "13d", "13n" %>
+    <p>雪</p>
+  <% when "50d", "50n" %>
+    <p>霧</p>
+  <% end %>
+  <p>気温: <%= ticket.temperature if ticket.temperature.present? %>℃</p>
+  <br>
+<% end %>
+
+マイページはこちら
+<%= user_url(@user) %>
