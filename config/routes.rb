@@ -3,12 +3,15 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
   get '/tos', to: 'static_pages#tos'
   devise_for :users
-  resources :users, only: [:show]
   resources :users do
     member do
       get :following, :followers, :map
     end
+    collection do
+      get :set_mail
+    end
   end
+  resources :users, only: [:show]
   resources :tickets do
     member do
       patch :unsolved

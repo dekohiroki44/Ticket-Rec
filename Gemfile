@@ -22,11 +22,13 @@ gem 'twitter'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem "aws-sdk-s3", require: false
+gem 'aws-ses', '~> 0.6'
 gem 'faker'
 gem "kaminari", ">= 1.2.1"
 gem 'httpclient'
 gem 'gon'
 gem 'simple_calendar', '~> 2.0'
+gem 'whenever', require: false
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'

@@ -51,15 +51,17 @@
           <%= f.text_field :price, autocomplete: 'current-password', class: 'form-control' %>
         </div>
 
-        <div class="form-group">
-          <%= f.label :weather, '天気' %>
-          <%= f.select :weather, [["快晴", "01d"], ["晴れ", "02d"], ["薄曇り", "03d"], ["曇り", "04d"], ["にわか雨", "09d"], ["雨", "10d"], ["雷", "11d"], ["雪", "13d"], ["霧", "50d"], ["表示しない","no display"]], include_blank: "未設定", class: 'form-control' %>
-        </div>
+        <% if @ticket.date <= DateTime.current %>
+          <div class="form-group">
+            <%= f.label :weather, '天気' %>
+            <%= f.select :weather, [["快晴", "01d"], ["晴れ", "02d"], ["薄曇り", "03d"], ["曇り", "04d"], ["にわか雨", "09d"], ["雨", "10d"], ["雷", "11d"], ["雪", "13d"], ["霧", "50d"], ["表示しない","no display"]], include_blank: "未設定", class: 'form-control' %>
+          </div>
 
-        <div class="form-group">
-          <%= f.label :temperature, '気温(数字)' %>
-          <%= f.number_field :temperature, class: 'form-control' %>
-        </div>
+          <div class="form-group">
+            <%= f.label :temperature, '気温(数字)' %>
+            <%= f.number_field :temperature, class: 'form-control' %>
+          </div>
+        <% end %>
         
         <div class="form-group">
           <%= f.label :content, '詳細' %>
