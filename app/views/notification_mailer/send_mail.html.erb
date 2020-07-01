@@ -1,5 +1,5 @@
 <%= @user.name %> 様
-明日のチケットの詳細をお送りします。
+<p>明日のチケットの詳細をお送りします。</p>
 
 <% @tickets.each do |ticket| %>
   <p>日にち: <%= ticket.date.strftime("%Y/%-m/%-d") %></p>
