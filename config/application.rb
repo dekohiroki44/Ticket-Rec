@@ -11,6 +11,7 @@ module Myapp
     config.i18n.default_locale = :ja
     config.time_zone = 'Asia/Tokyo'
     config.action_view.embed_authenticity_token_in_remote_forms = true
+
     config.generators do |g|
       g.test_framework :rspec,
                        fixtures: true,
@@ -21,5 +22,26 @@ module Myapp
                        request_specs: false
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
+
+    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+    if Rails.application.credentials.ses_smtp.present?
+      user_mame = Rails.application.credentials.ses_smtp[:user_name]
+      password = Rails.application.credentials.ses_smtp[:password]
+    else
+      user_name = 'user_name'
+      password = 'password'
+    end
+
+    config.action_mailer.delivery_method = :ses
+    config.action_mailer.smtp_settings = {
+        enable_starttls_auto: true,
+        address: "email-smtp.us-west-2.amazonaws.com",
+        port: 587,
+        user_name: user_name,
+        domain: 'ticket-rec.com',
+        password: password,
+        authentication: "login"
+    }
   end
 end
