@@ -1,16 +1,19 @@
 <div class="border-right" id="sidebar-wrapper">
   <%= link_to "Ticket Rec", root_path, id: "logo", class: "navbar-brand sidebar-heading" %>
-  <div class="clef">
-    <section class="current-user-section d-flex">
-      <% if user_signed_in? %>
-        <%= link_to current_user do %>
-          <%= image_tag current_user.image, class: "avatar" %>
-          <h1><%= current_user.name %></h1>
+  <% if user_signed_in? %>
+    <div class="clef">
+      <section class="current-user-section d-flex">
+        <% if user_signed_in? %>
+          <%= link_to current_user do %>
+            <%= image_tag current_user.image, class: "avatar" %>
+            <h1><%= current_user.name %></h1>
+          <% end %>
         <% end %>
-      <% end %>
-    </section>
-    <div class="list-group list-group-flush">
-      <% if user_signed_in? %>
+      </section>
+      <div class="list-group list-group-flush">
+        <%= link_to current_user, class:"list-group-item list-group-item-action bg-transparent" do %>
+          <i class="far fa-user fa-2x"></i>マイページ
+        <% end %>
         <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-transparent" do %>
           <i class="far fa-comments fa-2x"></i>皆んなのチケット
         <% end %>
@@ -27,15 +30,21 @@
         <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-transparent" do %>
         <i class="fas fa-sign-out-alt fa-2x"></i>ログアウト
         <% end %>
-      <% else %>
-        <%= link_to new_user_session_path, class:"list-group-item list-group-item-action bg-transparent" do %>
-          <i class="fas fa-sign-in-alt fa-2x"></i>ログイン
-        <% end %>
-      <% end %>
-      <%= link_to about_path, class:"list-group-item list-group-item-action bg-transparent" do %>
-        <i class="fas fa-info-circle fa-2x"></i>Ticket Recについて
-      <% end %>
+      </div>
     </div>
-  </div>
+  <% else %>
+    <div class="clef">
+      <div class="list-group list-group-flush mt-5">
+        <p>まずは無料登録</p>
+        <%= link_to new_user_registration_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+          <h2><i class="far fa-user fa-1x"></i>新規登録</h2>
+        <% end %>
+        <p>アカウントをお持ちの方</p>
+        <%= link_to new_user_session_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+          <h2><i class="fas fa-sign-out-alt fa-1x"></i>ログイン</h2>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>
 <div class="modal fade" id="ticket-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>

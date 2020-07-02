@@ -28,6 +28,10 @@ class User < ApplicationRecord
                                    foreign_key: 'visited_id',
                                    dependent: :destroy
 
+  after_update do
+    get_spotify_info if saved_change_to_recommend?
+  end
+
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
@@ -85,7 +89,7 @@ class User < ApplicationRecord
       join(", ")
   end
 
-  def recommends(count)
+  def suggests(count)
     user_ids = Ticket.
       where('UPPER(performer) LIKE ?', "%#{most_artists(1)}%".upcase).
       where.not(user_id: id).
@@ -116,6 +120,63 @@ class User < ApplicationRecord
     end
   end
 
+  def spotify
+    if recommend.present?
+      url = "https://accounts.spotify.com/api/token"
+      query = { "grant_type": "client_credentials" }
+      key = Rails.application.credentials.spotify[:client_base64]
+      header = { "Authorization": "Basic #{key}" }
+      client = HTTPClient.new
+      response = client.post(url, query, header)
+
+      if response.status == 200
+        auth_params = JSON.parse(response.body)
+        authenticate_token = auth_params["access_token"]
+        url = 'https://api.spotify.com/v1/search'
+        query = { "q": recommend, "type": "artist", "market": "JP", "limit": 1 }
+        header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
+        response_ja = client.get(url, query, header)
+        spotify_artist_ja = JSON.parse(response_ja.body)
+        header = { "Authorization": "Bearer #{authenticate_token}" }
+        response_en = client.get(url, query, header)
+        spotify_artist_en = JSON.parse(response_en.body)
+
+        if response_ja.status == 200 || response_en.status == 200
+          if spotify_artist_ja["artists"]["items"][0]["name"] == recommend
+            spotify_id = spotify_artist_ja["artists"]["items"][0]["id"]
+            image_url = spotify_artist_ja["artists"]["items"][0]["images"][1]["url"]
+          elsif spotify_artist_en["artists"]["items"][0]["name"].downcase == recommend.downcase
+            spotify_id = spotify_artist_en["artists"]["items"][0]["id"]
+            image_url = spotify_artist_en["artists"]["items"][0]["images"][1]["url"]
+          else
+            [nil, nil]
+          end
+
+          if spotify_id.present?
+            url = "https://api.spotify.com/v1/artists/#{spotify_id}/top-tracks"
+            query = { "market": "JP", "limit": 1 }
+            response = client.get(url, query, header)
+
+            if response.status == 200
+              top_tracks = JSON.parse(response.body)
+              track_url = top_tracks["tracks"].sample["preview_url"]
+              [image_url, track_url]
+            else
+              [image_url, nil]
+            end
+          else
+            [nil, nil]
+          end
+        else
+          [nil, nil]
+        end
+      else
+        [nil, nil]
+      end
+    end
+    [nil, nil]
+  end
+
   private
 
   def default_image
@@ -123,5 +184,9 @@ class User < ApplicationRecord
       file = File.open(Rails.root.join('public', 'images', 'no_picture.jpg'))
       image.attach(io: file, filename: 'no_picture.jpg', content_type: 'image/jpg')
     end
+  end
+
+  def get_spotify_info
+    update_attributes(recommend_image: spotify[0], recommend_track: spotify[1])
   end
 end

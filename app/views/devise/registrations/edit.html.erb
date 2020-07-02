@@ -24,6 +24,11 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :recommend %>
+      <%= f.text_field :recommend, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
       <%= f.label :password %>
       <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
 

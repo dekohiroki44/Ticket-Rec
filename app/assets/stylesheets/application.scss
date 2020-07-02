@@ -19,7 +19,7 @@
   position: relative;
   padding-bottom: 50px;
   box-sizing: border-box;
-  background-color: whitesmoke
+  background-color: rgb(220, 229, 233);
 }
 
 @media (min-width: 720px) {
@@ -118,6 +118,14 @@ a {
   border: 2px solid black;
 }
 
+@media (min-width: 991px) {
+  .vertical-box-lg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
 .edit-mark {
   margin: 0 0.5rem;
   padding: 0.5rem;
@@ -140,7 +148,7 @@ a {
 /* searchbar */
 
 #searchbar {
-  background-color: whitesmoke;
+  background-color: rgb(220, 229, 233);
   border-bottom: 1px solid lightgrey;
   justify-content: center;
 }
@@ -158,7 +166,7 @@ a {
 /* sidebar */
 
 #sidebar-wrapper {
-  background-color: whitesmoke;
+  background-color: rgb(220, 229, 233);
   color: black;
   text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
               -1px 1px 0 #FFF, 1px -1px 0 #FFF,
@@ -184,7 +192,7 @@ a {
     background-image: url(/images/treble_clef_gray.png);
     background-size: contain;
     // background-color: rgb(245, 243, 219);
-    background-color: whitesmoke;
+    background-color: rgb(220, 229, 233);
     background-blend-mode: color-dodge;
     .current-user-section {
       height: 240px;
@@ -214,7 +222,7 @@ a {
         font-weight: bold;
         border: 0;
         &:hover{
-          color: crimson;
+          color: crimson
         }
         imput {
           margin-left: 0.3rem;
@@ -222,6 +230,20 @@ a {
       }
       .far, .fas {
         margin: 0.25rem;
+      }
+      h2 {
+        background-color: white;
+        padding: 0.3rem;
+        border: 2px solid black;
+        border-radius: 0.5rem;
+        font-size: 1.5rem;
+        color: black;
+        &:hover{
+          color: crimson
+        }
+      }
+      p {
+        text-align: center;
       }
     }
   }
@@ -298,6 +320,7 @@ footer {
   border: 2px solid #333;
   border-radius: 0.3rem;
   .user-section-left {
+    position: relative;
     text-align: center;
     .avatar {
       height: 150px;
@@ -326,14 +349,16 @@ footer {
     }
   }
   .user-section-right {
-    .user-items {
-      p {
-        display: inline;
-        margin: 0;
-      }
-      .fas {
-        margin-right: 5px;
-      }
+    text-align: center;
+    strong {
+      font-size: 1.3rem;
+    }
+    .recommend-image {
+      width: 100%;
+      border: 1px solid #333;
+    }
+    .fas {
+      color: crimson;
     }
   }
 }
@@ -380,6 +405,7 @@ footer {
   border-radius: 0.3rem;
   background-color: white;
   .recommends-section {
+    positon: relative;
     font-size: 1.3rem;
     display: flex;
     flex-direction: column;
@@ -391,30 +417,6 @@ footer {
   .map-section {
     border: 2px solid #333;
     border-radius: 0.3rem;
-  }
-}
-
-.top {
-  padding-top: 40px;
-  height: 500px;
-  background-image: url(/images/top.png);
-  background-size: cover;
-  background-color: white;
-  text-align: center;
-  h1 {
-    color: crimson;
-  }
-}
-.signup {
-  text-align: center;
-  background-color: black;
-  color: white;
-  padding-bottom: 30px;
-  a {
-    font-size: 30px;
-    font-weight: bold;
-    padding: 15px;
-    width: 80%;
   }
 }
 
@@ -448,7 +450,7 @@ footer {
       height: 0px;
       margin: auto;
       border-style: solid;
-      border-color: transparent whitesmoke whitesmoke whitesmoke;
+      border-color: transparent rgb(220, 229, 233) rgb(220, 229, 233) rgb(220, 229, 233);
       border-width: 20px 20px 15px 20px;
       z-index: 1;
     }
@@ -504,6 +506,7 @@ footer {
     }
     .ticket-right {
       align-items: center;
+      position: relative;
       .content {
         display: block;
         overflow: hidden;
@@ -654,4 +657,71 @@ footer {
   margin-top: -2rem;
   margin-bottom: -2rem;
   display: block;
+}
+
+/* about */
+.about-section {
+  padding: 40px 10px;
+}
+.about-section:nth-child(odd) {
+  background-color: white;
+}
+
+.about-section:nth-child(even) {
+  background-color: rgb(220, 229, 233);
+}
+
+.section-child {
+  position: relative;
+}
+
+#about {
+  h1 {
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+  h1, h4{
+    color: rgb(12, 176, 231);
+  }
+  p {
+    margin: 0 auto;
+  }
+  .about-img {
+    width: 80%;
+  }
+  .weather-icon {
+    width: 7rem; 
+  }
+  .intro {
+    text-align: center;
+    a {
+      border: 1px solid #333;
+      margin-top: 2rem;
+      color: rgb(12, 176, 231);
+      background-color: white;
+      &:hover {
+        color: white;
+        background-color: rgb(12, 176, 231);  
+      }
+    }
+  }
+  .recommend {
+    text-align: center;
+    strong {
+      font-size: 1.0rem;
+    }
+    .recommend-image {
+      width: 100%;
+      border: 1px solid #333;
+    }
+    .fas {
+      color: crimson;
+    }
+  }
+  .map-img {
+    width: 90%;
+    border: 1px solid #333;
+    display: block;
+    margin: 0 auto;
+  }
 }

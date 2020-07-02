@@ -1,5 +1,5 @@
 <div class="user-section row mb-5">
-  <div class="user-section-left col-lg-4">
+  <div class="user-section-left col-lg-3">
     <%= link_to user do %>
       <%= image_tag user.image, class: "avatar" %>
     <% end %>
@@ -9,22 +9,56 @@
     </div>
     <%= render 'follow_btn', user: user %>
   </div>
-  <div class="user-section-right col-lg-8">
-    <div class="profile my-3"><%= user.profile %></div>
-    <div class="user-items d-flex flex-column align-items-center align-items-lg-stretch">
-      <a href="#user-ticket">
-        <P><i class="fas fa-ticket-alt"></i>参加済みのチケット (<%= @user.tickets.done.release.count %>枚)</P>
-      </a>
-      <%= link_to map_user_path(user), remote: true, class: "map-link" do %>
-        <i class="fas fa-map"></i><p>都道府県MAPを表示</p>
-      <% end %>
-      <% if user == current_user %>
+  <div class="user-section-center col-lg-6 mb-3">
+    <div class="vertical-box-lg">
+      <div class="profile my-3"><%= user.profile %></div>
+      <div class="user-items d-flex flex-column align-items-center align-items-lg-stretch">
+        <table>
+          <tr>
+            <td><i class="fas fa-ticket-alt"></i></td>
+            <td><a href="#user-ticket">参加済みのチケット (<%= @user.tickets.done.release.count %>枚)</a></td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-map"></i></td>
+            <td>
+              <%= link_to map_user_path(user), remote: true, class: "map-link" do %>
+                都道府県MAPを表示
+              <% end %>
+            </td>
+          </tr>
+          <% if user == current_user %>
+            <tr>
+              <td><i class="fas fa-user-edit"></i></td>
+              <td>
+                <%= link_to edit_user_registration_path(current_user) do %>
+                  アカウント情報を編集
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        <% if current_user.admin? && !current_user?(user) %>
+          <%= link_to "このユーザーを削除する", user, method: :delete, data: { confirm: "削除してよろしいですか?" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="user-section-right col-lg-3">
+    <div class="vertical-box-lg pr-3">
+      <strong>Recommended Artist</strong>
+      <%= image_tag user.recommend_image, alt: "アーティスト画像", class: "recommend-image" if user.recommend_image.present? %>
+      <% if user.recommend.present? %>
+        <span><%= user.recommend %></span>
+      <% else %>
+        <span>設定されていません。</span>
         <%= link_to edit_user_registration_path(current_user) do %>
-          <i class="fas fa-user-edit"></i><p>アカウント情報を編集</p>
+          Recomended Artistを設定する
         <% end %>
       <% end %>
-      <% if current_user.admin? && !current_user?(user) %>
-        <%= link_to "このユーザーを削除する", user, method: :delete, data: { confirm: "削除してよろしいですか?" } %>
+      <% if user.recommend_track.present? %>
+        <%= link_to user.recommend_track, target: :_blank, class: "recommend-track" do %>
+          <i class="fas fa-headphones ml-1"></i>
+        <% end %>
       <% end %>
     </div>
   </div>

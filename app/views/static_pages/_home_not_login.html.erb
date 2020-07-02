@@ -1,0 +1,95 @@
+<div id="about">
+  <div class="about-section intro">
+    <h1>Ticket Recに記録して</h1>
+    <h1>あなたの音楽ライフをもっと素敵なものに！</h1>
+    <p>Ticket Recは音楽イベントが好きな方の為のイベント記録サイトです。</p>
+    <%= link_to "今すぐ登録して始めよう!", new_user_registration_path, class: "btn btn-lg btn-light" %>
+  </div>
+  <div class="about-section row">
+    <div class="section-child col-lg-8">
+      <div class="virtical-box-lg px-3">
+        <h4>チケットを記録しよう</h4>
+        <br>
+        <p>イベントに遊びに行った大切な思い出、これからイベントに行く大事な予定をTicket Recに書き込もう。イベントの名前、出演アーティスト、会場などを書き込んで自分だけの音楽ライフを記録に残そう。</p>
+        <br>
+        <p>書き込んだチケットにはお気に入りの画像を保存したり、コメントを残して友達と共有しよう。</p>
+      </div>
+    </div>
+    <div class="section-child col-lg-4">
+      <div class="virtical-box-lg">
+        <%= image_tag "/images/ticket.png", class: "about-img" %>
+      </div>
+    </div>
+  </div>
+  <div class="about-section row">
+    <div class="section-child col-lg-4">
+      <div class="d-flex justify-content-around virtical-box-lg">
+        <%= image_tag "/images/weather_icon/01d@4x.png", class: "weather-icon" %>
+        <%= image_tag "/images/weather_icon/09d@4x.png", class: "weather-icon" %>
+        <%= image_tag "/images/weather_icon/13d@4x.png", class: "weather-icon" %>
+      </div>
+    </div>
+    <div class="section-child col-lg-8">
+      <div class="virtical-box-lg px-3">
+        <h4>当日の天気予報をお知らせ</h4>
+        <br>
+        <p>チケットのに書き込んだ日程の約5日前になると自動で当日の天気予報を取得します。</p>
+        <br>
+        <p>さらに、イベントの前日にチケットの詳細と天気予報をメールでお知らせします。</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-section row">
+    <div class="section-child col-lg-8">
+      <div class="virtical-box-lg px-3 mt-3">
+        <h4>お気に入りアーティストの楽曲をシェア</h4>
+        <br>
+        <p>ユーザー個別ページでRecommended Artistを設定すると、そのアーティストの画像を表示し楽曲の試聴ができるようになります。</p>
+        <br>
+        <p>あなたのページを訪れた他のユーザーにそのアーティストの魅力を伝えましょう。（画像表示や試聴に対応していないアーティストもいます）</p>
+      </div>
+    </div>
+    <div class="section-child col-lg-4">
+      <div class="virtical-box-lg recommend px-5">
+        <strong>Recommended Artist</strong>
+        <%= image_tag "https://i.scdn.co/image/7e3a0b98c2854b0d3a46ea23060acd927bbb3537", alt: "アーティスト画像", class: "recommend-image" %>
+        <span>oasis</span>
+        <%= link_to "https://p.scdn.co/mp3-preview/9df784ca8ed527fa54f65886e2ffc2c913c6c4e1?cid=d7ee090486d64dea8f42884e578f700b", target: :_blank, class: "recommend-track" do %>
+          <i class="fas fa-headphones ml-1"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="about-section row">
+    <div class="section-child col-lg-5">
+      <div class="virtical-box-lg">
+        <%= image_tag "/images/map.png", alt: "地図", class: "map-img" %>
+      </div>
+    </div>
+    <div class="section-child col-lg-7">
+      <div class="virtical-box-lg px-3 my-3">
+        <h4>日本地図で訪れた都道府県を表示</h4>
+        <br>
+        <p>あなたがイベントでどの都道府県に何回訪れているかを日本地図で表示します。</p>
+        <br>
+        <p>全国各地のイベントに参加して、地図に色をつけていきましょう。</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-section row">
+    <div class="section-child col-lg-8">
+      <div class="virtical-box-lg px-3">
+        <h4>イベントを探す</h4>
+        <br>
+        <p>キーワードや日付を入力して他のユーザーやチケットを検索してみましょう。同じ趣味を持った仲間や新しいイベントに出会えるかもしれません。</p>
+        <br>
+        <p>チケットはそれぞれ、他のユーザーに公開するかどうかを設定することが可能です。逆にもし検索されたくない投稿があれば非公開に設定できます。</p>
+      </div>
+    </div>
+    <div class="section-child col-lg-4">
+      <div class="virtical-box-lg px-5">
+        <%= image_tag "/images/search.png", alt: "検索", class: "about-img" %>
+      </div>
+    </div>
+  </div>
+</div>

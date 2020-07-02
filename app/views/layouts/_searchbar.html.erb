@@ -1,5 +1,8 @@
 <% if user_signed_in? %>  
   <nav id="searchbar" class="navbar sticky-top">
+    <%= link_to new_ticket_path, remote: true, class:"nav-item mr-5" do %>
+      <i class="far fa-edit fa-2x"></i>
+    <% end %>
     <%= form_tag searches_path, method: :get, class: "form-inline" do %>
       <%= text_field_tag :word, '', placeholder: "キーワードを入力", class: "form-control search-form mr-sm-2" %>
       <%= date_field_tag :date, class: "form-control search-form date-form mr-sm-5" %>

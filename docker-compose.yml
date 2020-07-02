@@ -17,5 +17,9 @@ services:
       - db
     tty: true
     stdin_open: true
+  busybox:
+    build: .
+    volumes:
+      - ./crontab:/var/spool/cron/crontabs/root
 volumes: 
   pgdatavol:
