@@ -1,4 +1,5 @@
 FROM ruby:2.5.1
+ENV TZ=Asia/Tokyo
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
 && apt-get update -qq \
 && apt-get install -y build-essential libpq-dev nodejs \
@@ -14,7 +15,7 @@ RUN apt-get update && apt-get install -y unzip && \
     sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
     sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
     apt-get update && apt-get install -y google-chrome-stable
-RUN apt-get install -y cron
+RUN apt-get install -y busybox-static
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
@@ -22,5 +23,5 @@ COPY Gemfile.lock  /myapp/Gemfile.lock
 RUN bundle install
 COPY . /myapp
 
-RUN bundle exec whenever --update-crontab
-CMD ["cron", "-f"]
+COPY ./main.sh /myapp
+CMD ["busybox", "crond", "-l", "8", "-L", "/dev/stderr", "-f"]

@@ -124,7 +124,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'recommends artists' do
-      expect(user_a.recommends(1)).to eq 'artist_d'
+      expect(user_a.suggests(1)).to eq 'artist_d'
     end
   end
 end
