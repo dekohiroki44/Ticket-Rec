@@ -1,12 +1,13 @@
 <% provide(:title, "通知") %>
-<div class="headline col-lg-8 mx-auto">
-  <%= image_tag "/images/8note.png", class: "eight-note" %>
-  <h3 class="px-5">通知</h3>
+<div class="notification col-lg-8 mx-auto">
+  <div class="headline">
+    <h3 class="px-5">通知</h3>
+  </div>
+  <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+  <% if notifications.exists? %>
+    <%= render notifications %>
+    <%= paginate notifications %>
+  <% else %>
+    <p class="mt-5">通知はありません</p>
+  <% end %>
 </div>
-<% notifications = @notifications.where.not(visitor_id: current_user.id) %>
-<% if notifications.exists? %>
-  <%= render notifications %>
-  <%= paginate notifications %>
-<% else %>
-  <p>通知はありません</p>
-<% end %>

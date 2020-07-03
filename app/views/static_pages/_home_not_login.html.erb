@@ -1,9 +1,11 @@
 <div id="about">
   <div class="about-section intro">
     <h1>Ticket Recに記録して</h1>
-    <h1>あなたの音楽ライフをもっと素敵なものに！</h1>
-    <p>Ticket Recは音楽イベントが好きな方の為のイベント記録サイトです。</p>
-    <%= link_to "今すぐ登録して始めよう!", new_user_registration_path, class: "btn btn-lg btn-light" %>
+    <h1>あなたの音楽ライフをもっと面白く！</h1>
+    <p>Ticket Recは音楽好きによる音楽好きの為のイベント記録サイトです。</p>
+    <% unless user_signed_in? %>
+      <%= link_to "今すぐ登録して始めよう!", new_user_registration_path, class: "btn btn-lg btn-light" %>
+    <% end %>
   </div>
   <div class="about-section row">
     <div class="section-child col-lg-8">
@@ -23,10 +25,16 @@
   </div>
   <div class="about-section row">
     <div class="section-child col-lg-4">
-      <div class="d-flex justify-content-around virtical-box-lg">
-        <%= image_tag "/images/weather_icon/01d@4x.png", class: "weather-icon" %>
-        <%= image_tag "/images/weather_icon/09d@4x.png", class: "weather-icon" %>
-        <%= image_tag "/images/weather_icon/13d@4x.png", class: "weather-icon" %>
+      <div class="virtical-box-lg flex-column">
+        <div class="d-flex justify-content-around ">
+          <%= image_tag "/images/weather_icon/01d@4x.png", class: "weather-icon" %>
+          <%= image_tag "/images/weather_icon/02d@4x.png", class: "weather-icon" %>
+          <%= image_tag "/images/weather_icon/13d@4x.png", class: "weather-icon" %>
+        </div>
+        <div class="d-flex justify-content-around ">
+          <%= image_tag "/images/weather_icon/09d@4x.png", class: "weather-icon" %>
+          <%= image_tag "/images/weather_icon/11d@4x.png", class: "weather-icon" %>
+        </div>
       </div>
     </div>
     <div class="section-child col-lg-8">
@@ -46,7 +54,7 @@
         <br>
         <p>ユーザー個別ページでRecommended Artistを設定すると、そのアーティストの画像を表示し楽曲の試聴ができるようになります。</p>
         <br>
-        <p>あなたのページを訪れた他のユーザーにそのアーティストの魅力を伝えましょう。（画像表示や試聴に対応していないアーティストもいます）</p>
+        <p>あなたのページを訪れた他のユーザーにそのアーティストの魅力を伝えましょう。（spotifyに登録されているアーティストが対象です。）</p>
       </div>
     </div>
     <div class="section-child col-lg-4">
@@ -68,7 +76,7 @@
     </div>
     <div class="section-child col-lg-7">
       <div class="virtical-box-lg px-3 my-3">
-        <h4>日本地図で訪れた都道府県を表示</h4>
+        <h4>訪れた都道府県がすぐにわかる</h4>
         <br>
         <p>あなたがイベントでどの都道府県に何回訪れているかを日本地図で表示します。</p>
         <br>
