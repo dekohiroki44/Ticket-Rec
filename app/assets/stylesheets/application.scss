@@ -24,7 +24,7 @@
 
 @media (min-width: 720px) {
   .main-wrapper {
-    margin-left: 15rem;
+    margin-left: 14rem;
   }
 }
 
@@ -81,22 +81,15 @@ a {
   }
 }
 
-.headline {
-  display: flex;
-  align-items: center;
-  img {
-    height: 90px;
-    margin: 0 0.3rem;
-  }
-  h3 {
-    padding: 0 1rem;
-    margin: 0;
-    line-height: 2.5rem;
-    border-width: 10px 0;
-    border-style: groove;
-    background-color: white;
-  }
+h3 {
+  padding: 0 1rem;
+  margin: 0;
+  line-height: 2.5rem;
+  border-width: 10px 0;
+  border-style: groove;
+  text-align: center;
 }
+
 
 #logo {
   font-size: 1.7em;
@@ -124,12 +117,6 @@ a {
     top: 50%;
     transform: translateY(-50%);
   }
-}
-
-.edit-mark {
-  margin: 0 0.5rem;
-  padding: 0.5rem;
-  background-color: lightgray;
 }
 
 /* header */
@@ -173,9 +160,9 @@ a {
               0px 1px 0 #FFF,  0-1px 0 #FFF,
               -1px 0 0 #FFF, 1px 0 0 #FFF;
 
-  width: 15rem;
+  width: 14rem;
   min-height: 100vh;
-  margin-left: -15rem;
+  margin-left: -14rem;
   transition: margin .25s ease-out;
   position: fixed;
   top: 0px;
@@ -215,7 +202,7 @@ a {
       }
     }
     .list-group {
-      width: 15rem;
+      width: 14rem;
       .list-group-item-action {
         padding-top: 0.2rem;
         padding-bottom: 0.3rem;
@@ -279,12 +266,8 @@ footer {
   color:black;
   position: absolute;
   bottom: 0;
-  background-color: whitesmoke;
+  background-color: rgb(220, 229, 233);
   border-top: 1px solid lightgrey;
-  small {
-    text-align: center;
-    display: block;
-  }
 }
 
 /* timeline */
@@ -551,6 +534,31 @@ footer {
   .next {
     float: right;
   }
+  .previous, .next {
+    padding: 5px;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid black;
+  }
+}
+
+.ticket-show-items {
+  a, .fa-thumbs-up {
+    vertical-align: center;
+    height: 50px;
+    width: 50px;
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 50%;
+    padding-top: 10px;
+    padding-bottom: -10px;
+    border: 1px solid black;
+  }
+  .fa-thumbs-up {
+    padding-top: 15px;
+    padding-bottom: -15px;
+  }
 }
 
 .ticket-show {
@@ -624,12 +632,10 @@ footer {
   color: #efa04c;
 }
 
+
 /* tos */
 
 #tos {
-  ol {
-    // margin-top: 2rem;
-  }
   table, td, tr{
     border: 1px solid gray;
     tr:first-child td {

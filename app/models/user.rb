@@ -133,7 +133,7 @@ class User < ApplicationRecord
         auth_params = JSON.parse(response.body)
         authenticate_token = auth_params["access_token"]
         url = 'https://api.spotify.com/v1/search'
-        query = { "q": recommend, "type": "artist", "market": "JP", "limit": 1 }
+        query = { "q": recommend, "type": "artist", "market": "JP" }
         header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
         response_ja = client.get(url, query, header)
         spotify_artist_ja = JSON.parse(response_ja.body)
@@ -141,31 +141,42 @@ class User < ApplicationRecord
         response_en = client.get(url, query, header)
         spotify_artist_en = JSON.parse(response_en.body)
 
-        if response_ja.status == 200 || response_en.status == 200
-          if spotify_artist_ja["artists"]["items"][0]["name"] == recommend
-            spotify_id = spotify_artist_ja["artists"]["items"][0]["id"]
-            image_url = spotify_artist_ja["artists"]["items"][0]["images"][1]["url"]
-          elsif spotify_artist_en["artists"]["items"][0]["name"].downcase == recommend.downcase
-            spotify_id = spotify_artist_en["artists"]["items"][0]["id"]
-            image_url = spotify_artist_en["artists"]["items"][0]["images"][1]["url"]
-          else
-            [nil, nil]
+        numbers = [0, 1, 2, 3, 4, 5]
+        names = []
+        if response_en.status == 200
+          numbers.each do |number|
+            names << spotify_artist_en["artists"]["items"][number]["name"]
+            break if spotify_artist_en["artists"]["items"][number]["name"].downcase == recommend.downcase
           end
+          i = names.map(&:downcase).index(recommend.downcase)
+          if i.present?
+            spotify_id = spotify_artist_en["artists"]["items"][i]["id"]
+            image_url = spotify_artist_en["artists"]["items"][i]["images"][1]["url"]
+          end
+        end
+        if response_ja.status == 200
+          numbers.each do |number|
+            names << spotify_artist_ja["artists"]["items"][number]["name"]
+            break if spotify_artist_ja["artists"]["items"][number]["name"] == recommend
+          end
+          i = names.map(&:downcase).index(recommend.downcase)
+          if i.present?
+            spotify_id = spotify_artist_ja["artists"]["items"][i]["id"]
+            image_url = spotify_artist_ja["artists"]["items"][i]["images"][1]["url"]
+          end
+        end
 
-          if spotify_id.present?
-            url = "https://api.spotify.com/v1/artists/#{spotify_id}/top-tracks"
-            query = { "market": "JP", "limit": 1 }
-            response = client.get(url, query, header)
+        if spotify_id.present?
+          url = "https://api.spotify.com/v1/artists/#{spotify_id}/top-tracks"
+          query = { "market": "JP", "limit": 1 }
+          response = client.get(url, query, header)
 
-            if response.status == 200
-              top_tracks = JSON.parse(response.body)
-              track_url = top_tracks["tracks"].sample["preview_url"]
-              [image_url, track_url]
-            else
-              [image_url, nil]
-            end
+          if response.status == 200
+            top_tracks = JSON.parse(response.body)
+            track_url = top_tracks["tracks"].sample["preview_url"]
+            return image_url, track_url
           else
-            [nil, nil]
+            return image_url, nil
           end
         else
           [nil, nil]

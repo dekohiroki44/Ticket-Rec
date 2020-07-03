@@ -5,8 +5,8 @@
       <div class="d-flex align-items-center">
         <span><<</span>
         <div class="d-flex flex-column justify-content-center">
-          <small><%= @ticket.user.name %></small>
-          <small>の前のチケット</small>
+          <small><%= @ticket.user.name %> の</small>
+          <small>前のチケット</small>
         </div>
       </div>
     <% end %>
@@ -15,8 +15,8 @@
     <%= link_to ticket_path(@ticket.next.id), class:'next' do %>
       <div class="d-flex align-items-center">
         <div class="d-flex flex-column">
-          <small><%= @ticket.user.name %></small>
-          <small>の次のチケット</small>
+          <small><%= @ticket.user.name %> の</small>
+          <small>次のチケット</small>
         </div>
         <span>>></span>
       </div>
@@ -35,17 +35,17 @@
   <% end %>
   <div class="row">
     <div class="main-section col-lg-8">
-      <div class="d-flex h-100px" >
+      <div class="d-flex align-items-center h-100px ticket-show-items" >
         <%= render "likes/like", ticket: @ticket %>
         <% if @ticket.user == current_user %>
-          <%= link_to '編集', edit_ticket_path(@ticket), remote: true, class: "edit-mark" %>
-          <%= link_to '削除', @ticket, method: :delete, title: 'イベントの削除', class: "edit-mark", data: { confirm: '削除してよろしいですか？', commit: '削除', cancel: '中止' } %>
+          <%= link_to '編集', edit_ticket_path(@ticket), remote: true %>
+          <%= link_to '削除', @ticket, method: :delete, title: 'イベントの削除', data: { confirm: '削除してよろしいですか？', commit: '削除', cancel: '中止' } %>
         <% end %>
       </div>
       <table>
         <tr>
           <td><i class="far fa-calendar-alt fa-2x"></i></td>
-          <td class="ticket-column date"><%= @ticket.date.strftime("%Y/%-m/%-d %R") %></td>
+          <td class="ticket-column date"><%= @ticket.date.strftime("%Y / %-m / %-d ( %R )") %></td>
         </tr>
         <tr>
           <td><i class="fas fa-user fa-2x"></i></td>

@@ -2,7 +2,6 @@
   <% if @ticket %>
     <div class="next-live-section tickets mt-2 mb-5 mx-auto">
       <div class="headline">
-        <%= image_tag "/images/8note.png", class: "eight-note" %>
         <% if @ticket.date > DateTime.current %>
           <h3>次のチケット(あと<%= "#{time_ago_in_words(@ticket.date).upcase}" %>)</h3>
         <% else @ticket.date <= DateTime.current %>

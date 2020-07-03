@@ -28,6 +28,9 @@
           <i class="far fa-bell fa-2x mr-2"></i>通知
         <% end %>
       <% end %>
+      <%= link_to about_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <i class="far fa-question-circle fa-2x"></i>Ticket Recについて
+      <% end %>
       <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-transparent" do %>
       <i class="fas fa-sign-in-alt fa-2x"></i>ログアウト
       <% end %>
