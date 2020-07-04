@@ -84,6 +84,10 @@ test:
 #
 production:
   <<: *default
-  database: myapp_production
-  username: myapp
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  # database: myapp_production
+  # username: myapp
+  # password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  database: ticket_rec_production
+  username: root
+  password:
+  socket: /var/lib/pgsql/mysql.sock
