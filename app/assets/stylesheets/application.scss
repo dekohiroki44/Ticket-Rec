@@ -182,7 +182,7 @@ h3 {
     background-color: rgb(220, 229, 233);
     background-blend-mode: color-dodge;
     .current-user-section {
-      height: 240px;
+      height: 260px;
       margin: 0 1.25rem;
       img {
         margin-top: 30px;
@@ -729,5 +729,14 @@ footer {
     border: 1px solid #333;
     display: block;
     margin: 0 auto;
+  }
+  .ticket-notice {
+    text-align: center;
+    p {
+    padding: 5px 0;
+    color: white;
+    background-color: rgb(12, 176, 231);
+    border-radius: 10px;
+    }
   }
 }

@@ -87,16 +87,34 @@
   <div class="about-section row">
     <div class="section-child col-lg-8">
       <div class="virtical-box-lg px-3">
+        <h4>予定していたチケットの開催日がすぎると…</h4>
+        <br>
+        <p>「参加予定のチケット」を書き込んだとしても、急遽参加できなくなることもあります。そのため「参加予定のチケット」は開催日が過ぎると「開催日の過ぎたチケットを振り分けよう」に移動し、自動では「参加済みのチケット」に移動しません。「開催日の過ぎたチケットを振り分けよう」から「参加した」を選択しチケットを移動させます。</p>
+        <br>
+        <p>もしそのイベントに参加できなかった場合は「参加しなかった」を選択すると、チケットを削除するできます。</p>
+      </div>
+    </div>
+    <div class="section-child col-lg-4">
+      <div class="virtical-box-lg ticket-notice mt-4">
+        <p>参加予定のチケット</p>↓
+        <p>開催日の過ぎたチケット<br>を振り分けよう</p>↓
+        <p>参加済みのチケット</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-section row">
+    <div class="section-child col-lg-4">
+      <div class="virtical-box-lg px-5">
+        <%= image_tag "/images/search.png", alt: "検索", class: "about-img" %>
+      </div>
+    </div>
+    <div class="section-child col-lg-8">
+      <div class="virtical-box-lg px-3">
         <h4>イベントを探す</h4>
         <br>
         <p>キーワードや日付を入力して他のユーザーやチケットを検索してみましょう。同じ趣味を持った仲間や新しいイベントに出会えるかもしれません。</p>
         <br>
-        <p>チケットはそれぞれ、他のユーザーに公開するかどうかを設定することが可能です。逆にもし検索されたくない投稿があれば非公開に設定できます。</p>
-      </div>
-    </div>
-    <div class="section-child col-lg-4">
-      <div class="virtical-box-lg px-5">
-        <%= image_tag "/images/search.png", alt: "検索", class: "about-img" %>
+        <p>チケットはそれぞれ、他のユーザーに公開するかどうかを設定することが可能です。逆にもし検索されたくない投稿があれば非公開に設定しましょう。</p>
       </div>
     </div>
   </div>
