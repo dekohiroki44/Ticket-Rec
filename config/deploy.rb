@@ -1,28 +1,13 @@
-# config valid for current version and patch releases of Capistrano
 lock "~> 3.14.1"
 
 set :application, "Ticket-Rec"
 set :repo_url, "git@example.com:hiroki/Ticket-Rec.git"
-
-# deployするブランチ。デフォルトはmasterなのでなくても可。
 set :branch, 'master'
-
-# deploy先のディレクトリ。
 set :deploy_to, '/var/www/Ticket-Rec'
-
-# シンボリックリンクをはるファイル。(※後述)
 set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
-
-# シンボリックリンクをはるフォルダ。(※後述)
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
-
-# 保持するバージョンの個数(※後述)
 set :keep_releases, 5
-
-# rubyのバージョン
 set :rbenv_ruby, '2.5.1'
-
-# 出力するログのレベル。
 set :log_level, :debug
 
 namespace :deploy do
