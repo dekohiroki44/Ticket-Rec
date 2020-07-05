@@ -1,10 +1,10 @@
 lock "~> 3.14.1"
 
 set :application, "Ticket-Rec"
-set :repo_url, "git@example.com:hiroki/Ticket-Rec.git"
+set :repo_url, 'git@github.com:dekohiroki44/Ticket-Rec.git'
 set :branch, 'master'
-set :deploy_to, '/var/www/Ticket-Rec'
-set :linked_files, fetch(:linked_files, []).push('config/settings.yml')
+set :deploy_to, '/var/www/rails/Ticket-Rec'
+set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :keep_releases, 5
 set :rbenv_ruby, '2.5.1'

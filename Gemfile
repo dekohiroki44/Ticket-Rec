@@ -29,6 +29,9 @@ gem 'httpclient'
 gem 'gon'
 gem 'simple_calendar', '~> 2.0'
 gem 'whenever', require: false
+gem 'ed25519', '>= 1.2', '< 2.0'
+gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+gem 'dotenv-rails'
 # gem 'mini_racer', platforms: :ruby
 # gem 'redis', '~> 4.0'
 # gem 'bcrypt', '~> 3.1.7'
