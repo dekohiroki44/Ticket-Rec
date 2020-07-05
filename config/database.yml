@@ -90,4 +90,4 @@ production:
   database: ticket_rec_production
   username: root
   password:
-  socket: /var/lib/pgsql/mysql.sock
+  socket: /var/lib/pgsql/pgsql.sock
