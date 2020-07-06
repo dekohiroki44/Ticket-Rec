@@ -94,11 +94,11 @@ jobs:
 
 workflows:
   version: 2
-  rubocop_rspec:
+  build:
     jobs:
       - rubocop
       - rspec:
-      - heroku_deploy:
+      - deploy:
           requires:
             - rspec
             - rubocop
