@@ -87,13 +87,10 @@ jobs:
       #deploy
       - add_ssh_keys:  
           fingerprints:  
-            - 4a:dd:86:24:18:c1:03:ea:da:29:8f:6d:34:32:79:17
-      - run:  
-          name: docker-compose stop
-          command: docker-compose stop
+            - e0:4b:ed:ae:ae:06:28:83:fc:d0:58:07:9c:e7:05:a0
       - deploy:  
           name: Deploy with Capistrano
-          command: cap production deploy  
+          command: bundle exec cap production deploy  
 
 workflows:
   version: 2
