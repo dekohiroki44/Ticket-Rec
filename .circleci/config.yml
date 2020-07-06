@@ -60,17 +60,17 @@ jobs:
           name: Rspec
           command: bundle exec rspec
 
-  deploy:
-    docker:
-      - image: circleci/ruby:2.5.1-node-browsers-legacy
-        environment:
-          # RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres:12.1
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: myapp_test
-    working_directory: ~/repo
+  capistrano:
+    # docker:
+    #   - image: circleci/ruby:2.5.1-node-browsers-legacy
+    #     environment:
+    #       # RAILS_ENV: test
+    #       POSTGRES_HOST: 127.0.0.1
+    #   - image: circleci/postgres:12.1
+    #     environment:
+    #       POSTGRES_USER: postgres
+    #       POSTGRES_DB: myapp_test
+    # working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
@@ -90,7 +90,7 @@ jobs:
             - 4a:dd:86:24:18:c1:03:ea:da:29:8f:6d:34:32:79:17
       - deploy:  
           name: Deploy with Capistrano  
-          command: bundle exec cap production deploy  
+          command: cap production deploy  
 
 workflows:
   version: 2
@@ -98,7 +98,7 @@ workflows:
     jobs:
       - rubocop
       - rspec
-      - deploy:
+      - capistrano:
           requires:
             - rspec
             - rubocop
