@@ -97,7 +97,7 @@ workflows:
   build:
     jobs:
       - rubocop
-      - rspec:
+      - rspec
       - deploy:
           requires:
             - rspec
