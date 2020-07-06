@@ -61,18 +61,16 @@ jobs:
           command: bundle exec rspec
 
   capistrano:
-    machine:
-      image: circleci/ruby:2.5.1-node-browsers-legacy
-    # docker:
-    #   - image: circleci/ruby:2.5.1-node-browsers-legacy
-    #     environment:
-    #       # RAILS_ENV: test
-    #       POSTGRES_HOST: 127.0.0.1
-    #   - image: circleci/postgres:12.1
-    #     environment:
-    #       POSTGRES_USER: postgres
-    #       POSTGRES_DB: myapp_test
-    # working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers-legacy
+        environment:
+          # RAILS_ENV: test
+          POSTGRES_HOST: 127.0.0.1
+      - image: circleci/postgres:12.1
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: myapp_test
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
@@ -91,7 +89,8 @@ jobs:
           fingerprints:  
             - 4a:dd:86:24:18:c1:03:ea:da:29:8f:6d:34:32:79:17
       - deploy:  
-          name: Deploy with Capistrano  
+          name: Deploy with Capistrano
+          command: docker-compose stop 
           command: cap production deploy  
 
 workflows:
