@@ -61,6 +61,8 @@ jobs:
           command: bundle exec rspec
 
   capistrano:
+    machine:
+      image: circleci/classic:edge
     # docker:
     #   - image: circleci/ruby:2.5.1-node-browsers-legacy
     #     environment:
