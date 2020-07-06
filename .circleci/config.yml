@@ -62,7 +62,7 @@ jobs:
 
   capistrano:
     machine:
-      image: circleci/classic:edge
+      image: circleci/ruby:2.5.1-node-browsers-legacy
     # docker:
     #   - image: circleci/ruby:2.5.1-node-browsers-legacy
     #     environment:
