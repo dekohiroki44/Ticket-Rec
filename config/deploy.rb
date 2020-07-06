@@ -4,7 +4,7 @@ set :application, "Ticket-Rec"
 set :repo_url, 'git@github.com:dekohiroki44/Ticket-Rec.git'
 set :branch, 'master'
 set :deploy_to, '/var/www/rails/Ticket-Rec'
-set :linked_files, %w{config/master.key}
+set :linked_files, %w(config/master.key)
 set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 set :keep_releases, 5
@@ -49,11 +49,6 @@ end
 
 after 'deploy:publishing', 'deploy:restart'
 namespace :deploy do
-  task :restart do
-    invoke 'unicorn:restart'
-  end
-
-  # 以下の記述により、GitHubに記録を残すことなく、master.keyを本番環境内に保存できる。
   desc 'upload master.key'
   task :upload do
     on roles(:app) do |host|
