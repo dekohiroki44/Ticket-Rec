@@ -84,10 +84,6 @@ test:
 #
 production:
   <<: *default
-  # database: myapp_production
-  # username: myapp
-  # password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
-  # socket: /var/lib/pgsql/pgsql.sock
   encoding: utf8
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_USERNAME'] %>

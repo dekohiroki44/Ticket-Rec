@@ -81,12 +81,12 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       #deploy
-      - add_ssh_keys:  
-          fingerprints:  
+      - add_ssh_keys:
+          fingerprints:
             - e0:4b:ed:ae:ae:06:28:83:fc:d0:58:07:9c:e7:05:a0
       - deploy:  
           name: Deploy with Capistrano
-          command: bundle exec cap production deploy  
+          command: bundle exec cap production deploy
 
 workflows:
   version: 2
