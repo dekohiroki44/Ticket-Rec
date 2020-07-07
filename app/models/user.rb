@@ -137,7 +137,8 @@ class User < ApplicationRecord
       image_url = ""
       if response_en.status == 200
         numbers.each do |number|
-          if spotify_artist_en["artists"]["items"][number].present? && spotify_artist_en["artists"]["items"][number]["name"].downcase == recommend.downcase
+          if spotify_artist_en["artists"]["items"][number].present? &&
+            spotify_artist_en["artists"]["items"][number]["name"].downcase == recommend.downcase
             spotify_id = spotify_artist_en["artists"]["items"][number]["id"]
             if spotify_artist_en["artists"]["items"][number]["images"].present?
               image_url = spotify_artist_en["artists"]["items"][number]["images"][1]["url"]
@@ -149,7 +150,8 @@ class User < ApplicationRecord
 
       if response_ja.status == 200
         numbers.each do |number|
-          if spotify_artist_ja["artists"]["items"][number].present? && spotify_artist_ja["artists"]["items"][number]["name"].downcase == recommend.downcase
+          if spotify_artist_ja["artists"]["items"][number].present? &&
+            spotify_artist_ja["artists"]["items"][number]["name"].downcase == recommend.downcase
             spotify_id = spotify_artist_ja["artists"]["items"][number]["id"]
             if spotify_artist_ja["artists"]["items"][number]["images"].present?
               image_url = spotify_artist_ja["artists"]["items"][number]["images"][1]["url"]
@@ -166,7 +168,6 @@ class User < ApplicationRecord
 
         if response.status == 200
           top_tracks = JSON.parse(response.body)
-          binding.pry
           track_url = top_tracks["tracks"].sample["preview_url"] if top_tracks["tracks"].present?
           return image_url, track_url
         else
@@ -199,10 +200,6 @@ class User < ApplicationRecord
       auth_params = JSON.parse(response.body)
       auth_params["access_token"]
     end
-  end
-
-  def spotify_id
-
   end
 
   def get_spotify_info
