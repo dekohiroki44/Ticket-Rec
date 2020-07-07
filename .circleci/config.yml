@@ -16,7 +16,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
@@ -24,7 +23,6 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      # Rubocop
       - run:
           name: Rubocop
           command: bundle exec rubocop
@@ -45,7 +43,6 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
       - run: yarn install
@@ -55,17 +52,50 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-      # Rspec
       - run:
           name: Rspec
           command: bundle exec rspec
 
+  capistrano:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers-legacy
+        environment:
+          POSTGRES_HOST: 127.0.0.1
+      - image: circleci/postgres:12.1
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: myapp_test
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - add_ssh_keys:
+          fingerprints:
+            - 07:f3:fa:ba:c3:0a:a5:76:02:82:1d:1f:62:0f:53:1d
+      - deploy:  
+          name: Deploy with Capistrano
+          command: bundle exec cap production deploy
+
 workflows:
   version: 2
-  rubocop_rspec:
+  build:
     jobs:
       - rubocop
-      - rspec:
+      - rspec
+      - capistrano:
           requires:
+            - rspec
             - rubocop
+          filters:  
+            branches:  
+              only: master 
             
