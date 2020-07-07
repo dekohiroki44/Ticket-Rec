@@ -84,7 +84,6 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - 07:f3:fa:ba:c3:0a:a5:76:02:82:1d:1f:62:0f:53:1d
-      - run: ssh hiroki@www.ticket-rec.com -i $PRODUCTION_SSH_KEY ls
       - deploy:  
           name: Deploy with Capistrano
           command: bundle exec cap production deploy
