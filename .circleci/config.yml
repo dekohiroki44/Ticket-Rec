@@ -23,7 +23,6 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      # Rubocop
       - run:
           name: Rubocop
           command: bundle exec rubocop
@@ -53,7 +52,6 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-      # Rspec
       - run:
           name: Rspec
           command: bundle exec rspec
@@ -80,7 +78,6 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      #deploy
       - add_ssh_keys:
           fingerprints:
             - 07:f3:fa:ba:c3:0a:a5:76:02:82:1d:1f:62:0f:53:1d
@@ -98,4 +95,7 @@ workflows:
           requires:
             - rspec
             - rubocop
+          filters:  
+            branches:  
+              only: master 
             
