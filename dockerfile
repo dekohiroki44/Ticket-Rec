@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y unzip && \
     sh -c 'wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -' && \
     sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list' && \
     apt-get update && apt-get install -y google-chrome-stable
-RUN apt-get install -y busybox-static
+RUN apt-get install -y cron
+RUN apt-get update && apt-get install -y busybox-static && apt-get clean
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
@@ -23,5 +24,5 @@ COPY Gemfile.lock  /myapp/Gemfile.lock
 RUN bundle install
 COPY . /myapp
 
-COPY ./main.sh /myapp
-CMD ["busybox", "crond", "-l", "8", "-L", "/dev/stderr", "-f"]
+COPY crontab /var/spool/cron/crontabs/root
+CMD ["busybox", "crond", "-f", "-L", "/dev/stderr"]
