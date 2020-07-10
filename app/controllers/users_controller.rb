@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show, :destroy, :following, :followers]
+  before_action :set_user
   before_action :admin_user, only: :destroy
 
   def show
