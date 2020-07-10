@@ -2,10 +2,10 @@
 <p>明日のチケットの詳細をお送りします。</p>
 
 <% @tickets.each do |ticket| %>
-  <p>日にち: <%= ticket.date.strftime("%Y/%-m/%-d") %></p>
+  <p>日付: <%= ticket.date.strftime("%Y/%-m/%-d") %></p>
   <p>時間: <%= ticket.date.strftime("%R") %></p>
   <p>イベント名: <%= ticket.name if ticket.name.present? %></p>
-  <p>アーティスト: <%= ticket.name if ticket.performer.present? %></p>
+  <p>出演アーティスト: <%= ticket.name if ticket.performer.present? %></p>
   <p>会場: <%= ticket.place if ticket.place.present? %></p>
   <p>料金: <%= ticket.price if ticket.price.present? %></p>
   <p>詳細: <%= simple_format(h(ticket.content)) if ticket.content.present? %></p>

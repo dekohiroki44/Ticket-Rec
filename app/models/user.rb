@@ -62,8 +62,9 @@ class User < ApplicationRecord
     end
   end
 
-  def most_places(count)
+  def many_places(count)
     tickets.
+      done.
       pluck(:place).
       join(",").
       gsub(" ", "").
@@ -75,8 +76,9 @@ class User < ApplicationRecord
       join(", ")
   end
 
-  def most_artists(count)
+  def many_artists(count)
     tickets.
+      done.
       pluck(:performer).
       join(",").
       gsub(", ", ",").
@@ -91,7 +93,7 @@ class User < ApplicationRecord
 
   def suggests(count)
     user_ids = Ticket.
-      where('UPPER(performer) LIKE ?', "%#{most_artists(1)}%".upcase).
+      where('UPPER(performer) LIKE ?', "%#{many_artists(1)}%".upcase).
       where.not(user_id: id).
       pluck(:user_id).
       uniq
@@ -100,7 +102,7 @@ class User < ApplicationRecord
       array << User.find(user_id).tickets.done.take(5).pluck(:performer).join(",")
     end
     recently_performers = array.join(",").gsub(", ", ",").downcase.split(",")
-    recently_performers.delete(most_artists(1))
+    recently_performers.delete(many_artists(1))
     recently_performers.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.

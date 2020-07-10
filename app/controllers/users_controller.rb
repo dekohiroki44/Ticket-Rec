@@ -49,6 +49,7 @@ class UsersController < ApplicationController
       user = User.find(user_id)
       NotificationMailer.send_mail(user).deliver
     end
+    redirect_to root_url
   end
 
   private
