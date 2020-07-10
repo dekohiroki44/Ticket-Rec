@@ -182,6 +182,15 @@ class User < ApplicationRecord
     [nil, nil]
   end
 
+  def self.set_tomorrow_ticket_mail
+    tomorrow = DateTime.tomorrow.to_datetime - 9.hour
+    user_ids = Ticket.where(date: tomorrow..tomorrow + 1.day).pluck(:user_id).uniq
+    user_ids.each do |user_id|
+      user = User.find(user_id)
+      NotificationMailer.send_tomorrow_ticket_mail(user).deliver_now
+    end
+  end
+
   private
 
   def default_image

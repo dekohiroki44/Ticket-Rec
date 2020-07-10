@@ -7,9 +7,6 @@ Rails.application.routes.draw do
     member do
       get :following, :followers, :map
     end
-    collection do
-      get :set_mail
-    end
   end
   resources :users, only: [:show]
   resources :tickets do
