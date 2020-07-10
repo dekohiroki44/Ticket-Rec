@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show, :destroy, :following, :followers]
-  before_action :set_user, except: :set_mail
+  before_action :set_user
   before_action :admin_user, only: :destroy
 
   def show
@@ -40,16 +40,6 @@ class UsersController < ApplicationController
     @title = "#{@user.name}のフォロワー"
     @users = @user.followers.page(params[:page]).with_attached_image
     render 'show_follow'
-  end
-
-  def set_mail
-    tomorrow = DateTime.tomorrow.to_datetime - 9.hour
-    user_ids = Ticket.where(date: tomorrow..tomorrow + 1.day).pluck(:user_id).uniq
-    user_ids.each do |user_id|
-      user = User.find(user_id)
-      NotificationMailer.send_mail(user).deliver
-    end
-    redirect_to root_url
   end
 
   private

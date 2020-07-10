@@ -1,7 +1,7 @@
 class NotificationMailer < ApplicationMailer
   default from: 'noreply@ticket-rec.com'
 
-  def send_mail(user)
+  def send_tomorrow_ticket_mail(user)
     @user = user
     tomorrow = DateTime.tomorrow.to_datetime - 9.hour
     @tickets = @user.tickets.where(date: tomorrow..tomorrow + 1.day)
