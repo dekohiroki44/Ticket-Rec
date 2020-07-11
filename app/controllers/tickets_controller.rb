@@ -64,7 +64,7 @@ class TicketsController < ApplicationController
     ticket = Ticket.find(params[:id])
     ticket.destroy
     flash[:success] = "チケットを削除しました"
-    redirect_to tickets_url
+    redirect_to user_url(ticket.user)
   end
 
   def unsolved

@@ -10,6 +10,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 set :keep_releases, 5
 set :rbenv_ruby, '2.5.1'
 set :log_level, :debug
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :deploy do
   desc 'Restart application'

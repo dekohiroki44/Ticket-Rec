@@ -99,7 +99,13 @@ class User < ApplicationRecord
       uniq
     array = []
     user_ids.each do |user_id|
-      array << User.find(user_id).tickets.done.take(5).pluck(:performer).join(",")
+      array << User.
+        find(user_id).
+        tickets.
+        where.not(performer: "").
+        done.take(5).
+        pluck(:performer).
+        join(",")
     end
     recently_performers = array.join(",").gsub(", ", ",").downcase.split(",")
     recently_performers.delete(many_artists(1))
