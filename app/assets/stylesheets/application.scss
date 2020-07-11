@@ -394,7 +394,7 @@ footer {
     flex-direction: column;
     align-items: center;
     .index {
-      background: linear-gradient(transparent 70%, lightgray 70%);
+      color: rgb(12, 176, 231);
     }
   }
   .map-section {
@@ -566,6 +566,19 @@ footer {
     margin: 30px 0;
     border-bottom: 1px solid gray
   }
+  .icon {
+    padding-top: 1.5rem;
+    width: 6rem;
+  }
+  td {
+    word-break : break-all;
+  }
+  td:first-child:before {
+    display: block;
+    float: left;
+    height: 60px;
+    content: "";
+  }
   .user-name {
     font-size: 2rem;
     margin-left: 10px;
@@ -575,8 +588,7 @@ footer {
     width: 100%;
     margin-right: 0;
     .fas, .far {
-      margin-left: 1rem;
-      width: 4rem;
+      padding-left: 1.5rem;
     }
   }
   .ticket-column {
