@@ -23,8 +23,6 @@ module Myapp
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
-    config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
     if Rails.application.credentials.ses_smtp.present?
       user_mame = Rails.application.credentials.ses_smtp[:user_name]
       password = Rails.application.credentials.ses_smtp[:password]
