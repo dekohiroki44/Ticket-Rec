@@ -188,9 +188,15 @@ class User < ApplicationRecord
     [nil, nil]
   end
 
-  def self.set_tomorrow_ticket_mail
+  def self.update_and_mail_of_tomorrow
     tomorrow = DateTime.tomorrow.to_datetime - 9.hour
-    user_ids = Ticket.where(date: tomorrow..tomorrow + 1.day).pluck(:user_id).uniq
+    tickets = Ticket.where(date: tomorrow..tomorrow + 1.day)
+    tickets.each do |ticket|
+      if ticket.prefecture.present?
+        ticket.update(weather: ticket.get_weather[0], temperature: ticket.get_weather[1])
+      end
+    end
+    user_ids = tickets.pluck(:user_id).uniq
     user_ids.each do |user_id|
       user = User.find(user_id)
       NotificationMailer.send_tomorrow_ticket_mail(user).deliver_now

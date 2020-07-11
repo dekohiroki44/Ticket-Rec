@@ -12,23 +12,23 @@
   天気: 
   <% case ticket.weather %>
   <% when "01d", "01n" %>
-    <p>快晴</p>
+    <span>快晴</span>
   <% when "02d", "02n" %>
-    <p>晴れ</p>
+    <span>晴れ</span>
   <% when "03d", "03n" %>
-    <p>薄曇り</p>
+    <span>薄曇り</span>
   <% when "04d", "04n" %>
-    <p>曇り</p>
+    <span>曇り</span>
   <% when "09d", "09n" %>
-    <p>にわか雨</p>
+    <span>にわか雨</span>
   <% when "10d", "10n" %>
-    <p>雨</p>
+    <span>雨</span>
   <% when "11d", "11n" %>
-    <p>雷</p>
+    <span>雷</span>
   <% when "13d", "13n" %>
-    <p>雪</p>
+    <span>雪</span>
   <% when "50d", "50n" %>
-    <p>霧</p>
+    <span>霧</span>
   <% end %>
   <p>気温: <%= ticket.temperature if ticket.temperature.present? %>℃</p>
   <br>

@@ -5,7 +5,6 @@ set :environment, :production
 set :output, 'log/cron.log'
 ENV.each { |k, v| env(k, v) }
 
-# every 1.days, at: '12:00 am' do
-every 3.minutes do
-  runner "User.set_tomorrow_ticket_mail"
+every 1.days, at: '7:15 pm' do
+  runner "User.update_and_mail_of_tomorrow"
 end
