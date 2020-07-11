@@ -366,14 +366,16 @@ footer {
   table {
     border: 2px solid #333;
     border-radius: 0.3rem;
+    background-color: white;
   }
   .has-events {
     background-color: rgb(222, 247, 173);
+    max-width: 141px;
     a {
+      display: block;
+      white-space: nowrap;
       overflow: hidden;
-      display: inline-block;
-      max-height: 50px;
-      // background: linear-gradient(transparent 70%, crimson 70%);
+      text-overflow: ellipsis;
     }
   }
 }
@@ -441,6 +443,7 @@ footer {
 }
 
 .ticket-partial, .user-partial {
+  word-break : break-all;
   a {
     color: #212529;
     &:hover {
