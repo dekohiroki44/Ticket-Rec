@@ -10,7 +10,7 @@
       google.charts.load('current', {'packages':['geochart']});
       google.charts.setOnLoadCallback(drawRegionsMap);
       function drawRegionsMap() {
-        var data = google.visualization.arrayToDataTable(gon.prefectures);
+        var data = google.visualization.arrayToDataTable(gon.map_data);
         var options = { region: 'JP', resolution: 'provinces', width: '100%', height: 500 };
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
         chart.draw(data, options);

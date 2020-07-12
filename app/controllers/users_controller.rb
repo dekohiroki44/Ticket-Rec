@@ -4,12 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
 
   def show
-    prefectures = ["都道府県"]
-    @user.tickets.done.each do |ticket|
-      prefectures << ticket.prefecture
-    end
-    gon.prefectures = prefectures.group_by(&:itself).map { |key, value| [key, value.count] }
-    gon.prefectures[0][1] = "回数"
+    gon.map_data = @user.prefecture_data
     @done_tickets = @user.tickets.done.page(params[:page]).
       with_attached_images.includes([:like_users])
     @upcomming_tickets = @user.tickets.upcomming.page(params[:page]).
