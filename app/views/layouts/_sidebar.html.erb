@@ -1,7 +1,7 @@
-<div class="border-right" id="sidebar-wrapper">
+<div class="border-right bg-light" id="sidebar-wrapper">
   <%= link_to "Ticket Rec", root_path, id: "logo", class: "navbar-brand sidebar-heading" %>
   <% if user_signed_in? %>
-    <div class="clef">
+    <div class="side-main clef bg-light">
       <section class="current-user-section d-flex">
         <% if user_signed_in? %>
           <%= link_to current_user do %>
@@ -11,41 +11,42 @@
         <% end %>
       </section>
       <div class="list-group list-group-flush">
-        <%= link_to current_user, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <%= link_to current_user, class:"list-group-item list-group-item-action bg-light" do %>
           <i class="far fa-user fa-2x"></i>マイページ
         <% end %>
-        <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <%= link_to tickets_path, class:"list-group-item list-group-item-action bg-light" do %>
           <i class="far fa-comments fa-2x"></i>皆んなのチケット
         <% end %>
-        <%= link_to new_ticket_path, remote: true, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <%= link_to new_ticket_path, remote: true, class:"list-group-item list-group-item-action bg-light" do %>
           <i class="far fa-edit fa-2x"></i>書き込む
         <% end %>
-        <%= link_to notifications_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <%= link_to notifications_path, class:"list-group-item list-group-item-action bg-light" do %>
           <% if unchecked_notifications.any? %>
             <i class="fas fa-bell faa-ring animated fa-2x"></i><%= "#{unchecked_notifications.count}件の未読通知" %>
           <% else %>
             <i class="far fa-bell fa-2x mr-2"></i>通知
           <% end %>
         <% end %>
-        <%= link_to about_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <%= link_to about_path, class:"list-group-item list-group-item-action bg-light" do %>
           <i class="far fa-question-circle fa-2x"></i>Ticket Recについて
         <% end %>
-        <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <%= link_to destroy_user_session_path, method: :delete, class:"list-group-item list-group-item-action bg-light" do %>
           <i class="fas fa-sign-out-alt fa-2x"></i>ログアウト
         <% end %>
       </div>
     </div>
   <% else %>
-    <div class="clef">
+    <div class="side-main bg-light">
       <div class="list-group list-group-flush mt-5">
-        <p>まずは無料登録</p>
-        <%= link_to new_user_registration_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <p class="mt-5">まずは無料登録</p>
+        <%= link_to new_user_registration_path, class:"not-login-item" do %>
           <h2><i class="far fa-user fa-1x"></i>新規登録</h2>
         <% end %>
-        <p>アカウントをお持ちの方</p>
-        <%= link_to new_user_session_path, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <p class="mt-5">アカウントをお持ちの方</p>
+        <%= link_to new_user_session_path, class:"not-login-item" do %>
           <h2><i class="fas fa-sign-out-alt fa-1x"></i>ログイン</h2>
         <% end %>
+        <p class="mr-3 mt-3"><%= link_to '利用規約', tos_path, style: "color: var(--main-color);" %>はこちら</p>
       </div>
     </div>
   <% end %>
