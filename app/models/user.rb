@@ -117,6 +117,16 @@ class User < ApplicationRecord
       join(", ")
   end
 
+  def prefecture_data
+    prefectures = ["都道府県"]
+    tickets.done.each do |ticket|
+      prefectures << ticket.prefecture
+    end
+    prefecture_data = prefectures.group_by(&:itself).map { |key, value| [key, value.count] }
+    prefecture_data[0][1] = "回数"
+    prefecture_data
+  end
+
   def self.search(word, date)
     if word.present?
       User.where("upper(name) LIKE ? OR upper(profile) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase)
