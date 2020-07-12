@@ -4,6 +4,11 @@
 
 @import "bootstrap";
 
+:root {
+  --main-color: rgb(12, 176, 231);
+  --back-color: rgb(220, 229, 233);
+}
+
 .container {
   @extend .container-fluid;
   padding: 2rem;
@@ -19,7 +24,7 @@
   position: relative;
   padding-bottom: 50px;
   box-sizing: border-box;
-  background-color: rgb(220, 229, 233);
+  background-color: var(--back-color);
 }
 
 @media (min-width: 720px) {
@@ -135,7 +140,7 @@ h3 {
 /* searchbar */
 
 #searchbar {
-  background-color: rgb(220, 229, 233);
+  background-color: var(--back-color);
   border-bottom: 1px solid lightgrey;
   justify-content: center;
 }
@@ -153,13 +158,8 @@ h3 {
 /* sidebar */
 
 #sidebar-wrapper {
-  background-color: rgb(220, 229, 233);
+  background-color: var(--back-color);
   color: black;
-  text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
-              -1px 1px 0 #FFF, 1px -1px 0 #FFF,
-              0px 1px 0 #FFF,  0-1px 0 #FFF,
-              -1px 0 0 #FFF, 1px 0 0 #FFF;
-
   width: 14rem;
   min-height: 100vh;
   margin-left: -14rem;
@@ -174,12 +174,9 @@ h3 {
     display: block;
     text-align: center;
   }
-  .clef {
+  .side-main {
     height: 700px;
-    background-image: url(/images/treble_clef_gray.png);
-    background-size: contain;
-    // background-color: rgb(245, 243, 219);
-    background-color: rgb(220, 229, 233);
+    background-color: var(--back-color);
     background-blend-mode: color-dodge;
     .current-user-section {
       height: 260px;
@@ -204,10 +201,14 @@ h3 {
     .list-group {
       width: 14rem;
       .list-group-item-action {
+        text-shadow:1px 1px 0 #FFF, -1px -1px 0 #FFF,
+                    -1px 1px 0 #FFF, 1px -1px 0 #FFF,
+                    0px 1px 0 #FFF,  0-1px 0 #FFF,
+                    -1px 0 0 #FFF, 1px 0 0 #FFF;
         padding-top: 0.2rem;
         padding-bottom: 0.3rem;
         font-weight: bold;
-        border: 0;
+        // border: 0;
         &:hover{
           color: crimson
         }
@@ -218,15 +219,22 @@ h3 {
       .far, .fas {
         margin: 0.25rem;
       }
-      h2 {
-        background-color: white;
-        padding: 0.3rem;
+      .not-login-item {
+        width: 80%;
+        margin: 0 auto;
         border: 1px solid black;
         border-radius: 0.5rem;
-        font-size: 1.5rem;
-        color: black;
-        &:hover{
-          color: crimson
+        h2 {
+          color: var(--main-color);
+          padding: 0.3rem;
+          font-size: 1.5rem;
+          margin-bottom: 0;
+        }
+        &:hover {
+          background-color: var(--main-color);
+          h2 {
+            color: white
+          }
         }
       }
       p {
@@ -266,7 +274,7 @@ footer {
   color:black;
   position: absolute;
   bottom: 0;
-  background-color: rgb(220, 229, 233);
+  background-color: var(--back-color);
   border-top: 1px solid lightgrey;
 }
 
@@ -318,12 +326,11 @@ footer {
       a {
         margin: 0 10px;
         padding: 0.5rem;
-        background-color: lightgray;
         border-radius: 0.5rem;
         color: black;
         &:hover {
           text-decoration: none;
-          background-color: crimson;
+          background-color: var(--back-color);
         }
       }
       strong {
@@ -370,7 +377,7 @@ footer {
   }
   .has-events {
     background-color: rgb(222, 247, 173);
-    max-width: 141px;
+    max-width: 50px;
     a {
       display: block;
       white-space: nowrap;
@@ -390,13 +397,21 @@ footer {
   border-radius: 0.3rem;
   background-color: white;
   .recommends-section {
-    positon: relative;
+    position: relative;
     font-size: 1.3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    .index {
-      color: rgb(12, 176, 231);
+    .index-item {
+      background-color: var(--back-color);
+      padding: 5px;
+      margin: 10px 0;
+      p {
+        margin-bottom: 0;
+      }
+      .index {
+        color: var(--main-color);
+      }
     }
   }
   .map-section {
@@ -435,7 +450,7 @@ footer {
       height: 0px;
       margin: auto;
       border-style: solid;
-      border-color: transparent rgb(220, 229, 233) rgb(220, 229, 233) rgb(220, 229, 233);
+      border-color: transparent var(--back-color) var(--back-color) var(--back-color);
       border-width: 20px 20px 15px 20px;
       z-index: 1;
     }
@@ -689,7 +704,7 @@ footer {
 }
 
 .about-section:nth-child(even) {
-  background-color: rgb(220, 229, 233);
+  background-color: var(--back-color);
 }
 
 .section-child {
@@ -702,7 +717,7 @@ footer {
     line-height: 1.5;
   }
   h1, h4{
-    color: rgb(12, 176, 231);
+    color: var(--main-color);
   }
   p {
     margin: 0 auto;
@@ -718,11 +733,11 @@ footer {
     a {
       border: 1px solid #333;
       margin-top: 2rem;
-      color: rgb(12, 176, 231);
+      color: var(--main-color);
       background-color: white;
       &:hover {
         color: white;
-        background-color: rgb(12, 176, 231);  
+        background-color: var(--main-color);
       }
     }
   }
@@ -750,7 +765,7 @@ footer {
     p {
     padding: 5px 0;
     color: white;
-    background-color: rgb(12, 176, 231);
+    background-color: var(--main-color);
     border-radius: 10px;
     }
   }
