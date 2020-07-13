@@ -34,26 +34,26 @@
         <div class="index-item">
           <strong>全ての参加済みチケット (<%= current_user.tickets.done.release.count %>枚)</strong>
         </div>
-        <% if current_user.many_places(1).present? %>
+        <% if current_user.most_visited_places(1).present? %>
           <div class="most-place index-item mt-3">
             <div class="index"><%= "#{current_user.name}が最も行った会場" %></div>
-            <strong class="d-block"><%= current_user.many_places(1) %></strong>
+            <strong class="d-block"><%= current_user.most_visited_places(1) %></strong>
           </div>
         <% end %>
-        <% if current_user.many_places(1).present? %>
+        <% if current_user.most_visited_artists(1).present? %>
           <div class="most-artist index-item mt-3">
-            <div class="index"><%= "#{current_user.name}が最も見に行ったアーティスト" if current_user.many_artists(1).present? %></div>
-            <strong class="d-block mb-3"><%= current_user.many_artists(1) %></strong>
+            <div class="index"><%= "#{current_user.name}が最も見に行ったアーティスト" if current_user.most_visited_artists(1).present? %></div>
+            <strong class="d-block mb-3"><%= current_user.most_visited_artists(1) %></strong>
           </div>
         <% end %>
-        <% if current_user.many_artists(1).blank? %>
+        <% if current_user.most_visited_artists(1).blank? %>
           <div class="index-item">
             <p class="index" style="font-size: 1.2rem;">他のユーザーが最近見に行ったアーティスト</p>
             <strong class="d-block"><%= Ticket.recently_artists(3) %></strong>
           </div>
-        <% elsif current_user.many_artists(1).present? && current_user.suggests(3).present?%>
+        <% elsif current_user.most_visited_artists(1).present? && current_user.suggests(3).present?%>
           <div class="index-item">
-            <div class="index"><%= "#{current_user.many_artists(1)}を見に行った他のユーザーが最近見に行ったアーティスト" %></div>
+            <div class="index"><%= "#{current_user.most_visited_artists(1)}を見に行った他のユーザーが最近見に行ったアーティスト" %></div>
             <strong class="d-block"><%= current_user.suggests(3) %></strong>
           </div>
         <% end %>

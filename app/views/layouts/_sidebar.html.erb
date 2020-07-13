@@ -6,7 +6,7 @@
         <% if user_signed_in? %>
           <%= link_to current_user do %>
             <%= image_tag current_user.image, class: "avatar" %>
-            <h1><%= current_user.name %></h1>
+            <small><%= current_user.name %></small>
           <% end %>
         <% end %>
       </section>
@@ -45,6 +45,9 @@
         <p class="mt-5">アカウントをお持ちの方</p>
         <%= link_to new_user_session_path, class:"not-login-item" do %>
           <h2><i class="fas fa-sign-out-alt fa-1x"></i>ログイン</h2>
+        <% end %>
+        <%= link_to users_guest_sign_in_path, method: :post, class:"not-login-item mt-5" do %>
+          <h2>ゲストログイン（閲覧用）</h2>
         <% end %>
         <p class="mr-3 mt-3"><%= link_to '利用規約', tos_path, style: "color: var(--main-color);" %>はこちら</p>
       </div>
