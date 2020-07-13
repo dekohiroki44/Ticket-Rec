@@ -41,9 +41,9 @@
       <%= link_to new_user_session_path, class:"list-group-item list-group-item-action bg-transparent" do %>
         <i class="fas fa-sign-out-alt fa-2x mr-3"></i>ログイン
       <% end %>
+      <%= link_to users_guest_sign_in_path, method: :post, class:"list-group-item list-group-item-action bg-transparent" do %>
+        <i class="fas fa-running fa-2x mr-3"></i>ゲストログイン（閲覧用）
+      <% end %>
     <% end %>
-  </div>
-</div>
-    </ul>
   </div>
 </header>

@@ -113,7 +113,7 @@ h3 {
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
 @media (min-width: 991px) {
@@ -186,14 +186,15 @@ h3 {
         margin-bottom: 5px;
         width: 160px;
         height: 160px;
-        border: 2px solid black;
+        border: 1px solid black;
       }
       a {
         font-size: 1.5rem;
         &:hover{
           color:crimson;
         }
-        h1 {
+        small {
+          display: block;
           text-align: center;
         }
       }
@@ -289,7 +290,7 @@ footer {
     margin-top: 10px;
     padding: 10px 30px;
     background-color: lightpink;
-    border: 2px solid #333;
+    border: 1px solid #333;
     border-radius: 0.3rem;
     p {
       margin-bottom: 0;
@@ -308,7 +309,7 @@ footer {
 .user-section {
   background-color: white;
   padding: 10px;
-  border: 2px solid #333;
+  border: 1px solid #333;
   border-radius: 0.3rem;
   .user-section-left {
     position: relative;
@@ -318,7 +319,7 @@ footer {
       width: 150px;
     }
     .name {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
     .stats {
       overflow: auto;
@@ -347,12 +348,15 @@ footer {
       width: 100%;
       border: 1px solid #333;
     }
-    .fas {
-      color: crimson;
-    }
   }
 }
 
+.fa-headphones {
+  color: blue;
+}
+.fa-wrench {
+  color: crimson
+}
 
 .modal-dialog {
   h4 {
@@ -371,7 +375,7 @@ footer {
     }
   }
   table {
-    border: 2px solid #333;
+    border: 1px solid #333;
     border-radius: 0.3rem;
     background-color: white;
   }
@@ -393,7 +397,7 @@ footer {
   text-align: center;
   padding: 10px;
   margin: 10px 0;
-  border: 2px solid #333;
+  border: 1px solid #333;
   border-radius: 0.3rem;
   background-color: white;
   .recommends-section {
@@ -415,7 +419,7 @@ footer {
     }
   }
   .map-section {
-    border: 2px solid #333;
+    border: 1px solid #333;
     border-radius: 0.3rem;
   }
 }
@@ -430,7 +434,7 @@ footer {
     margin: 10px 0;
     border-radius: 0.3rem;
     background-color: white;
-    border: 2px solid #333;
+    border: 1px solid #333;
   }
 }
 
@@ -681,6 +685,7 @@ footer {
   padding: 0.8rem;
   margin-top: 0.8rem;
   text-align: center;
+  border: 1px solid black;
   .weather-icon {
     width: 30%;
   }
@@ -749,9 +754,6 @@ footer {
     .recommend-image {
       width: 100%;
       border: 1px solid #333;
-    }
-    .fas {
-      color: crimson;
     }
   }
   .map-img {

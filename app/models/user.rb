@@ -62,13 +62,13 @@ class User < ApplicationRecord
     end
   end
 
-  def many_places(count)
-    tickets.
-      done.
-      pluck(:place).
-      join(",").
-      gsub(" ", "").
-      downcase.split(",").
+  def visited_places
+    tickets.done.pluck(:place)
+  end
+
+  def most_visited_places(count)
+    visited_places.
+      map { |i| i.tr(' ', '').downcase }.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
@@ -76,14 +76,13 @@ class User < ApplicationRecord
       join(", ")
   end
 
-  def many_artists(count)
-    tickets.
-      done.
-      pluck(:performer).
-      join(",").
-      gsub(", ", ",").
-      downcase.
-      split(",").
+  def visited_artists
+    tickets.done.pluck(:performer)
+  end
+
+  def most_visited_artists(count)
+    visited_artists.
+      map { |i| i.tr(', ', ',').downcase }.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
@@ -93,7 +92,7 @@ class User < ApplicationRecord
 
   def suggests(count)
     user_ids = Ticket.
-      where('UPPER(performer) LIKE ?', "%#{many_artists(1)}%".upcase).
+      where('UPPER(performer) LIKE ?', "%#{most_visited_artists(1)}%".upcase).
       where.not(user_id: id).
       pluck(:user_id).
       uniq
@@ -108,7 +107,7 @@ class User < ApplicationRecord
         join(",")
     end
     recently_performers = array.join(",").gsub(", ", ",").downcase.split(",")
-    recently_performers.delete(many_artists(1))
+    recently_performers.delete(most_visited_artists(1))
     recently_performers.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
@@ -138,7 +137,7 @@ class User < ApplicationRecord
     end
   end
 
-  def spotify
+  def spotify_id
     if recommend.present? && authenticate_token.present?
       client = HTTPClient.new
       url = 'https://api.spotify.com/v1/search'
@@ -178,24 +177,28 @@ class User < ApplicationRecord
           end
         end
       end
-
-      if spotify_id.present?
-        url = "https://api.spotify.com/v1/artists/#{spotify_id}/top-tracks"
-        query = { "market": "JP", "limit": 1 }
-        response = client.get(url, query, header)
-
-        if response.status == 200
-          top_tracks = JSON.parse(response.body)
-          track_url = top_tracks["tracks"].sample["preview_url"] if top_tracks["tracks"].present?
-          return image_url, track_url
-        else
-          return image_url, nil
-        end
-      else
-        [nil, nil]
-      end
+      [spotify_id, image_url]
     end
-    [nil, nil]
+  end
+
+  def spotify
+    if spotify_id.present?
+      client = HTTPClient.new
+      url = "https://api.spotify.com/v1/artists/#{spotify_id[0]}/top-tracks"
+      query = { "market": "JP", "limit": 1 }
+      header = { "Authorization": "Bearer #{authenticate_token}" }
+      response = client.get(url, query, header)
+
+      if response.status == 200
+        top_tracks = JSON.parse(response.body)
+        track_url = top_tracks["tracks"].sample["preview_url"] if top_tracks["tracks"].present?
+        return spotify_id[1], track_url
+      else
+        return spotify_id[1], nil
+      end
+    else
+      [nil, nil]
+    end
   end
 
   def self.update_and_mail_of_tomorrow
@@ -210,6 +213,15 @@ class User < ApplicationRecord
     user_ids.each do |user_id|
       user = User.find(user_id)
       NotificationMailer.send_tomorrow_ticket_mail(user).deliver_now
+    end
+  end
+
+  def self.guest
+    find_or_create_by!(name: 'ゲストユーザー', email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      if user.new_record?
+        user.update_attributes!(agreement: true)
+      end
     end
   end
 

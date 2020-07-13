@@ -51,16 +51,17 @@
         <span><%= user.recommend %></span>
       <% else %>
         <span>設定されていません。</span>
-        <%= link_to edit_user_registration_path(current_user) do %>
-          Recomended Artistを設定する
-        <% end %>
       <% end %>
       <% if user.recommend_track.present? %>
         <%= link_to user.recommend_track, target: :_blank, class: "recommend-track" do %>
           <i class="fas fa-headphones ml-1"></i>
         <% end %>
       <% end %>
+      <%= link_to recommend_user_path(current_user), remote: true do %>
+        <i class="fas fa-wrench ml-1"></i>
+      <% end %>
     </div>
   </div>
 </div>
 <div class="modal fade" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="recommend-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>

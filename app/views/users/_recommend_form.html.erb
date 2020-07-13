@@ -1,0 +1,18 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="headline m-3">
+      <h3>Recommend Artistを設定</h3>
+    </div>
+    <div class="form-container">
+      <%= form_with(model: @user, remote: true) do |f| %>
+        <div class="form-group">
+          <%= f.label :recommend, 'アーティスト名を入力してください' %>
+          <%= f.text_field :recommend, autofocus: true, class: 'form-control' %>
+        </div>
+        <div class="form-group mt-3">
+          <%= f.submit '設定する', class: 'btn btn-primary btn-block' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

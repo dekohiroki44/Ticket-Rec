@@ -18,6 +18,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if current_user.update_attributes(user_params)
+      flash[:success] = "Recommend Artistを編集しました"
+      redirect_to current_user
+    else
+      format.js { render :show }
+    end
+  end
+
   def destroy
     user = User.find(params[:id])
     user.destroy
@@ -45,5 +54,9 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  def user_params
+    params.require(:user).permit(:recommend)
   end
 end
