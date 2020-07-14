@@ -32,9 +32,6 @@ gem 'whenever', require: false
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 gem 'dotenv-rails'
-# gem 'mini_racer', platforms: :ruby
-# gem 'redis', '~> 4.0'
-# gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -48,6 +45,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails-console'
+  gem 'rails-erd'
 end
 
 group :development do
