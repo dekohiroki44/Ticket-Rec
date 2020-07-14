@@ -1,7 +1,7 @@
 <div id="readme">  
   <h1>Ticket Recアプリケーションの概要</h1>
   音楽イベントへの参加を記録して共有するイベント記録サイトです。
-  <img src="/Users/HIROKI/livcale/public/images/intro.png" title="Ticket-Rec-image">
+  <img src="./public/images/intro.png" title="Ticket-Rec-image">
   <a href="https://www.ticket-rec.com/" alt="TicketRecUrl">https://www.ticket-rec.com/</a>(トップページからユーザー情報の入力なしでゲストログインが可能です。)
   <h1>アプリケーションの目的</h1>
   <p>長い間音楽活動をしていた経験から、音楽イベントはファンの存在なしでは成り立たない事を強く感じました。しかしながら、そういう方々の行動が日にあたることはありません。</p>
@@ -44,9 +44,9 @@
     <li>CI：Circle CIによるCI/CDパイプライン</li>
   </ul>
   <h2>AWS構成図</h2>
-  <img src="/Users/HIROKI/livcale/public/images/aws_diagram.png" title="aws-diagram">
+  <img src="./public/images/aws_diagram.png" title="aws-diagram">
   <h2>ER図</h2>
-  <img src="/Users/HIROKI/livcale/public/images/erd.png" title="er">
+  <img src="./public/images/erd.png" title="er">
   <h2>その他の技術</h2>
   <ul>
     <li>テスト（RSpec）</li>
