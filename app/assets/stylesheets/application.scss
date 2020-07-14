@@ -701,6 +701,7 @@ footer {
 }
 
 /* about */
+
 .about-section {
   padding: 40px 10px;
 }
@@ -770,5 +771,13 @@ footer {
     background-color: var(--main-color);
     border-radius: 10px;
     }
+  }
+}
+
+/* README */
+
+#readme {
+  p {
+    margin-bottom: 0;
   }
 }

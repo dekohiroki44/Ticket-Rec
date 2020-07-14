@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_120357) do
+ActiveRecord::Schema.define(version: 2020_07_14_081946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,8 +119,6 @@ ActiveRecord::Schema.define(version: 2020_07_01_120357) do
     t.string "name", null: false
     t.text "profile"
     t.boolean "admin", default: false, null: false
-    t.string "uid"
-    t.string "provider"
     t.string "recommend"
     t.string "recommend_image"
     t.string "recommend_track"
