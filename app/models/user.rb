@@ -213,7 +213,7 @@ class User < ApplicationRecord
     user_ids.each do |user_id|
       user = User.find(user_id)
       unless user.email.include?("@example.com")
-      NotificationMailer.send_tomorrow_ticket_mail(user).deliver_now
+        NotificationMailer.send_tomorrow_ticket_mail(user).deliver_now
       end
     end
   end
