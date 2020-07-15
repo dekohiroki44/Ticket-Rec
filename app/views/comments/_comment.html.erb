@@ -1,7 +1,7 @@
 <div class="comment-partial">
   <li id="comment-<%= comment.id %>" class="comment">
     <%= link_to user_path(comment.user.id) do %>
-      <%= image_tag @ticket.user.image.variant(resize:'50x50').processed, class:"avatar" %>
+      <%= image_tag comment.user.image.variant(resize:'50x50').processed, class:"avatar" %>
       <%= comment.user.name %>
     <% end %>
     <span class="content"><%= comment.content %></span>

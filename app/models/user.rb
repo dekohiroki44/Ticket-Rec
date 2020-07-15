@@ -68,7 +68,7 @@ class User < ApplicationRecord
 
   def most_visited_places(count)
     visited_places.
-      map { |i| i.tr(' ', '').downcase }.
+      map { |i| i.tr(' ', '').upcase }.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
@@ -82,7 +82,7 @@ class User < ApplicationRecord
 
   def most_visited_artists(count)
     visited_artists.
-      map { |i| i.tr(', ', ',').downcase }.
+      map { |i| i.gsub(', ', ',').upcase }.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
@@ -106,7 +106,7 @@ class User < ApplicationRecord
         pluck(:performer).
         join(",")
     end
-    recently_performers = array.join(",").gsub(", ", ",").downcase.split(",")
+    recently_performers = array.join(",").gsub(", ", ",").upcase.split(",")
     recently_performers.delete(most_visited_artists(1))
     recently_performers.
       group_by(&:itself).
@@ -212,7 +212,9 @@ class User < ApplicationRecord
     user_ids = tickets.pluck(:user_id).uniq
     user_ids.each do |user_id|
       user = User.find(user_id)
-      NotificationMailer.send_tomorrow_ticket_mail(user).deliver_now
+      unless user.email.include?("@example.com")
+        NotificationMailer.send_tomorrow_ticket_mail(user).deliver_now
+      end
     end
   end
 

@@ -61,7 +61,7 @@
         </tr>
         <tr>
           <td class="icon"><i class="fas fa-comment fa-2x"></i></td>
-          <td class="ticket-column content"><%= simple_format(h(@ticket.content)) %></td>
+          <td class="ticket-column content"><small><%= simple_format(h(@ticket.content)) %></small></td>
         </tr>
       </table>
       <% if @ticket.images.attached? %>
@@ -71,9 +71,11 @@
       <% end %>
     </div>
     <div class="col-lg-4 mt-5 side-section">
-      <div class="weather-section mb-5">
-        <%= render "shared/weather", ticket: @ticket %>
-      </div>
+      <% unless @ticket.weather == "no display" %>
+        <div class="weather-section mb-5">
+          <%= render "shared/weather", ticket: @ticket %>
+        </div>
+      <% end %>
       <div class="comment-section mt-3">
         <div class="comment-list">
           <h2><%= @comments.present? ? "コメント一覧" : "コメントはありません"  %></h2>
