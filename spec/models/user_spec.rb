@@ -116,15 +116,15 @@ RSpec.describe User, type: :model do
     end
 
     it 'presents most visited place' do
-      expect(user_a.most_visited_places(1)).to eq 'venue_c'
+      expect(user_a.most_visited_places(1)).to eq 'VENUE_C'
     end
 
     it 'presents most visited performer' do
-      expect(user_a.most_visited_artists(1)).to eq 'artist_a'
+      expect(user_a.most_visited_artists(1)).to eq 'ARTIST_A'
     end
 
     it 'recommends artists' do
-      expect(user_a.suggests(1)).to eq 'artist_d'
+      expect(user_a.suggests(1)).to eq 'ARTIST_D'
     end
   end
 end
