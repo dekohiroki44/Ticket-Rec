@@ -1,15 +1,13 @@
 <% provide(:title, @user.name) %>
-<div class="d-flex flex-column">
-  <%= render 'user_section', user: @user %>
-</div>
-<div class="list-section col-lg-10 mx-auto">
-  <% if @user.tickets.any? %>
-    <div class="headline">
+<%= render 'user_section', user: @user %>
+<div class="row">
+  <div class="list-section">
+    <% if @user.tickets.any? %>
       <h3 id="user-ticket"><%= "#{@user.name}のチケット" %></h3>
-    </div>
-    <%= render 'tickets/timeline', user: @user,
-                                  done_tickets: @done_tickets,
-                                  upcomming_tickets: @upcomming_tickets,
-                                  unsolved_tickets: @unsolved_tickets %>
-  <% end %>
+      <%= render 'tickets/timeline', user: @user,
+                                    done_tickets: @done_tickets,
+                                    upcomming_tickets: @upcomming_tickets,
+                                    unsolved_tickets: @unsolved_tickets %>
+    <% end %>
+  </div>
 </div>

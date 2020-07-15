@@ -14,6 +14,12 @@
   padding: 2rem;
 }
 
+// @media (max-width: 550px) {
+//   .container {
+//     padding: 1rem;
+//   }
+// }
+
 #wrapper {
   width: 100vw;
 }
@@ -364,6 +370,17 @@ footer {
   }
 }
 
+.list-section {
+  width: 100%;
+}
+
+@media(min-width: 1000px) {
+  .list-section {
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+
 /* simple-calendar */
 
 .simple-calendar {
@@ -395,12 +412,12 @@ footer {
 
 .data-section {
   text-align: center;
-  padding: 10px;
+  padding: 15px 10px;
   margin: 10px 0;
   border: 1px solid #333;
   border-radius: 0.3rem;
   background-color: white;
-  .recommends-section {
+  .suggests-section {
     position: relative;
     font-size: 1.3rem;
     display: flex;
@@ -408,12 +425,14 @@ footer {
     align-items: center;
     .index-item {
       background-color: var(--back-color);
-      padding: 5px;
+      padding: 5px 10px;
       margin: 10px 0;
+      border-radius: 5px;
       p {
         margin-bottom: 0;
       }
       .index {
+        font-size: 1rem;
         color: var(--main-color);
       }
     }
@@ -430,7 +449,7 @@ footer {
   list-style: none;
   padding: 0;
   li {
-    padding: 4%;
+    padding: 3%;
     margin: 10px 0;
     border-radius: 0.3rem;
     background-color: white;
@@ -478,6 +497,11 @@ footer {
     .ticket-left-1, .user-left {
       width: 100px;
       flex-shrink: 0;
+      .user-name {
+        text-align: center;
+        font-size: 1rem;
+        font-weight: bold;
+      }
       .date {
         font-weight: bold;
         font-size: 20px;
@@ -485,20 +509,15 @@ footer {
     }
     .ticket-left-2, .user-center {
       margin: 0 10px;
-      .user-name {
-        display: block;
-        font-size: 15px;
-        font-weight: bold;
-      }
       .ticket-name, .name {
         display: block;
         font-weight: bold;
-        font-size: 30px;
+        font-size: 1.8rem;
       }
       .performer {
         overflow: hidden;
         height: 3.6em;
-        font-size: 16px;
+        font-size: 1rem;
         line-height: 1.8;
       }
       .profile {
@@ -507,6 +526,9 @@ footer {
         width: 100%;
         height: 2em;
         line-height: 2; 
+      }
+      .time, .place {
+        display: block;
       }
     }
     .ticket-right {
@@ -523,6 +545,21 @@ footer {
       img {
         margin-left: 0.5em;
       }
+    }
+  }
+}
+
+.like-section {
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .ticket-left-2, .user-center {
+    .ticket-name, .name {
+      font-size: 1rem !important;
+    }
+    .performer, .place, .time {
+      font-size: 0.8rem !important;
     }
   }
 }

@@ -1,38 +1,35 @@
-<div class="ticket-partial">
-  <li id="ticket-<%= ticket.id %>" class="ticket d-flex flex-column flex-lg-row">
+<div class="ticket-partial" id="ticket-<%= ticket.id %>">
+  <li class="ticket d-flex flex-column flex-lg-row">
     <div class="d-flex ticket-left">
       <div class="ticket-left-1 d-flex flex-column align-items-center">
         <%= link_to user_path(ticket.user_id) do %>
+          <div class="user-name"><%= ticket.user.name %></div>
           <%= image_tag ticket.user.image.variant(resize:'50x50').processed, class:"avatar" %>
         <% end %>
         <span class="date"><%= ticket.date.strftime("%-m/%-d") %></span>
         <small class="year"><%= ticket.date.strftime("%Y") %></small>
-        <%= render "likes/like", ticket: ticket %>
       </div>
       <%= link_to ticket_path(ticket.id) do %>
         <div class="ticket-left-2">
-          <span class="user-name"><%= ticket.user.name %></span>
           <% if ticket.public %>
             <span class="ticket-name"><%= ticket.name %></span>
           <% else %>
             <span class="ticket-name"><i class="fas fa-lock"></i><%= ticket.name %></span>
           <% end %>
-          <% if ticket.performer %>
+          <% if ticket.performer.present? %>
             <span class="performer"><i class="fas fa-user"></i><%= ticket.performer%></span>
           <% end %>
-          <div>
-            <% if ticket.place %>
-              <span class="place"><i class="fas fa-map-marker-alt"></i><%= ticket.place %></span>
-            <% end %>
-            <% if ticket.date %>
-              <span class="time"><i class="fas fa-clock"></i><%= ticket.date.strftime("%R") %></span>
-            <% end %>
-          </div>
+          <% if ticket.place.present? %>
+            <span class="place"><i class="fas fa-map-marker-alt"></i><%= ticket.place %></span>
+          <% end %>
+          <% if ticket.date.present? %>
+            <span class="time"><i class="fas fa-clock"></i><%= ticket.date.strftime("%R") %></span>
+          <% end %>
         </div>
       <% end %>
     </div>
     <%= link_to ticket_path(ticket.id) do %>
-      <div class="d-flex ticket-right  align-items-center px-3">
+      <div class="d-flex ticket-right  justify-content-center flex-lg-column px-3">
         <%= image_tag ticket.images.first.variant(resize:'100x100').processed, class:"image" if ticket.images.attached?  %>
       </div>
     <% end %>
@@ -44,4 +41,7 @@
       </ul>
     </div>
   </li>
+  <div class="like-section ticket-show-items">
+    <%= render "likes/like", ticket: ticket %>
+  </div>
 </div>

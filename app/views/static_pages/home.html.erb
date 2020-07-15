@@ -29,7 +29,7 @@
     <% end %>
   </div>
   <div class="data-section row mt-5">
-    <div class="col-lg-6 recommends-section">
+    <div class="col-lg-6 suggests-section">
       <div class="vertical-box-lg">
         <div class="index-item">
           <strong>全ての参加済みチケット (<%= current_user.tickets.done.release.count %>枚)</strong>
@@ -43,7 +43,7 @@
         <% if current_user.most_visited_artists(1).present? %>
           <div class="most-artist index-item mt-3">
             <div class="index"><%= "#{current_user.name}が最も見に行ったアーティスト" if current_user.most_visited_artists(1).present? %></div>
-            <strong class="d-block mb-3"><%= current_user.most_visited_artists(1) %></strong>
+            <strong class="d-block"><%= current_user.most_visited_artists(1) %></strong>
           </div>
         <% end %>
         <% if current_user.most_visited_artists(1).blank? %>
@@ -53,7 +53,8 @@
           </div>
         <% elsif current_user.most_visited_artists(1).present? && current_user.suggests(3).present?%>
           <div class="index-item">
-            <div class="index"><%= "#{current_user.most_visited_artists(1)}を見に行った他のユーザーが最近見に行ったアーティスト" %></div>
+            <div class="index"><%= "#{current_user.most_visited_artists(1)}を見に行った他のユーザーが" %></div>
+            <div class="index">最近見に行ったアーティスト</div>
             <strong class="d-block"><%= current_user.suggests(3) %></strong>
           </div>
         <% end %>

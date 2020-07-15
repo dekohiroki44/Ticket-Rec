@@ -3,7 +3,5 @@ class AddColumnsToUsers < ActiveRecord::Migration[5.2]
     add_column :users, :name, :string, null: false
     add_column :users, :profile, :text
     add_column :users, :admin, :boolean, default: false, null: false
-    add_column :users, :uid, :string
-    add_column :users, :provider, :string
   end
 end
