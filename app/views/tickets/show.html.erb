@@ -1,26 +1,18 @@
 <% provide(:title, @ticket.name) %>
-<div class="previous-next">
+<div class="previous-next d-flex justify-content-between">
   <% if @ticket.previous %>
-    <%= link_to ticket_path(@ticket.previous.id), class:'previous' do %>
-      <div class="d-flex align-items-center">
-        <span><<</span>
-        <div class="d-flex flex-column justify-content-center">
-          <small><%= @ticket.user.name %> の</small>
-          <small>前のチケット</small>
-        </div>
-      </div>
+    <%= link_to ticket_path(@ticket.previous.id) do %>
+      <span><<</span>
     <% end %>
+  <% else %>
+    <small>_</small>
   <% end %>
   <% if @ticket.next %>
-    <%= link_to ticket_path(@ticket.next.id), class:'next' do %>
-      <div class="d-flex align-items-center">
-        <div class="d-flex flex-column">
-          <small><%= @ticket.user.name %> の</small>
-          <small>次のチケット</small>
-        </div>
-        <span>>></span>
-      </div>
+    <%= link_to ticket_path(@ticket.next.id) do %>
+      <span>>></span>
     <% end %>
+  <% else %>
+    <small>_</small>
   <% end %>
 </div>
 <div id="ticket-<%= @ticket.id %>" class="ticket-show" >
@@ -35,13 +27,6 @@
   <% end %>
   <div class="row">
     <div class="main-section col-lg-8">
-      <div class="d-flex align-items-center h-100px ticket-show-items" >
-        <%= render "likes/like", ticket: @ticket %>
-        <% if @ticket.user == current_user %>
-          <%= link_to '編集', edit_ticket_path(@ticket), remote: true %>
-          <%= link_to '削除', @ticket, method: :delete, title: 'イベントの削除', data: { confirm: '削除してよろしいですか？', commit: '削除', cancel: '中止' } %>
-        <% end %>
-      </div>
       <table>
         <tr>
           <td class="icon"><i class="far fa-calendar-alt fa-2x"></i></td>
@@ -71,6 +56,13 @@
       <% end %>
     </div>
     <div class="col-lg-4 mt-5 side-section">
+      <div class="d-flex align-items-center h-100px ticket-show-items" >
+        <%= render "likes/like", ticket: @ticket %>
+        <% if @ticket.user == current_user %>
+          <%= link_to '編集', edit_ticket_path(@ticket), remote: true, class: "mr-3" %>
+          <%= link_to '削除', @ticket, method: :delete, title: 'イベントの削除', data: { confirm: '削除してよろしいですか？', commit: '削除', cancel: '中止' } %>
+        <% end %>
+      </div>
       <% unless @ticket.weather == "no display" %>
         <div class="weather-section mb-5">
           <%= render "shared/weather", ticket: @ticket %>
