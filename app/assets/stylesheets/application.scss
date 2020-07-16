@@ -149,7 +149,12 @@ h3 {
   background-color: var(--back-color);
   border-bottom: 1px solid lightgrey;
   justify-content: center;
+  .fa-edit {
+    color: rgb(94, 94, 94);
+  }
 }
+
+
 
 .search-form {
   height: 30px;
@@ -278,6 +283,7 @@ footer {
   width: 100%;
   height: 50px;
   padding-top: 10px;
+  padding-bottom: 10px;
   color:black;
   position: absolute;
   bottom: 0;
@@ -481,7 +487,7 @@ footer {
 }
 
 .ticket-partial, .user-partial {
-  word-break : break-all;
+  word-break : keep-all;
   a {
     color: #212529;
     &:hover {
@@ -489,6 +495,7 @@ footer {
     }
   }
   .ticket, .user {
+    position: relative;
     text-decoration: none;
     color: #212529;
     .fas {
@@ -497,10 +504,13 @@ footer {
     .ticket-left-1, .user-left {
       width: 100px;
       flex-shrink: 0;
+      text-align: center;
       .user-name {
-        text-align: center;
-        font-size: 1rem;
+        font-size: 0.8rem;
         font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .date {
         font-weight: bold;
@@ -550,16 +560,36 @@ footer {
 }
 
 .like-section {
-  text-align: right;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  border-radius: 50%;
+  border: 1px solid rgb(155, 154, 154);
+  .fa-thumbs-up {
+    width: 30px;
+    height: 30px;
+    padding-top: 5px;
+  }
 }
 
 @media (max-width: 720px) {
+  .ticket-left-1, .user-left {
+    .user-name {
+      font-size: 0.8rem !important;
+    }
+  }
   .ticket-left-2, .user-center {
     .ticket-name, .name {
       font-size: 1rem !important;
     }
     .performer, .place, .time {
       font-size: 0.8rem !important;
+    }
+  }
+  .like-section {
+    .fa-thumbs-up {
+      width: 15px;
+      height: 15px;
     }
   }
 }
@@ -585,42 +615,33 @@ footer {
 
 .previous-next {
   small {
-    text-align: center;
-  }
-  .previous {
-    float: left;
-  }
-  .next {
-    float: right;
-  }
-  .previous, .next {
-    padding: 5px;
-    background-color: white;
-    border-radius: 20px;
-    border: 1px solid black;
+    visibility:  hidden;
   }
 }
 
-.ticket-show-items {
-  a, .fa-thumbs-up {
-    vertical-align: center;
-    height: 50px;
-    width: 50px;
-    margin: 0 0.5rem;
-    padding: 0.5rem;
-    background-color: white;
-    border-radius: 50%;
-    padding-top: 10px;
-    padding-bottom: -10px;
-    border: 1px solid black;
-  }
-  .fa-thumbs-up {
-    padding-top: 15px;
-    padding-bottom: -15px;
+.side-section {
+  .ticket-show-items {
+    a, .fa-thumbs-up {
+      vertical-align: center;
+      height: 50px;
+      width: 50px;
+      margin: 0 0.5rem;
+      padding: 0.5rem;
+      background-color: white;
+      border-radius: 50%;
+      padding-top: 10px;
+      padding-bottom: -10px;
+      border: 1px solid black;
+    }
+    .fa-thumbs-up {
+      padding-top: 15px;
+      padding-bottom: -15px;
+    }
   }
 }
 
 .ticket-show {
+  word-break : keep-all;
   table, td, th {
     margin: 30px 0;
     border-bottom: 1px solid gray
@@ -662,6 +683,13 @@ footer {
   }
 }
 
+@media(max-width: 720px) {
+  .ticket-show {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+}
 /* comment */
 
 .comment-list {
@@ -675,6 +703,10 @@ footer {
     display: block;
     width: 90%;
     word-break:break-all
+  }
+  .avatar {
+    width: 30px;
+    height: 30px;
   }
 }
 
@@ -695,6 +727,19 @@ footer {
 }
 
 /* notification */
+
+.form-inline {
+  .avatar {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.liked-ticket-name {
+  display: block;
+  text-align: center;
+  font-weight: nomal;
+}
 
 .circle {
   position: absolute;

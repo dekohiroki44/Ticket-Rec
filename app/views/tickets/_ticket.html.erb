@@ -1,5 +1,5 @@
-<div class="ticket-partial" id="ticket-<%= ticket.id %>">
-  <li class="ticket d-flex flex-column flex-lg-row">
+<div class="ticket-partial">
+  <li id="ticket-<%= ticket.id %>" class="ticket d-flex flex-column flex-lg-row">
     <div class="d-flex ticket-left">
       <div class="ticket-left-1 d-flex flex-column align-items-center">
         <%= link_to user_path(ticket.user_id) do %>
@@ -40,8 +40,8 @@
         <li><%= link_to '参加しなかった', ticket, method: :delete, title: 'チケットの削除', class: "unsolved-check", data: { confirm: '削除しますが、よろしいですか？', commit: '削除', cancel: '中止' } %></li>
       </ul>
     </div>
+    <div class="like-section ticket-show-items">
+      <%= render "likes/like", ticket: ticket %>
+    </div>
   </li>
-  <div class="like-section ticket-show-items">
-    <%= render "likes/like", ticket: ticket %>
-  </div>
 </div>

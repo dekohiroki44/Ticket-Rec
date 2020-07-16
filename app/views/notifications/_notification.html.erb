@@ -1,6 +1,6 @@
 <% visitor = notification.visitor %>
 <% visited = notification.visited %>
-<div class="col-lg-8 mx-auto mt-5">
+<div class=" mt-5">
   <div class="form-inline">
     <span>
       <%= link_to user_path(visitor) do %>
@@ -13,6 +13,7 @@
       <% when 'like' then %>
         <%= link_to 'あなたの投稿', notification.ticket, style: "font-weight: bold;" %>
         <%= "にいいねしました" %>
+        <%= link_to notification.ticket.name, notification.ticket, class: "liked-ticket-name" %>
       <% when 'comment' then %>
         <% if notification.ticket.user_id == visited.id %>
           <%= link_to "あなたの投稿", notification.ticket, style: "font-weight: bold;" %>
