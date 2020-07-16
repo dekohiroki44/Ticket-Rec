@@ -9,8 +9,7 @@ class TicketsController < ApplicationController
       with_attached_images.includes(:user, [:like_users])
     @upcomming_tickets = current_user.feed.upcomming.page(params[:page]).
       with_attached_images.includes(:user, [:like_users])
-    @unsolved_tickets = current_user.feed.unsolved.page(params[:page]).
-      with_attached_images.includes(:user, [:like_users])
+    @unsolved_tickets = []
   end
 
   def show
