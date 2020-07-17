@@ -4,7 +4,7 @@
       <%= image_tag user.image, class: "avatar" %>
     <% end %>
     <div class="name"><%= user.name %></div>
-    <div class="stats mb-3">
+    <div class="stats">
       <%= render 'shared/stats', user: user %>
     </div>
     <%= render 'follow_btn', user: user %>
