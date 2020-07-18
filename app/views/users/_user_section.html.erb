@@ -7,40 +7,25 @@
     <div class="stats">
       <%= render 'shared/stats', user: user %>
     </div>
-    <%= render 'follow_btn', user: user %>
   </div>
   <div class="user-section-center col-lg-6 mb-3">
     <div class="vertical-box-lg">
       <div class="profile my-3"><%= user.profile %></div>
-      <div class="user-items d-flex flex-column align-items-center align-items-lg-stretch">
-        <table>
-          <tr>
-            <td><i class="fas fa-ticket-alt"></i></td>
-            <td><a href="#user-ticket">参加済みのチケット (<%= @user.tickets.done.release.count %>枚)</a></td>
-          </tr>
-          <tr>
-            <td><i class="fas fa-map"></i></td>
-            <td>
-              <%= link_to map_user_path(user), remote: true, class: "map-link" do %>
-                都道府県MAPを表示
-              <% end %>
-            </td>
-          </tr>
-          <% if user == current_user %>
-            <tr>
-              <td><i class="fas fa-user-edit"></i></td>
-              <td>
-                <%= link_to edit_user_registration_path(current_user) do %>
-                  アカウント情報を編集
-                <% end %>
-              </td>
-            </tr>
+      <div class="user-items d-flex">
+        <%= render 'follow_btn', user: user %>
+        <a href="#user-ticket" class="ticket-form"><small>参加済みの<br>チケット</small><br><strong><%= @user.tickets.done.release.count %>枚</strong></a>
+        <%= link_to map_user_path(user), remote: true, class: "map-form" do %>
+          <%= image_tag "/images/japan.png", class: "user-item" %>
+        <% end %>
+        <% if user == current_user %>
+          <%= link_to edit_user_registration_path(current_user), class: "edit-form" do %>
+            <small>アカウント<br>情報を編集</small><br><i class="fas fa-user-edit"></i>
           <% end %>
-        </table>
-        <% if current_user.admin? && !current_user?(user) %>
-          <%= link_to "このユーザーを削除する", user, method: :delete, data: { confirm: "削除してよろしいですか?" } %>
         <% end %>
       </div>
+      <% if current_user.admin? && !current_user?(user) %>
+        <%= link_to "このユーザーを削除する", user, method: :delete, data: { confirm: "削除してよろしいですか?" } %>
+      <% end %>
     </div>
   </div>
   <div class="user-section-right col-lg-3">

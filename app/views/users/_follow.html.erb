@@ -1,4 +1,6 @@
-<%= form_with model: current_user.active_relationships.build, remote: true do |f| %>
+<%= form_with model: current_user.active_relationships.build, remote: true, class: "follow-form" do |f| %>
   <%= hidden_field_tag :followed_id, @user.id %>
-  <%= f.submit "フォローする", class: "btn btn-info" %>
+  <%= button_tag type: :submit do %>
+    <small>フォロー<br>する</small><br><i class="far fa-user mb-2"></i>
+  <% end %>
 <% end %>
