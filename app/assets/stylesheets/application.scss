@@ -355,7 +355,7 @@ footer {
     .user-items {
       a, form {
         display: block;
-        margin: 5px;
+        margin: 3px;
         text-align: center;
         border-radius: 5%;
         border: 1px solid gray;
@@ -392,7 +392,7 @@ footer {
           color: black;
         }
       }
-      .user-item {
+      .map-icon {
         width: 80px;
       }
       button {
@@ -402,6 +402,9 @@ footer {
       a, #follow_btn {
         width: 33%;
         height: 80px;
+      }
+      #follow_btn {
+        min-width: 35%;
       }
       #follow_btn {
         padding-bottom: 30px;
@@ -416,6 +419,19 @@ footer {
     .recommend-image {
       width: 100%;
       border: 1px solid #333;
+    }
+  }
+}
+
+@media(max-width: 400px) {
+  .user-section {
+    padding-left: 3px;
+    padding-right: 3px;
+    .user-items {
+      .map-icon {
+        width: 50px !important;
+        padding-top: 10px;
+      }
     }
   }
 }
@@ -545,6 +561,7 @@ footer {
 
 .ticket-partial, .user-partial {
   word-break : keep-all;
+  word-wrap: break-word;
   a {
     color: #212529;
     &:hover {
