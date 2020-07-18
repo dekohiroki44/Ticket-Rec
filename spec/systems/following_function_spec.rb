@@ -28,7 +28,7 @@ RSpec.describe 'following_function', type: :system, js: true do
       visit user_path(user_b.id)
       expect do
         page.accept_confirm do
-          click_button 'フォローしています'
+          click_button 'フォローしてます'
         end
         wait_for_ajax
       end.to change { user_a.following.count }.by(-1).
