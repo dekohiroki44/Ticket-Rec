@@ -13,13 +13,13 @@
       <div class="profile my-3"><%= user.profile %></div>
       <div class="user-items d-flex">
         <%= render 'follow_btn', user: user %>
-        <a href="#user-ticket" class="ticket-form"><small>参加済みの<br>チケット</small><br><strong><%= @user.tickets.done.release.count %>枚</strong></a>
+        <a href="#user-ticket" class="ticket-form"><small>参加済み<br>チケット</small><br><strong><%= @user.tickets.done.release.count %>枚</strong></a>
         <%= link_to map_user_path(user), remote: true, class: "map-form" do %>
-          <%= image_tag "/images/japan.png", class: "user-item" %>
+          <%= image_tag "/images/japan.png", class: "map-icon" %>
         <% end %>
         <% if user == current_user %>
           <%= link_to edit_user_registration_path(current_user), class: "edit-form" do %>
-            <small>アカウント<br>情報を編集</small><br><i class="fas fa-user-edit"></i>
+            <small>アカウント<br>編集</small><br><i class="fas fa-user-edit"></i>
           <% end %>
         <% end %>
       </div>

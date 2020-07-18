@@ -1,5 +1,5 @@
 <%= form_with model: current_user.active_relationships.find_by(followed_id: @user.id), method: :delete, remote: true, data: { confirm: "フォローを解除してよろしいですか?" }, class: "unfollow-form"  do |f| %>
   <%= button_tag type: :submit do %>
-    <small>フォロー<br>しています</small><br><i class="fas fa-user-check mb-2"></i>
+    <small>フォロー<br>してます</small><br><i class="fas fa-user-check mb-2"></i>
   <% end %>
 <% end %>
