@@ -351,6 +351,63 @@ footer {
       }
     }
   }
+  .user-section-center {
+    .user-items {
+      a, form {
+        display: block;
+        margin: 5px;
+        text-align: center;
+        border-radius: 5%;
+        border: 1px solid gray;
+      }
+      .follow-form {
+        background-color: rgba(245, 245, 245, 0);
+        &:hover {
+          background-color: whitesmoke;
+        }
+      }
+      .unfollow-form {
+        background-color: rgba(12, 176, 231, 0.438);
+        &:hover {
+          background-color: rgba(12, 176, 231, 0.788);
+        }
+      }
+      .ticket-form {
+        background-color: rgba(195, 250, 85, 0.432);
+        &:hover {
+          background-color: rgb(195, 250, 85);
+          color: black;
+        }
+      }
+      .map-form {
+        background-color: rgba(0, 128, 0, 0.411);
+        &:hover {
+          background-color: rgba(4, 196, 4, 0.699);
+        }
+      }
+      .edit-form {
+        background-color: rgba(100, 148, 237, 0.466);
+        &:hover {
+          background-color: rgba(100, 148, 237, 0.836);
+          color: black;
+        }
+      }
+      .user-item {
+        width: 80px;
+      }
+      button {
+        background-color: transparent;
+        border: 0;
+      }
+      a, #follow_btn {
+        width: 33%;
+        height: 80px;
+      }
+      #follow_btn {
+        padding-bottom: 30px;
+      }
+    }
+  }
   .user-section-right {
     text-align: center;
     strong {
