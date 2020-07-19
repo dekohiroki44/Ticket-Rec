@@ -310,8 +310,25 @@ footer {
   }
   .unsolved-alert {
     display: block;
+    width: 160px;
+    height: 80px;
+    font-size: small;
+    margin-top: 3px;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    background-color: lightgrey;
+    p {
+      margin-bottom: 0;
+    }
     a {
       display: block;
+      text-align: center;
+      background-color: lightpink;
+      border: 1px solid black;
+      border-radius: 40%;
+      margin-top: 2px;
+      margin-bottom: 2px;
     }
   }
 }
@@ -421,6 +438,12 @@ footer {
       border: 1px solid #333;
     }
   }
+}
+
+.none-display-line {
+  font-size: 0.1px;
+  line-height: 0.1;
+  visibility:  hidden;
 }
 
 @media(max-width: 400px) {
@@ -670,19 +693,6 @@ footer {
 
 .unsolved-alert {
   display: none;
-  border: 1px solid black;
-  border-radius: 0.3rem;
-  padding: 0.3rem;
-  background-color: lightgrey;
-  p {
-    padding: 0;
-  }
-  ul {
-    list-style: none;
-    li {
-      background-color: lightpink;
-    }
-  }
 }
 
 /* tickets/show */
@@ -820,6 +830,7 @@ footer {
   display: block;
   text-align: center;
   font-weight: nomal;
+  color: gray;
 }
 
 .circle {
