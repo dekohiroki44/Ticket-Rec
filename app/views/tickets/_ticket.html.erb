@@ -35,10 +35,8 @@
     <% end %>
     <div class="unsolved-alert">
       <p>どちらかをクリック！</p>
-      <ul>
-        <li><%= link_to "参加した", unsolved_ticket_path(ticket.id), method: :patch, class: "unsolved-check" %></li>
-        <li><%= link_to '参加しなかった', ticket, method: :delete, title: 'チケットの削除', class: "unsolved-check", data: { confirm: '削除しますが、よろしいですか？', commit: '削除', cancel: '中止' } %></li>
-      </ul>
+        <%= link_to "参加した", unsolved_ticket_path(ticket.id), method: :patch, class: "unsolved-check" %>
+        <%= link_to '参加しなかった', ticket, method: :delete, title: 'チケットの削除', class: "unsolved-check", data: { confirm: '削除しますが、よろしいですか？' } %>
     </div>
     <div class="like-section ticket-show-items">
       <%= render "likes/like", ticket: ticket %>

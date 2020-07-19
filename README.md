@@ -25,8 +25,10 @@
 <li>ユーザーにお勧めアーティストを提案</li>
 <li>投稿した予定の前日に詳細・天気予報を自動でメール送信（Whenever・SES）</li>
 <li>モーダルウィンドウ（投稿フォーム・Google Chart）</li>
+<li>Ajax（いいね機能、フォロー機能、モーダルウィンドウ）</li>
 <li>ページネーション機能（Kaminari）</li>
 <li>カレンダー機能（Simple Carendar）</li>
+<li>レスポンシブWebデザイン</li>
 </ul>
 <h2>使用技術</h2>
 <h3>環境</h3>
@@ -53,8 +55,13 @@
   <li>テスト（RSpec）</li>
   <li>リンター（Rubocop Airbnb）</li>
   <li>GitHub（GitHub Flowでの開発）</li>
-  <li>Javascript/JQuery</li>
+  <li>Javascript / JQuery / Ajax</li>
   <li>AWS SESでのメールサービス</li>
   <li>Web API（Open Weather Map, Spotify）</li>
   <li>独自ドメインでのSSL化</li>
 </ul>
+<h3>今後実装したい機能</h3>
+<ul>
+  <li>Twitter APIを導入し、関連するtweetの表示及びtwitterへ投稿する機能</li>
+</ul>
+
