@@ -63,7 +63,7 @@
           <%= link_to '削除', @ticket, method: :delete, title: 'イベントの削除', data: { confirm: '削除してよろしいですか？', commit: '削除', cancel: '中止' } %>
         <% end %>
       </div>
-      <% unless @ticket.weather == "no display" %>
+      <% unless @ticket.weather == "no display" || (@ticket.weather.blank? && (@ticket.date <=  DateTime.current)) %>
         <div class="weather-section mb-5">
           <%= render "shared/weather", ticket: @ticket %>
         </div>
