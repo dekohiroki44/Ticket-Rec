@@ -4,7 +4,9 @@ describe 'tickets_page', type: :system do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
   let(:self_ticket) { create(:ticket, user: user, name: "イベント1", performer: "アーティスト1") }
-  let(:other_ticket) { create(:ticket, user: other_user, name: "イベント2", performer: "アーティスト2") }
+  let!(:self_ticket_previous) { create(:ticket, user: user, date: self_ticket.date - 1.day, done: true) }
+  let!(:self_ticket_next) { create(:ticket, user: user, date: self_ticket.date + 1.day) }
+  let(:other_ticket) { create(:ticket, user: other_user, name: "イベント4", performer: "アーティスト2") }
 
   before do
     visit new_user_session_path
@@ -18,6 +20,16 @@ describe 'tickets_page', type: :system do
     expect(page).to have_title "#{self_ticket.name} - Ticket Rec"
     expect(page).to have_content self_ticket.name
     expect(page).to have_content self_ticket.performer
+  end
+
+  it 'changes previous ticket page after click <<' do
+    click_link '<<'
+    expect(current_path).to eq ticket_path(self_ticket_previous.id)
+  end
+
+  it 'changes previous ticket page after click >>' do
+    click_link '>>'
+    expect(current_path).to eq ticket_path(self_ticket_next.id)
   end
 
   context 'on self ticket' do

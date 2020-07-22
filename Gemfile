@@ -45,6 +45,7 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails-console'
+  gem 'capistrano-dotenv', require: false
   gem 'rails-erd'
 end
 

@@ -113,7 +113,7 @@ workflows:
           requires:
             - rspec
             - rubocop
-          # filters:  
-          #   branches:  
-          #     only: master 
+          filters:  
+            branches:  
+              only: master 
             
