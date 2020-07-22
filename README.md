@@ -11,24 +11,24 @@
 音楽イベントが好きな方はもちろん、新しい音楽や仲間を探したい方など。
 <h2>アプリケーションの機能一覧</h2>
 <ul>
-<li>ユーザー認証・CRUD機能（Devise等）</li>
-<li>投稿のCRUD機能</li>
-<li>画像投稿機能（ActiveStorage）</li>
-<li>投稿に対するコメント機能</li>
-<li>いいね機能（投稿へのいいねを登録・削除）</li>
-<li>フォロー機能（ユーザーのフォローを登録・削除・一覧表示）</li>
-<li>通知機能（いいね・フォロー・コメント）</li>
-<li>検索機能（ユーザー、投稿の検索）</li>
-<li>天気予報取得（Open Weather Map API）</li>
-<li>音楽アーティストの画像・試聴トラックの取得（Spotify API）</li>
-<li>過去に訪れた都道府県を地図で表示（Google Chart）</li>
-<li>ユーザーにお勧めアーティストを提案</li>
-<li>投稿した予定の前日に詳細・天気予報を自動でメール送信（Whenever・SES）</li>
-<li>モーダルウィンドウ（投稿フォーム・Google Chart）</li>
-<li>Ajax（いいね機能、フォロー機能、モーダルウィンドウ）</li>
-<li>ページネーション機能（Kaminari）</li>
-<li>カレンダー機能（Simple Carendar）</li>
-<li>レスポンシブWebデザイン</li>
+  <li>ユーザー認証・CRUD機能（Devise等）</li>
+  <li>投稿のCRUD機能</li>
+  <li>画像投稿機能（ActiveStorage）</li>
+  <li>投稿に対するコメント機能</li>
+  <li>いいね機能（投稿へのいいねを登録・削除）</li>
+  <li>フォロー機能（ユーザーのフォローを登録・削除・一覧表示）</li>
+  <li>通知機能（いいね・フォロー・コメント）</li>
+  <li>検索機能（ユーザー、投稿の検索）</li>
+  <li>天気予報取得（Open Weather Map API）</li>
+  <li>音楽アーティストの画像・試聴トラックの取得（Spotify API）</li>
+  <li>過去に訪れた都道府県を地図で表示（Google Chart）</li>
+  <li>ユーザーにお勧めアーティストを提案</li>
+  <li>投稿した予定の前日に詳細・天気予報を自動でメール送信（Whenever・SES）</li>
+  <li>モーダルウィンドウ（投稿フォーム・Google Chart）</li>
+  <li>Ajax（いいね機能、フォロー機能、モーダルウィンドウ）</li>
+  <li>ページネーション機能（Kaminari）</li>
+  <li>カレンダー機能（Simple Carendar）</li>
+  <li>レスポンシブWebデザイン</li>
 </ul>
 <h2>使用技術</h2>
 <h3>環境</h3>

@@ -67,13 +67,15 @@ class User < ApplicationRecord
   end
 
   def most_visited_places(count)
-    visited_places.
-      map { |i| i.tr(' ', '').upcase }.
-      group_by(&:itself).
-      sort_by { |_, v| -v.size }.
-      map(&:first).
-      take(count).
-      join(", ")
+    unless visited_places == [nil]
+      visited_places.
+        map { |i| i.tr(' ', '').upcase }.
+        group_by(&:itself).
+        sort_by { |_, v| -v.size }.
+        map(&:first).
+        take(count).
+        join(", ")
+    end
   end
 
   def visited_artists
@@ -81,13 +83,15 @@ class User < ApplicationRecord
   end
 
   def most_visited_artists(count)
-    visited_artists.
-      map { |i| i.gsub(', ', ',').upcase }.
-      group_by(&:itself).
-      sort_by { |_, v| -v.size }.
-      map(&:first).
-      take(count).
-      join(", ")
+    unless visited_places == [nil]
+      visited_artists.
+        map { |i| i.gsub(', ', ',').upcase }.
+        group_by(&:itself).
+        sort_by { |_, v| -v.size }.
+        map(&:first).
+        take(count).
+        join(", ")
+    end
   end
 
   def suggests(count)
