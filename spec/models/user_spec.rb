@@ -115,15 +115,15 @@ RSpec.describe User, type: :model do
       Ticket.update_all(done: true)
     end
 
-    it 'presents most visited place' do
+    it 'shows most visited place' do
       expect(user_a.most_visited_places(1)).to eq 'VENUE_C'
     end
 
-    it 'presents most visited performer' do
+    it 'shows most visited performer' do
       expect(user_a.most_visited_artists(1)).to eq 'ARTIST_A'
     end
 
-    it 'recommends artists' do
+    it 'suggests artists who other user visted recently' do
       expect(user_a.suggests(1)).to eq 'ARTIST_D'
     end
   end
