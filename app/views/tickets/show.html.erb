@@ -1,4 +1,6 @@
-<% provide(:title, @ticket.name) %>
+<% if @ticket.name.present? %>
+  <% provide(:title, @ticket.name) %>
+<% end %>
 <div class="previous-next d-flex justify-content-between">
   <% if @ticket.previous %>
     <%= link_to ticket_path(@ticket.previous.id) do %>
