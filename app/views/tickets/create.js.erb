@@ -1,9 +1,2 @@
-<!-- <% if @status == 'success' %>
-  $("#tickets-area").html("<%= escape_javascript(render "tickets", tickets: @tickets) %>");
-<% elsif @status == 'fail' %>
-  alert("イベントを作成できませんでした");
-<% end %>
-$("#ticket-modal").modal("hide"); -->
-
 $('#tickets').html("<%= j (render @tickets) %>");
 $('#ticket-modal').slideUp(350);
