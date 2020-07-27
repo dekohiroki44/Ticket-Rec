@@ -23,23 +23,23 @@ module Myapp
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
 
-    if Rails.application.credentials.ses_smtp.present?
-      user_mame = Rails.application.credentials.ses_smtp[:user_name]
-      password = Rails.application.credentials.ses_smtp[:password]
+    if Rails.application.credentials.sendgrid_smtp.present?
+      user_mame = Rails.application.credentials.sendgrid_smtp[:user_name]
+      password = Rails.application.credentials.sendgrid_smtp[:password]
     else
       user_name = 'user_name'
       password = 'password'
     end
 
-    config.action_mailer.delivery_method = :ses
+    config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-        enable_starttls_auto: true,
-        address: "email-smtp.us-west-2.amazonaws.com",
-        port: 587,
-        user_name: user_name,
-        domain: 'ticket-rec.com',
-        password: password,
-        authentication: "login"
+      user_name: 'apikey',
+      password: password,
+      domain: 'www.ticket-rec.com',
+      address: 'smtp.sendgrid.net',
+      port: 587,
+      authentication: :plain,
+      enable_starttls_auto: true
     }
   end
 end

@@ -22,7 +22,6 @@ gem 'twitter'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem "aws-sdk-s3", require: false
-gem 'aws-ses', '~> 0.6'
 gem 'faker'
 gem "kaminari", ">= 1.2.1"
 gem 'httpclient'
@@ -45,7 +44,6 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-rails-console'
-  gem 'capistrano-dotenv', require: false
   gem 'rails-erd'
 end
 
