@@ -23,7 +23,7 @@
   <li>音楽アーティストの画像・試聴トラックの取得（Spotify API）</li>
   <li>過去に訪れた都道府県を地図で表示（Google Chart）</li>
   <li>ユーザーにお勧めアーティストを提案</li>
-  <li>投稿した予定の前日に詳細・天気予報を自動でメール送信（Whenever・SES）</li>
+  <li>投稿した予定の前日に詳細・天気予報を自動でメール送信（Whenever・SendGrid）</li>
   <li>モーダルウィンドウ（投稿フォーム・Google Chart）</li>
   <li>Ajax（いいね機能、フォロー機能、モーダルウィンドウ）</li>
   <li>ページネーション機能（Kaminari）</li>
@@ -56,7 +56,7 @@
   <li>リンター（Rubocop Airbnb）</li>
   <li>GitHub（GitHub Flowでの開発）</li>
   <li>Javascript / JQuery / Ajax</li>
-  <li>AWS SESでのメールサービス</li>
+  <li>SendGridでのメールサービス</li>
   <li>Web API（Open Weather Map, Spotify）</li>
   <li>独自ドメインでのSSL化</li>
 </ul>
