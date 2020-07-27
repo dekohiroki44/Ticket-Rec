@@ -7,6 +7,7 @@ describe 'tickets_page', type: :system do
   let!(:self_ticket_previous) { create(:ticket, user: user, date: self_ticket.date - 1.day, done: true) }
   let!(:self_ticket_next) { create(:ticket, user: user, date: self_ticket.date + 1.day) }
   let(:other_ticket) { create(:ticket, user: other_user) }
+  let(:like) { create(:like, user_id: other_user.id, ticket_id: self_ticket.id) }
 
   before do
     visit new_user_session_path
@@ -35,6 +36,10 @@ describe 'tickets_page', type: :system do
   it 'changes previous ticket page after click >>' do
     click_link '>>'
     expect(current_path).to eq ticket_path(self_ticket_next.id)
+  end
+
+  it 'shows like count' do
+    expect(page).to have_content self_ticket.likes.count
   end
 
   context 'on self ticket' do
