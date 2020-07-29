@@ -141,54 +141,62 @@ class User < ApplicationRecord
     end
   end
 
-  def spotify_id
+  def spotify_id_and_image_url
     if recommend.present? && authenticate_token.present?
-      client = HTTPClient.new
-      url = 'https://api.spotify.com/v1/search'
-      query = { "q": recommend, "type": "artist", "market": "JP" }
-      header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
-      response_ja = client.get(url, query, header)
-      spotify_artist_ja = JSON.parse(response_ja.body)
-      header = { "Authorization": "Bearer #{authenticate_token}" }
-      response_en = client.get(url, query, header)
-      spotify_artist_en = JSON.parse(response_en.body)
-
       numbers = [0, 1, 2, 3, 4, 5]
       spotify_id = ""
       image_url = ""
-      if response_en.status == 200
-        numbers.each do |number|
-          if spotify_artist_en["artists"]["items"][number].present? &&
-            spotify_artist_en["artists"]["items"][number]["name"].downcase == recommend.downcase
-            spotify_id = spotify_artist_en["artists"]["items"][number]["id"]
-            if spotify_artist_en["artists"]["items"][number]["images"].present?
-              image_url = spotify_artist_en["artists"]["items"][number]["images"][1]["url"]
-            end
-            break
+      numbers.each do |number|
+        if spotify_artist_en["artists"]["items"][number].present? &&
+          spotify_artist_en["artists"]["items"][number]["name"].downcase == recommend.downcase
+          spotify_id = spotify_artist_en["artists"]["items"][number]["id"]
+          if spotify_artist_en["artists"]["items"][number]["images"].present?
+            image_url = spotify_artist_en["artists"]["items"][number]["images"][1]["url"]
           end
+          break
         end
       end
-
-      if response_ja.status == 200
-        numbers.each do |number|
-          if spotify_artist_ja["artists"]["items"][number].present? &&
-            spotify_artist_ja["artists"]["items"][number]["name"].downcase == recommend.downcase
-            spotify_id = spotify_artist_ja["artists"]["items"][number]["id"]
-            if spotify_artist_ja["artists"]["items"][number]["images"].present?
-              image_url = spotify_artist_ja["artists"]["items"][number]["images"][1]["url"]
-            end
-            break
+      numbers.each do |number|
+        if spotify_artist_ja["artists"]["items"][number].present? &&
+          spotify_artist_ja["artists"]["items"][number]["name"].downcase == recommend.downcase
+          spotify_id = spotify_artist_ja["artists"]["items"][number]["id"]
+          if spotify_artist_ja["artists"]["items"][number]["images"].present?
+            image_url = spotify_artist_ja["artists"]["items"][number]["images"][1]["url"]
           end
+          break
         end
       end
       [spotify_id, image_url]
     end
   end
 
+  def spotify_artist_en
+    client = HTTPClient.new
+    url = 'https://api.spotify.com/v1/search'
+    query = { "q": recommend, "type": "artist", "market": "JP" }
+    header = { "Authorization": "Bearer #{authenticate_token}" }
+    response = client.get(url, query, header)
+    if response.status == 200
+      JSON.parse(response.body)
+    end
+  end
+
+  def spotify_artist_ja
+    client = HTTPClient.new
+    url = 'https://api.spotify.com/v1/search'
+    query = { "q": recommend, "type": "artist", "market": "JP" }
+    header = { "Authorization": "Bearer #{authenticate_token}", "Accept-Language": "ja;q=1" }
+    response = client.get(url, query, header)
+    JSON.parse(response.body)
+    if response.status == 200
+      JSON.parse(response.body)
+    end
+  end
+
   def spotify
-    if spotify_id.present?
+    if spotify_id_and_image_url.present?
       client = HTTPClient.new
-      url = "https://api.spotify.com/v1/artists/#{spotify_id[0]}/top-tracks"
+      url = "https://api.spotify.com/v1/artists/#{spotify_id_and_image_url[0]}/top-tracks"
       query = { "market": "JP", "limit": 1 }
       header = { "Authorization": "Bearer #{authenticate_token}" }
       response = client.get(url, query, header)
@@ -196,9 +204,9 @@ class User < ApplicationRecord
       if response.status == 200
         top_tracks = JSON.parse(response.body)
         track_url = top_tracks["tracks"].sample["preview_url"] if top_tracks["tracks"].present?
-        return spotify_id[1], track_url
+        return spotify_id_and_image_url[1], track_url
       else
-        return spotify_id[1], nil
+        return spotify_id_and_image_url[1], nil
       end
     else
       [nil, nil]
