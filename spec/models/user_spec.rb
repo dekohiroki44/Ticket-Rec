@@ -100,31 +100,31 @@ RSpec.describe User, type: :model do
     let(:user_a) { create(:user) }
     let(:user_b) { create(:user) }
     let(:user_c) { create(:user) }
-    let!(:ticket_a_1) { create(:ticket, user: user_a, performer: 'artist_a', place: 'venue_a') }
-    let!(:ticket_a_2) { create(:ticket, user: user_a, performer: 'artist_a', place: 'venue_b') }
-    let!(:ticket_a_3) { create(:ticket, user: user_a, performer: 'artist_b', place: 'venue_c') }
-    let!(:ticket_a_4) { create(:ticket, user: user_a, performer: 'artist_c', place: 'venue_c') }
-    let!(:ticket_b_1) { create(:ticket, user: user_b, performer: 'artist_a') }
-    let!(:ticket_b_2) { create(:ticket, user: user_b, performer: 'artist_d') }
-    let!(:ticket_b_3) { create(:ticket, user: user_b, performer: 'artist_e') }
-    let!(:ticket_c_1) { create(:ticket, user: user_c, performer: 'artist_a') }
-    let!(:ticket_c_2) { create(:ticket, user: user_c, performer: 'artist_d') }
-    let!(:ticket_c_3) { create(:ticket, user: user_c, performer: 'artist_f') }
+    let!(:ticket_a_1) { create(:ticket, user: user_a, artist: 'artist_a', place: 'venue_a') }
+    let!(:ticket_a_2) { create(:ticket, user: user_a, artist: 'artist_a', place: 'venue_b') }
+    let!(:ticket_a_3) { create(:ticket, user: user_a, artist: 'artist_b', place: 'venue_c') }
+    let!(:ticket_a_4) { create(:ticket, user: user_a, artist: 'artist_c', place: 'venue_c') }
+    let!(:ticket_b_1) { create(:ticket, user: user_b, artist: 'artist_a') }
+    let!(:ticket_b_2) { create(:ticket, user: user_b, artist: 'artist_d') }
+    let!(:ticket_b_3) { create(:ticket, user: user_b, artist: 'artist_e') }
+    let!(:ticket_c_1) { create(:ticket, user: user_c, artist: 'artist_a') }
+    let!(:ticket_c_2) { create(:ticket, user: user_c, artist: 'artist_d') }
+    let!(:ticket_c_3) { create(:ticket, user: user_c, artist: 'artist_f') }
 
     before do
       Ticket.update_all(done: true)
     end
 
     it 'shows most visited place' do
-      expect(user_a.most_visited_places(1)).to eq 'VENUE_C'
+      expect(user_a.most_visited_places(1).join).to eq 'venue_c'
     end
 
-    it 'shows most visited performer' do
-      expect(user_a.most_visited_artists(1)).to eq 'ARTIST_A'
+    it 'shows most visited artist' do
+      expect(user_a.most_visited_artists(1).join).to eq 'artist_a'
     end
 
     it 'suggests artists who other user visted recently' do
-      expect(user_a.suggests(1)).to eq 'ARTIST_D'
+      expect(user_a.suggests_related_most_visited_artists(1).join).to eq 'artist_d'
     end
   end
 end

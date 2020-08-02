@@ -15,18 +15,6 @@ class Ticket < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-  def self.recently_artists(count)
-    Ticket.
-      done.
-      where.not(performer: "").
-      take(count + 2).
-      pluck(:performer).
-      map { |n| n.split(", ").first }.
-      uniq.
-      take(count).
-      join(", ")
-  end
-
   def get_weather
     if date >= DateTime.current
       weather_forecast
@@ -135,10 +123,10 @@ class Ticket < ApplicationRecord
 
   def self.search(word, date)
     if word.present? && date.present?
-      Ticket.where("upper(name) LIKE ? OR upper(performer) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase).
+      Ticket.where("upper(name) LIKE ? OR upper(artist) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase).
         where(date: date..date + 1.day)
     elsif word.present? && date.blank?
-      Ticket.where("upper(name) LIKE ? OR upper(performer) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase)
+      Ticket.where("upper(name) LIKE ? OR upper(artist) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase)
     elsif word.blank? && date.present?
       Ticket.where(date: date..date + 1.day)
     else

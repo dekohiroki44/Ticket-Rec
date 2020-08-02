@@ -5,7 +5,7 @@
   <p>日付: <%= ticket.date.strftime("%Y/%-m/%-d") %></p>
   <p>時間: <%= ticket.date.strftime("%R") %></p>
   <p>イベント名: <%= ticket.name if ticket.name.present? %></p>
-  <p>出演アーティスト: <%= ticket.performer if ticket.performer.present? %></p>
+  <p>出演アーティスト: <%= ticket.artist if ticket.artist.present? %></p>
   <p>会場: <%= ticket.place if ticket.place.present? %></p>
   <p>料金: <%= ticket.price if ticket.price.present? %></p>
   天気: 

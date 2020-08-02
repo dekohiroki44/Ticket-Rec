@@ -21,7 +21,7 @@ describe 'tickets_page', type: :system do
     expect(page).to have_title "#{self_ticket.name} - Ticket Rec"
     expect(page).to have_content self_ticket.user.name
     expect(page).to have_content self_ticket.name
-    expect(page).to have_content self_ticket.performer
+    expect(page).to have_content self_ticket.artist
   end
 
   it 'displays details of the user who posted' do

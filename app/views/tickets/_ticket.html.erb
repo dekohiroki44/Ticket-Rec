@@ -16,8 +16,8 @@
           <% else %>
             <span class="ticket-name"><i class="fas fa-lock"></i><%= ticket.name %></span>
           <% end %>
-          <% if ticket.performer.present? %>
-            <span class="performer"><i class="fas fa-user"></i><%= ticket.performer%></span>
+          <% if ticket.artist.present? %>
+            <span class="artist"><i class="fas fa-user"></i><%= ticket.artist%></span>
           <% end %>
           <% if ticket.place.present? %>
             <span class="place"><i class="fas fa-map-marker-alt"></i><%= ticket.place %></span>

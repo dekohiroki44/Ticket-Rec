@@ -4,7 +4,7 @@ describe 'search_function', type: :system do
   let(:user_a) { create(:user, name: 'word1') }
   let(:user_b) { create(:user) }
   let!(:ticket_a) { create(:ticket, user: user_a, date: DateTime.current - 1.day, name: 'word2', done: true) }
-  let!(:ticket_b) { create(:ticket, user: user_b, date: DateTime.current + 1.day, performer: 'word3') }
+  let!(:ticket_b) { create(:ticket, user: user_b, date: DateTime.current + 1.day, artist: 'word3') }
 
   before do
     visit new_user_session_path

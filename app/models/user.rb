@@ -69,57 +69,64 @@ class User < ApplicationRecord
   def most_visited_places(count)
     unless visited_places == [nil]
       visited_places.
-        map { |i| i.tr(' ', '').upcase }.
+        map { |i| i.tr(' ', '') }.
         group_by(&:itself).
         sort_by { |_, v| -v.size }.
         map(&:first).
-        take(count).
-        join(", ")
+        take(count)
     end
   end
 
   def visited_artists
-    tickets.done.where.not(performer: "").pluck(:performer)
+    tickets.done.where.not(artist: "").pluck(:artist)
   end
 
   def most_visited_artists(count)
     unless visited_artists == [nil]
       visited_artists.
-        map { |i| i.gsub(', ', ',').upcase }.
+        map { |i| i.gsub(', ', ',') }.
         group_by(&:itself).
         sort_by { |_, v| -v.size }.
         map(&:first).
-        take(count).
-        join(", ")
+        take(count)
     end
   end
 
-  def other_user_ids_having_ticket_of(performer)
-    Ticket.where('UPPER(performer) LIKE ?', "%#{performer}%").
+  def other_user_ids_having_ticket_of(artist)
+    Ticket.where('UPPER(artist) LIKE ?', "%#{artist}%").
       where.not(user_id: id).
       pluck(:user_id).
       uniq
   end
 
-  def suggests(count)
-    most_visited_artist = most_visited_artists(1).upcase
-    recently_performers = []
+  def suggests_related_most_visited_artists(count)
+    most_visited_artist = most_visited_artists(1).join.upcase
+    related_artists = []
     other_user_ids_having_ticket_of(most_visited_artist).each do |user_id|
-      recently_performers += User.
+      related_artists += User.
         find(user_id).
         tickets.
-        where.not(performer: "").
-        where.not('UPPER(performer) = ?', most_visited_artist).
+        where.not(artist: "").
+        where.not('UPPER(artist) = ?', most_visited_artist).
         done.
         take(5).
-        pluck(:performer)
+        pluck(:artist)
     end
-    recently_performers.
+    related_artists.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
-      take(count).
-      join(", ")
+      take(count)
+  end
+
+  def self.recently_artists(count)
+    Ticket.where.not(artist: "").
+      select(:artist, :user_id).
+      group_by(&:user_id).
+      map { |_, tickets| tickets.take(5).pluck(:artist) }.
+      flatten.group_by(&:itself).sort_by { |_, v| -v.size }.
+      map(&:first).
+      take(count)
   end
 
   def prefecture_data

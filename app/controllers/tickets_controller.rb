@@ -86,7 +86,7 @@ class TicketsController < ApplicationController
                :place,
                :prefecture,
                :price,
-               :performer,
+               :artist,
                :public,
                images: []).
         merge(done: done)
@@ -102,7 +102,7 @@ class TicketsController < ApplicationController
              :place,
              :prefecture,
              :price,
-             :performer,
+             :artist,
              :weather,
              :temperature,
              :public,
