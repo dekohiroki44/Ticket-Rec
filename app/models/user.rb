@@ -52,7 +52,7 @@ class User < ApplicationRecord
 
   def create_notification_follow!(current_user)
     temp = Notification.
-      where(["visitor_id = ? and visited_id = ? and action = ? ", current_user.id, id, 'follow'])
+      where(visitor: current_user, action: "follow")
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,
@@ -63,61 +63,70 @@ class User < ApplicationRecord
   end
 
   def visited_places
-    tickets.done.pluck(:place)
+    tickets.done.where.not(place: "").pluck(:place)
   end
 
   def most_visited_places(count)
     unless visited_places == [nil]
       visited_places.
-        map { |i| i.tr(' ', '').upcase }.
+        map { |i| i.tr(' ', '') }.
         group_by(&:itself).
         sort_by { |_, v| -v.size }.
         map(&:first).
-        take(count).
-        join(", ")
+        take(count)
     end
   end
 
   def visited_artists
-    tickets.done.pluck(:performer)
+    tickets.done.where.not(artist: "").pluck(:artist)
   end
 
   def most_visited_artists(count)
-    unless visited_places == [nil]
+    unless visited_artists == [nil]
       visited_artists.
-        map { |i| i.gsub(', ', ',').upcase }.
+        map { |i| i.gsub(', ', ',') }.
         group_by(&:itself).
         sort_by { |_, v| -v.size }.
         map(&:first).
-        take(count).
-        join(", ")
+        take(count)
     end
   end
 
-  def suggests(count)
-    user_ids = Ticket.
-      where('UPPER(performer) LIKE ?', "%#{most_visited_artists(1)}%".upcase).
+  def other_user_ids_having_ticket_of(artist)
+    Ticket.where('UPPER(artist) LIKE ?', "%#{artist}%").
       where.not(user_id: id).
       pluck(:user_id).
       uniq
-    array = []
-    user_ids.each do |user_id|
-      array << User.
+  end
+
+  def suggests_related_most_visited_artists(count)
+    most_visited_artist = most_visited_artists(1).join.upcase
+    related_artists = []
+    other_user_ids_having_ticket_of(most_visited_artist).each do |user_id|
+      related_artists += User.
         find(user_id).
         tickets.
-        where.not(performer: "").
-        done.take(5).
-        pluck(:performer).
-        join(",")
+        where.not(artist: "").
+        where.not('UPPER(artist) = ?', most_visited_artist).
+        done.
+        take(5).
+        pluck(:artist)
     end
-    recently_performers = array.join(",").gsub(", ", ",").upcase.split(",")
-    recently_performers.delete(most_visited_artists(1))
-    recently_performers.
+    related_artists.
       group_by(&:itself).
       sort_by { |_, v| -v.size }.
       map(&:first).
-      take(count).
-      join(", ")
+      take(count)
+  end
+
+  def self.recently_artists(count)
+    Ticket.where.not(artist: "").
+      select(:artist, :user_id).
+      group_by(&:user_id).
+      map { |_, tickets| tickets.take(5).pluck(:artist) }.
+      flatten.group_by(&:itself).sort_by { |_, v| -v.size }.
+      map(&:first).
+      take(count)
   end
 
   def prefecture_data
@@ -134,34 +143,35 @@ class User < ApplicationRecord
     if word.present?
       User.where("upper(name) LIKE ? OR upper(profile) LIKE ?", "%#{word}%".upcase, "%#{word}%".upcase)
     elsif word.blank? && date.present?
-      user_ids = Ticket.where(date: date..date + 1.day).release.pluck(:user_id)
-      User.where(id: user_ids)
+      User.eager_load(:tickets).merge(Ticket.where(date: date..date.tomorrow).release)
     elsif word.blank? && date.blank?
       User.all
     end
   end
 
-  def spotify_id_and_image_url
+  def get_spotify_id_and_image_url
     if recommend.present? && authenticate_token.present?
       numbers = [0, 1, 2, 3, 4, 5]
       spotify_id = ""
       image_url = ""
+      artist_data_en = spotify_artist_en
+      artist_data_ja = spotify_artist_ja
       numbers.each do |number|
-        if spotify_artist_en["artists"]["items"][number].present? &&
-          spotify_artist_en["artists"]["items"][number]["name"].downcase == recommend.downcase
-          spotify_id = spotify_artist_en["artists"]["items"][number]["id"]
-          if spotify_artist_en["artists"]["items"][number]["images"].present?
-            image_url = spotify_artist_en["artists"]["items"][number]["images"][1]["url"]
+        if artist_data_en["artists"]["items"][number].present? &&
+          artist_data_en["artists"]["items"][number]["name"].downcase == recommend.downcase
+          spotify_id = artist_data_en["artists"]["items"][number]["id"]
+          if artist_data_en["artists"]["items"][number]["images"].present?
+            image_url = artist_data_en["artists"]["items"][number]["images"][1]["url"]
           end
           break
         end
       end
       numbers.each do |number|
-        if spotify_artist_ja["artists"]["items"][number].present? &&
-          spotify_artist_ja["artists"]["items"][number]["name"].downcase == recommend.downcase
-          spotify_id = spotify_artist_ja["artists"]["items"][number]["id"]
-          if spotify_artist_ja["artists"]["items"][number]["images"].present?
-            image_url = spotify_artist_ja["artists"]["items"][number]["images"][1]["url"]
+        if artist_data_ja["artists"]["items"][number].present? &&
+          artist_data_ja["artists"]["items"][number]["name"].downcase == recommend.downcase
+          spotify_id = artist_data_ja["artists"]["items"][number]["id"]
+          if artist_data_ja["artists"]["items"][number]["images"].present?
+            image_url = artist_data_ja["artists"]["items"][number]["images"][1]["url"]
           end
           break
         end
@@ -194,7 +204,8 @@ class User < ApplicationRecord
   end
 
   def spotify
-    if spotify_id_and_image_url.present?
+    if get_spotify_id_and_image_url.present?
+      spotify_id_and_image_url = get_spotify_id_and_image_url
       client = HTTPClient.new
       url = "https://api.spotify.com/v1/artists/#{spotify_id_and_image_url[0]}/top-tracks"
       query = { "market": "JP", "limit": 1 }
