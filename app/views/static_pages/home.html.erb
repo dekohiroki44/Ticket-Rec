@@ -53,7 +53,7 @@
           </div>
         <% elsif current_user.most_visited_artists(1).present? && current_user.suggests_related_most_visited_artists(3).present?%>
           <div class="index-item">
-            <div class="index"><%= "#{current_user.most_visited_artists(1)}を見に行った他のユーザーが" %></div>
+            <div class="index"><%= "#{current_user.most_visited_artists(1).join}を見に行った他のユーザーが" %></div>
             <div class="index">最近見に行ったアーティスト</div>
             <strong class="d-block"><%= current_user.suggests_related_most_visited_artists(3).join(", ") %></strong>
           </div>
@@ -63,7 +63,6 @@
     <div class="col-lg-6 map-section">
       <%= link_to map_user_path(current_user), remote: true, class: "map-link" do %>
         <div id="regions"></div>
-        <script src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
           google.charts.load('current', {'packages':['geochart']});
           google.charts.setOnLoadCallback(drawRegionsMap);
